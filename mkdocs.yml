@@ -1,11 +1,11 @@
 site_name: Wall Clock In Machine
-site_description: A physical desk device to automatically track your office time with a single button press
-site_author: Your Name
-site_url: https://yourusername.github.io/wallClockInMachine
+site_description: A physical desk button for automatic time tracking. No more curl commands!
+site_author: Wall Clock In Machine Project
+site_url: https://lanterno.github.io/office-wall-clock/
 
-repo_name: yourusername/wallClockInMachine
-repo_url: https://github.com/yourusername/wallClockInMachine
-edit_uri: edit/main/docs/
+repo_name: lanterno/office-wall-clock
+repo_url: https://github.com/lanterno/office-wall-clock
+edit_uri: edit/main/docs-site/
 
 theme:
   name: material
@@ -53,11 +53,9 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/yourusername
-      name: GitHub
+      link: https://github.com/lanterno/office-wall-clock
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/yourusername
-      name: Twitter
+      link: https://twitter.com/lanterno
   
   version:
     provider: mike

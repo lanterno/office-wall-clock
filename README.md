@@ -1,16 +1,14 @@
 # Wall Clock In Machine 🕐⚡
 
-**# Wall Clock In Machine
-
-![Documentation](https://github.com/lanterno/beats/actions/workflows/deploy-docs.yml/badge.svg)
+![Documentation](https://github.com/lanterno/office-wall-clock/actions/workflows/deploy-docs.yml/badge.svg)
 
 A physical desk button that automatically tracks your work hours. No more typing curl commands!
 
 ## 📖 Documentation
 
-**[Read the full documentation →](https://lanterno.github.io/beats/)**
+**[Read the full documentation →](https://lanterno.github.io/office-wall-clock/)**
 
-Complete guides for building, assembling, and using your Wall Clock In Machine.**
+Complete guides for building, assembling, and using your Wall Clock In Machine.
 
 ## Project Overview
 
