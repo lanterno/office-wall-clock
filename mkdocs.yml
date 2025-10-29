@@ -1,0 +1,178 @@
+site_name: Wall Clock In Machine
+site_description: A physical desk device to automatically track your office time with a single button press
+site_author: Your Name
+site_url: https://yourusername.github.io/wallClockInMachine
+
+repo_name: yourusername/wallClockInMachine
+repo_url: https://github.com/yourusername/wallClockInMachine
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/clock-fast
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername
+      name: GitHub
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/yourusername
+      name: Twitter
+  
+  version:
+    provider: mike
+    default: latest
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: getting-started/overview.md
+    - Quick Start: getting-started/quick-start.md
+    - Project Timeline: getting-started/timeline.md
+  
+  - Hardware:
+    - Overview: hardware/overview.md
+    - Specifications: hardware/specifications.md
+    - Bill of Materials: hardware/bill-of-materials.md
+    - Enclosure Design: hardware/enclosure-design.md
+    - Wiring Diagram: hardware/wiring.md
+  
+  - Firmware:
+    - Overview: firmware/overview.md
+    - Architecture: firmware/architecture.md
+    - Installation: firmware/installation.md
+    - Configuration: firmware/configuration.md
+    - API Integration: firmware/api-integration.md
+  
+  - Assembly:
+    - Preparation: assembly/preparation.md
+    - Component Testing: assembly/testing.md
+    - Breadboard Prototype: assembly/breadboard.md
+    - Soldering: assembly/soldering.md
+    - Enclosure Assembly: assembly/enclosure.md
+    - Final Testing: assembly/final-testing.md
+  
+  - Usage:
+    - Daily Operation: usage/daily-operation.md
+    - LED Indicators: usage/led-indicators.md
+    - Battery Management: usage/battery.md
+    - Maintenance: usage/maintenance.md
+  
+  - Troubleshooting:
+    - Common Issues: troubleshooting/common-issues.md
+    - Power Problems: troubleshooting/power.md
+    - Network Issues: troubleshooting/network.md
+    - Hardware Debugging: troubleshooting/hardware.md
+    - Firmware Issues: troubleshooting/firmware.md
+  
+  - Development:
+    - Contributing: development/contributing.md
+    - Building Firmware: development/building.md
+    - Testing: development/testing.md
+    - Custom Features: development/customization.md
+  
+  - Reference:
+    - Pin Assignment: reference/pins.md
+    - Configuration Options: reference/configuration.md
+    - API Endpoints: reference/api.md
+    - FAQ: reference/faq.md
+  
+  - About:
+    - License: about/license.md
+    - Changelog: about/changelog.md
+    - Contact: about/contact.md
+
+copyright: Copyright &copy; 2025 Wall Clock In Machine Project
