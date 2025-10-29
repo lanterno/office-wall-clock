@@ -164,6 +164,10 @@ nav:
     - Testing: development/testing.md
     - Custom Features: development/customization.md
   
+  - Deployment:
+    - GitHub Pages: deployment/github-pages.md
+    - Quick Start: deployment/quick-start.md
+  
   - Reference:
     - Pin Assignment: reference/pins.md
     - Configuration Options: reference/configuration.md

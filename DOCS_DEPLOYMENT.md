@@ -79,42 +79,40 @@ The generated site will be in the `site/` directory.
 
 #### Automatic Deployment with GitHub Actions
 
-Create `.github/workflows/docs.yml`:
+✅ **Already configured!** The repository includes `.github/workflows/deploy-docs.yml`
 
-```yaml
-name: Deploy Documentation
+**Quick Setup** (5 minutes):
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+1. **Enable GitHub Pages**:
+   - Go to Settings → Pages
+   - Source: "Deploy from a branch"
+   - Branch: `gh-pages` / `/ (root)`
+   - Save
 
-permissions:
-  contents: write
+2. **Push your code**:
+   ```bash
+   git add .
+   git commit -m "Initial commit with documentation"
+   git push origin main
+   ```
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.x
-      
-      - run: pip install -r requirements-docs.txt
-      
-      - run: mkdocs gh-deploy --force
-```
+3. **Wait 2-3 minutes** - GitHub Action automatically:
+   - Builds the documentation
+   - Deploys to gh-pages branch
+   - Your site is live!
 
-**Setup**:
-1. Push this file to your repository
-2. Enable GitHub Pages in repo settings → Pages
-3. Select "gh-pages" branch as source
-4. Every push to main will auto-deploy docs!
+4. **Visit your site**:
+   ```
+   https://YOUR-USERNAME.github.io/wallClockInMachine/
+   ```
+
+**The workflow automatically deploys when**:
+- You push to `main` branch
+- Any files in `docs-site/` change
+- `mkdocs.yml` or `requirements-docs.txt` change
+- Or manually trigger via Actions tab
+
+**Detailed instructions**: See [GitHub Pages Deployment Guide](docs-site/deployment/github-pages.md)
 
 #### Manual Deployment
 

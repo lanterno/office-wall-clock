@@ -1,0 +1,63 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs-site/**'
+      - 'mkdocs.yml'
+      - 'requirements-docs.txt'
+      - '.github/workflows/deploy-docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for git info
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements-docs.txt
+      
+      - name: Configure git for gh-deploy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Build and deploy documentation
+        run: |
+          mkdocs gh-deploy --force --clean --verbose
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Summary
+        run: |
+          echo "✅ Documentation deployed successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 Site URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📝 Updated pages:" >> $GITHUB_STEP_SUMMARY
+          git diff --name-only HEAD~1 HEAD -- docs-site/ mkdocs.yml | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY || echo "- All pages rebuilt" >> $GITHUB_STEP_SUMMARY
