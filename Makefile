@@ -28,21 +28,42 @@ actions-status: ## Check GitHub Actions status
 		echo "  gh auth login"; \
 		exit 1; \
 	fi
-	@echo "Checking GitHub Actions status..."
+	@if ! gh auth status >/dev/null 2>&1; then \
+		echo "❌ Error: GitHub CLI is not authenticated."; \
+		echo ""; \
+		echo "Please run:"; \
+		echo "  gh auth login"; \
+		echo ""; \
+		exit 1; \
+	fi
+	@echo "Checking GitHub Actions status for lanterno/office-wall-clock..."
 	@echo ""
-	@ACTIVE=$$(gh run list --limit 100 --json status --jq '[.[] | select(.status == "in_progress" or .status == "queued")] | length' 2>/dev/null || echo "0"); \
+	@RUNS=$$(gh run list --limit 1 --json status 2>/dev/null || echo "[]"); \
+	if [ "$$RUNS" = "[]" ] || [ -z "$$RUNS" ]; then \
+		echo "ℹ️  No workflow runs found in this repository."; \
+		echo ""; \
+		echo "This could mean:"; \
+		echo "  • No GitHub Actions workflows are configured yet"; \
+		echo "  • Workflows exist but haven't been triggered"; \
+		echo ""; \
+		echo "To add workflows, create files in .github/workflows/"; \
+		exit 0; \
+	fi; \
+	ACTIVE=$$(echo "$$RUNS" | jq '[.[] | select(.status == "in_progress" or .status == "queued")] | length' 2>/dev/null || echo "0"); \
 	if [ "$$ACTIVE" -gt 0 ]; then \
 		echo "⚡ Active workflow runs:"; \
 		echo ""; \
-		gh run list --limit 20 --json status,conclusion,name,databaseId,createdAt,displayTitle --jq '.[] | select(.status == "in_progress" or .status == "queued") | "  🔄 \(.name) - \(.displayTitle) (ID: \(.databaseId)) - \(.status)"'; \
+		gh run list --limit 20 --json status,conclusion,name,databaseId,createdAt,displayTitle,workflowName | \
+		jq -r '.[] | select(.status == "in_progress" or .status == "queued") | "  🔄 \(.workflowName // .name) - \(.displayTitle) - \(.status | ascii_upcase)"'; \
+		echo ""; \
 	else \
-		echo "✓ No active workflow runs"; \
+		echo "✅ No active workflow runs"; \
 		echo ""; \
-		echo "📊 Last run status for each workflow:"; \
-		echo ""; \
-		gh run list --limit 100 --json name,status,conclusion,createdAt,displayTitle,databaseId 2>/dev/null | \
-		jq -r 'group_by(.name) | map(.[0]) | .[] | if .conclusion == "success" then "  ✓" elif .conclusion == "failure" then "  ✗" elif .conclusion == "cancelled" then "  ⊘" else "  ○" end + " \(.name) - \(.displayTitle) (\(.conclusion // .status)) - \(.createdAt | split("T")[0])"' || echo "  No workflows found"; \
-	fi
+	fi; \
+	echo "📊 Last run status for each workflow:"; \
+	echo ""; \
+	gh run list --limit 100 --json name,status,conclusion,createdAt,displayTitle,databaseId,workflowName | \
+	jq -r 'group_by(.workflowName // .name) | map(sort_by(.createdAt) | reverse | .[0]) | sort_by(.workflowName // .name) | .[] | if .conclusion == "success" then "  ✅" elif .conclusion == "failure" then "  ❌" elif .conclusion == "cancelled" then "  ⊘" elif .status == "in_progress" then "  🔄" elif .status == "queued" then "  ⏳" else "  ○" end + " \(.workflowName // .name) - \(.conclusion // .status) (\(.createdAt | split("T")[0]))"'
 
 clean: ## Clean build artifacts
 	rm -rf docs/
