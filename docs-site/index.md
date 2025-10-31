@@ -7,7 +7,7 @@ hide:
 # Wall Clock In Machine
 
 <div class="hero-image" markdown>
-  <h1>⚡ Stop Typing Curl Commands</h1>
+  <h1>⚡ Automatic Time Tracking Device</h1>
   <p class="hero-subtitle">A physical desk device that tracks your office time with a single button press</p>
 </div>
 
