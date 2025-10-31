@@ -7,6 +7,10 @@ repo_name: lanterno/office-wall-clock
 repo_url: https://github.com/lanterno/office-wall-clock
 edit_uri: edit/main/docs-site/
 
+# Use content from docs-site/ and output the built site into docs/ for GitHub Pages
+docs_dir: docs-site
+site_dir: docs
+
 theme:
   name: material
   palette:
@@ -120,21 +124,21 @@ nav:
     - Overview: getting-started/overview.md
     - Quick Start: getting-started/quick-start.md
     - Project Timeline: getting-started/timeline.md
-  
+
   - Hardware:
     - Overview: hardware/overview.md
     - Specifications: hardware/specifications.md
     - Bill of Materials: hardware/bill-of-materials.md
     - Enclosure Design: hardware/enclosure-design.md
     - Wiring Diagram: hardware/wiring.md
-  
+
   - Firmware:
     - Overview: firmware/overview.md
     - Architecture: firmware/architecture.md
     - Installation: firmware/installation.md
     - Configuration: firmware/configuration.md
     - API Integration: firmware/api-integration.md
-  
+
   - Assembly:
     - Preparation: assembly/preparation.md
     - Component Testing: assembly/testing.md
@@ -142,39 +146,15 @@ nav:
     - Soldering: assembly/soldering.md
     - Enclosure Assembly: assembly/enclosure.md
     - Final Testing: assembly/final-testing.md
-  
+
   - Usage:
     - Daily Operation: usage/daily-operation.md
     - LED Indicators: usage/led-indicators.md
     - Battery Management: usage/battery.md
     - Maintenance: usage/maintenance.md
-  
-  - Troubleshooting:
-    - Common Issues: troubleshooting/common-issues.md
-    - Power Problems: troubleshooting/power.md
-    - Network Issues: troubleshooting/network.md
-    - Hardware Debugging: troubleshooting/hardware.md
-    - Firmware Issues: troubleshooting/firmware.md
-  
-  - Development:
-    - Contributing: development/contributing.md
-    - Building Firmware: development/building.md
-    - Testing: development/testing.md
-    - Custom Features: development/customization.md
-  
+
   - Deployment:
     - GitHub Pages: deployment/github-pages.md
     - Quick Start: deployment/quick-start.md
-  
-  - Reference:
-    - Pin Assignment: reference/pins.md
-    - Configuration Options: reference/configuration.md
-    - API Endpoints: reference/api.md
-    - FAQ: reference/faq.md
-  
-  - About:
-    - License: about/license.md
-    - Changelog: about/changelog.md
-    - Contact: about/contact.md
 
 copyright: Copyright &copy; 2025 Wall Clock In Machine Project
