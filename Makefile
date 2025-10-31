@@ -1,4 +1,4 @@
-.PHONY: help build deploy actions-status clean serve
+.PHONY: help build deploy actions-status clean serve docs-url
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -16,6 +16,28 @@ deploy: build ## Build and push to GitHub Pages
 	git add docs/
 	git commit -m "Update GitHub Pages site" || echo "No changes to commit"
 	git push
+
+docs-url: ## Print documentation site URL
+	@URL=$$(awk '/^site_url:/ {sub(/^site_url:[[:space:]]*/, "", $$0); print $$0; exit}' mkdocs.yml | tr -d '"' | tr -d "'" ); \
+	if [ -n "$$URL" ]; then \
+		printf "%s\n" "$$URL"; \
+	else \
+		REMOTE=$$(git remote get-url origin 2>/dev/null || echo ""); \
+		if [ -n "$$REMOTE" ]; then \
+			OWNER_REPO=$$(printf "%s" "$$REMOTE" | sed -E 's#.*github.com[:/ ]([^/]+)/([^/.]+)(\\.git)?$#\1/\2#'); \
+			OWNER=$$(printf "%s" "$$OWNER_REPO" | cut -d/ -f1); \
+			REPO=$$(printf "%s" "$$OWNER_REPO" | cut -d/ -f2); \
+			if [ -n "$$OWNER" ] && [ -n "$$REPO" ]; then \
+				printf "https://%s.github.io/%s/\n" "$$OWNER" "$$REPO"; \
+			else \
+				echo "Could not determine repository owner/name."; \
+				exit 1; \
+			fi; \
+		else \
+			echo "No git remote found and site_url not set in mkdocs.yml"; \
+			exit 1; \
+		fi; \
+	fi
 
 actions-status: ## Check GitHub Actions status
 	@if ! command -v gh >/dev/null 2>&1; then \
