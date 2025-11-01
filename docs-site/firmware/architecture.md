@@ -1,32 +1,49 @@
 # Firmware Architecture
 
-Overview of the state machine, modules, and data flow.
+Overview of the async task-based architecture using Embassy.
 
-## State Machine
+## Async Task Architecture
+
+The firmware uses Embassy's async executor to run concurrent tasks:
+
 ```
-STARTUP → WIFI_CONNECTING → IDLE_CLOCKED_OUT ↔ WORKING_CLOCKED_IN → ERROR
+Embassy Executor
+├── Button Task (tasks/button.rs)
+│   ├── Async debouncing
+│   ├── Long-press detection
+│   └── Event signaling
+├── LED Task (tasks/led.rs)
+│   ├── WS2812B control via RMT
+│   ├── Status indication
+│   └── Energy meter display
+└── WiFi Task (tasks/wifi.rs)
+    ├── Network management
+    ├── API communication
+    └── State synchronization
 ```
-- STARTUP: Hardware init, config load
-- WIFI_CONNECTING: Connect or open captive portal
-- IDLE_CLOCKED_OUT: Waiting for button down
-- WORKING_CLOCKED_IN: Session running, periodic sync
-- ERROR: Recoverable faults with retry/backoff
+
+## Task Communication
+
+Tasks communicate via Embassy's `Signal` primitive:
+- Button Task → WiFi Task (button events)
+- WiFi Task → LED Task (status updates)
+- Type-safe, lock-free message passing
 
 ## Modules
-- button_handler: Debounce, click/long-press
-- led_controller: Status + energy meter animations
-- api_client: HTTPS requests, retries, offline cache
-- power_manager: Sleep/wake, low-battery handling
-- config: Persistent settings (WiFi, API URL, brightness)
+- **main.rs**: Embassy executor initialization
+- **config.rs**: Hardware constants and configuration
+- **tasks/button.rs**: Async button handling with debouncing
+- **tasks/led.rs**: WS2812B LED control (status + energy meter)
+- **tasks/wifi.rs**: WiFi connection and API integration
 
 ## Data Flow
-- GPIO interrupt → button_handler → state change
-- timer (5 min) → api_client → backend sync
+- Main loop polls/debounces button → state change
+- Timer (5 min) → api → backend sync
 - NTP sync at boot for accurate timestamps
 
 ## Storage
-- Preferences (NVS) for settings
-- EEPROM/FS for offline session cache (up to 50 entries)
+- NVS (non-volatile storage) for WiFi and API settings
+- Optional offline session cache (future)
 
 ## Error Handling
 - Network: exponential backoff (1s, 5s, 15s)

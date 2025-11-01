@@ -1,0 +1,16 @@
+[build]
+target = "riscv32imc-unknown-none-elf"
+
+[target.riscv32imc-unknown-none-elf]
+runner = "espflash flash --monitor"
+rustflags = [
+    "-C", "link-arg=-Tlinkall.x",
+    "-C", "link-arg=-Tdefmt.x",
+]
+
+[unstable]
+build-std = ["core"]
+
+[env]
+ESP_LOG_LEVEL = "INFO"
+DEFMT_LOG = "trace"

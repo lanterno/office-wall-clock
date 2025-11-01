@@ -44,7 +44,7 @@ This document details the technical specifications and component selection ratio
 ✅ **Built-in WiFi**: No additional modules needed  
 ✅ **Native USB**: Direct USB-C programming without FTDI chip  
 ✅ **Low Power**: Deep sleep mode extends battery life  
-✅ **Arduino Support**: Easy to program with familiar framework  
+✅ **Rust + ESP-IDF Support**: Modern, safe firmware with great tooling  
 ✅ **Affordable**: Great value for features  
 ✅ **Compact**: Small footprint for enclosure  
 ✅ **Active Community**: Tons of examples and libraries  
@@ -274,9 +274,8 @@ See [ENCLOSURE_DESIGN.md](ENCLOSURE_DESIGN.md) for full details.
 - Heat shrink tubing
 
 ### Software Tools
-- **Arduino IDE** or **PlatformIO**: Firmware development
-- **ESPTool**: Flashing firmware
-- **Serial Monitor**: Debugging
+- **Rust toolchain (rustup)**: Firmware development
+- **espflash**: Flashing firmware and serial monitor
 - **Web Browser**: Initial device configuration
 
 ### Optional Tools

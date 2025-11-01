@@ -9,7 +9,7 @@ Verify each part works before final assembly.
 
 ## LED Strip
 - Connect 5V/GND and DIN via 330Ω
-- Run simple FastLED demo
+- Run simple Rust LED test (smart-leds example)
 - Check all 8 pixels light in order
 
 ## Button

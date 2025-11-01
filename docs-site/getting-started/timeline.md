@@ -34,16 +34,16 @@ Total time from decision to working device: **2-4 weeks** (depending on part ava
 - [ ] Read [Firmware Overview](../firmware/overview.md) and [Architecture](../firmware/architecture.md)
 - [ ] Study [Wiring Diagram](../hardware/wiring.md)
 - [ ] Watch soldering tutorials if you're a beginner
-- [ ] Set up Arduino IDE and install required libraries
+- [ ] Set up Rust toolchain and espflash
 - [ ] Clone the firmware repository
 - [ ] Test API connectivity (set up backend API first)
 
 **Time Required**: 4-8 hours spread over a week
 
 **Learning Resources**:
-- Arduino ESP32 documentation
-- FastLED library examples
-- WiFiManager setup guides
+- Rust on ESP-IDF book
+- smart-leds patterns and examples
+- esp-idf-svc WiFi/HTTP examples
 - FabLab EPFL workshops (check their schedule)
 
 ## Phase 3: Assembly (Days 11-14)
@@ -139,7 +139,7 @@ Total time from decision to working device: **2-4 weeks** (depending on part ava
 - Take your time with breadboard testing
 - Don't skip the learning phase!
 
-### Intermediate (Some Arduino Experience)
+### Intermediate (Some Embedded/Rust Experience)
 - **Planning**: 1-2 days
 - **Learning**: 2-3 days
 - **Assembly**: 1 day

@@ -1,25 +1,33 @@
 # Firmware Overview
 
-The Wall Clock In Machine firmware is built using the Arduino framework for ESP32, providing a simple yet robust solution for time tracking.
+The Wall Clock In Machine firmware is built in **pure Rust** for ESP32-C3, using state-of-the-art embedded tools. This provides a modern, safe, and efficient solution for time tracking.
+
+## Technology Stack
+
+- **esp-hal 0.20**: Pure Rust hardware abstraction (no C!)
+- **Embassy 0.6**: Modern async/await runtime for embedded
+- **defmt**: Zero-cost structured logging
+- **Stable Rust**: No nightly toolchain required
 
 ## Architecture
 
-The firmware follows a modular architecture with clear separation of concerns:
+The firmware uses a task-based async architecture with Embassy executor:
 
 ```
 ┌─────────────────────────────────────────┐
-│            main.cpp                      │
-│        (State Machine)                   │
+│         Embassy Executor                │
+│         (Async Runtime)                 │
 └────────┬────────┬────────┬──────────────┘
          │        │        │
     ┌────▼───┐  ┌▼────┐  ┌▼─────────┐
-    │ Button │  │ LED │  │   API    │
-    │Handler │  │Ctrl │  │ Client   │
+    │ Button │  │ LED │  │   WiFi   │
+    │  Task  │  │Task │  │   Task   │
+    │ (Async)│  │(Async)│ │ (Async) │
     └────────┘  └─────┘  └──────────┘
          │        │        │
     ┌────▼────────▼────────▼──────────┐
+    │       esp-hal (Pure Rust)        │
     │      Hardware Abstraction        │
-    │  (ESP32 Arduino Framework)       │
     └──────────────────────────────────┘
 ```
 
@@ -59,29 +67,22 @@ stateDiagram-v2
 
 ```
 firmware/
-├── platformio.ini          # Build configuration
+├── Cargo.toml             # Rust dependencies and config
+├── rust-toolchain.toml    # Rust toolchain config
+├── .cargo/config.toml     # Cargo target and runner
 ├── src/
-│   ├── main.cpp           # Main state machine (300 lines)
-│   ├── config.h           # Configuration constants
-│   ├── types.h            # Data structures & enums
-│   │
-│   ├── button_handler.h   # Button interface
-│   ├── button_handler.cpp # Debouncing logic (100 lines)
-│   │
-│   ├── led_controller.h   # LED interface
-│   ├── led_controller.cpp # LED animations (200 lines)
-│   │
-│   ├── api_client.h       # API interface
-│   └── api_client.cpp     # HTTP/HTTPS client (250 lines)
-│
-└── test/
-    ├── test_button.cpp    # Button unit tests
-    └── test_led.cpp       # LED unit tests
+│   ├── main.rs            # Main state machine
+│   ├── config.rs          # Configuration constants
+│   ├── types.rs           # Data structures & enums
+│   ├── button.rs          # Button interface and debouncing
+│   ├── led.rs             # LED interface and animations
+│   ├── api.rs             # API interface and HTTP client
+└── README.md              # Firmware overview
 ```
 
 ### Module Responsibilities
 
-#### 1. main.cpp - Application Core
+#### 1. main.rs - Application Core
 
 **Responsibilities**:
 - Initialize all subsystems
@@ -90,28 +91,27 @@ firmware/
 - Coordinate LED updates
 - Manage deep sleep
 
-**Key Functions**:
-```cpp
-void setup()              // One-time initialization
-void loop()               // Main event loop (runs continuously)
-void handleButtonPress()  // React to button state changes
-void updateEnergyMeter()  // Update work duration display
-void goToSleep()          // Enter deep sleep mode
+**Key Functions (Rust)**:
+```rust
+fn main()                // One-time initialization and main event loop
+fn handle_button_press() // React to button state changes
+fn update_energy_meter() // Update work duration display
+fn go_to_sleep()         // Enter deep sleep mode
 ```
 
-**Main Loop Flow**:
-```cpp
-loop() {
-    1. Read button state
-    2. Check for state changes
-    3. Update LEDs
-    4. Handle API calls
-    5. Check for sleep conditions
-    6. Repeat every 100ms
+**Main Loop Flow (Rust)**:
+```rust
+loop {
+    // 1. Read button state
+    // 2. Check for state changes
+    // 3. Update LEDs
+    // 4. Handle API calls
+    // 5. Check for sleep conditions
+    // 6. Repeat every 100ms
 }
 ```
 
-#### 2. button_handler - Input Processing
+#### 2. button.rs - Input Processing
 
 **Responsibilities**:
 - Debounce mechanical switch
@@ -119,24 +119,24 @@ loop() {
 - Track button timing
 - Detect long press (3 seconds)
 
-**Key Functions**:
-```cpp
-void begin(pin)           // Initialize GPIO
-void update()             // Call every loop
-bool isPressed()          // Current state
-ButtonEvent getEvent()    // Returns NONE/PRESSED/RELEASED/LONG_PRESS
+**Key Functions (Rust)**:
+```rust
+fn begin(pin: i32)                  // Initialize GPIO
+fn update(&mut self)                // Call every loop
+fn is_pressed(&self) -> bool        // Current state
+fn event(&mut self) -> ButtonEvent  // Returns None/Pressed/Released/LongPress
 ```
 
 **Debouncing Algorithm**:
-```cpp
+```rust
 // Read switch 50ms apart
-if (currentState != lastState) {
-    debounceTimer = millis();
+if current_state != last_state {
+    debounce_timer = now();
 }
-if ((millis() - debounceTimer) > DEBOUNCE_TIME) {
-    stableState = currentState;
-    if (stableState != previousState) {
-        return PRESSED or RELEASED;
+if now() - debounce_timer > DEBOUNCE_TIME {
+    stable_state = current_state;
+    if stable_state != previous_state {
+        return Pressed or Released;
     }
 }
 ```
@@ -149,27 +149,27 @@ if ((millis() - debounceTimer) > DEBOUNCE_TIME) {
 - Energy meter (LEDs 1-7)
 - Animations (pulse, rainbow)
 
-**Key Functions**:
-```cpp
-void begin(pin, numLeds)      // Initialize LED strip
-void setStatus(color)         // Set status LED color
-void setEnergyMeter(hours)    // Display work duration
-void pulseStatus(color)       // Breathing animation
-void rainbowCelebration()     // Completed workday animation
-void clear()                  // Turn all LEDs off
+**Key Functions (Rust)**:
+```rust
+fn begin(pin: i32, num_leds: usize)        // Initialize LED strip
+fn set_status(color: Rgb)                  // Set status LED color
+fn set_energy_meter(hours: f32)            // Display work duration
+fn pulse_status(color: Rgb)                // Breathing animation
+fn rainbow_celebration()                   // Completed workday animation
+fn clear()                                 // Turn all LEDs off
 ```
 
 **Energy Meter Algorithm**:
-```cpp
+```rust
 // Map 0-8 hours to 7 LEDs with thermal gradient
-hours = clamp(workHours, 0, 8);
-ledCount = (hours / 8.0) * 7;
+let hours = clamp(work_hours, 0.0, 8.0);
+let led_count = (hours / 8.0) * 7.0;
 
-for (int i = 0; i < 7; i++) {
-    if (i < ledCount) {
+for i in 0..7 {
+    if (i as f32) < led_count {
         // Gradient: Green → Yellow → Orange → Red
-        hue = map(i, 0, 7, 96, 0);  // HSV hue
-        leds[i+1] = CHSV(hue, 255, brightness);
+        let hue = map(i, 0, 7, 96, 0);  // HSV hue
+        leds[i+1] = hsv_to_rgb(hue, 255, brightness);
     }
 }
 ```
@@ -218,121 +218,121 @@ if (httpCode == 200) {
 
 ## Configuration
 
-All configurable parameters are in `config.h`:
+All configurable parameters are in `config.rs`:
 
 ### WiFi Settings
 
-```cpp
-#define WIFI_SSID "YourNetwork"      // Your WiFi name
-#define WIFI_PASSWORD "password"     // Your WiFi password
-#define WIFI_TIMEOUT_MS 30000        // 30 seconds to connect
+```rust
+pub const WIFI_TIMEOUT_MS: u64 = 30_000; // 30 seconds to connect
 ```
+
+WiFi credentials are provided via the configuration portal and stored in NVS.
 
 ### API Settings
 
-```cpp
-#define API_ENDPOINT "https://api.example.com"
-#define API_TOKEN "your_bearer_token"
-#define API_TIMEOUT_MS 10000         // 10 seconds per request
-#define API_RETRY_COUNT 3            // Retry 3 times
+```rust
+pub const API_ENDPOINT: &str = "https://api.example.com";
+pub const API_TIMEOUT_MS: u64 = 10_000;      // 10 seconds per request
+pub const API_RETRY_COUNT: u8 = 3;           // Retry 3 times
 ```
 
 ### Hardware Pins
 
-```cpp
-#define BUTTON_PIN GPIO_NUM_2        // Toggle switch
-#define LED_PIN GPIO_NUM_3           // WS2812B data
-#define NUM_LEDS 8                   // Total LED count
+```rust
+pub const BUTTON_PIN: i32 = 2;    // Toggle switch GPIO
+pub const LED_PIN: i32 = 3;       // WS2812B data GPIO
+pub const NUM_LEDS: usize = 8;    // Total LED count
 ```
 
 ### Timing
 
-```cpp
-#define DEBOUNCE_TIME_MS 50          // Button debounce
-#define LONG_PRESS_TIME_MS 3000      // Long press = 3 seconds
-#define SLEEP_TIMEOUT_MS 300000      // Sleep after 5 minutes
-#define ENERGY_UPDATE_MS 300000      // Update meter every 5 min
+```rust
+pub const DEBOUNCE_TIME_MS: u64 = 50;        // Button debounce
+pub const LONG_PRESS_TIME_MS: u64 = 3_000;   // Long press = 3 seconds
+pub const SLEEP_TIMEOUT_MS: u64 = 300_000;   // Sleep after 5 minutes
+pub const ENERGY_UPDATE_MS: u64 = 300_000;   // Update meter every 5 min
 ```
 
 ### Power Management
 
-```cpp
-#define ENABLE_DEEP_SLEEP true       // Battery saving
-#define DEEP_SLEEP_TIME_US 3600000000ULL  // Wake every hour
-#define LED_BRIGHTNESS 64            // 0-255 (25% = longer battery)
+```rust
+pub const ENABLE_DEEP_SLEEP: bool = true;     // Battery saving
+pub const DEEP_SLEEP_TIME_US: u64 = 3_600_000_000; // Wake every hour
+pub const LED_BRIGHTNESS: u8 = 64;            // 0-255 (25% = longer battery)
 ```
 
 ## Data Structures
 
 ### Enums
 
-```cpp
+```rust
 // Device operational states
-enum DeviceState {
-    STARTUP,
-    WIFI_CONNECTING,
-    IDLE_CLOCKED_OUT,
-    WORKING_CLOCKED_IN,
-    ERROR
-};
+pub enum DeviceState {
+    Startup,
+    WifiConnecting,
+    IdleClockedOut,
+    WorkingClockedIn,
+    Error,
+}
 
 // Button events
-enum ButtonEvent {
-    NONE,           // No change
-    PRESSED,        // Button just pressed
-    RELEASED,       // Button just released
-    LONG_PRESS      // Held for 3+ seconds
-};
+pub enum ButtonEvent {
+    None,           // No change
+    Pressed,        // Button just pressed
+    Released,       // Button just released
+    LongPress,      // Held for 3+ seconds
+}
 
 // API response codes
-enum ApiResult {
-    SUCCESS,
-    AUTH_ERROR,
-    NETWORK_ERROR,
-    SERVER_ERROR,
-    TIMEOUT_ERROR
-};
+pub enum ApiResult {
+    Success,
+    AuthError,
+    NetworkError,
+    ServerError,
+    TimeoutError,
+}
 ```
 
 ### Structures
 
-```cpp
+```rust
 // Work session tracking
-struct WorkSession {
-    uint32_t startTime;    // Unix timestamp
-    uint32_t duration;     // Seconds elapsed
-    bool active;           // Currently working?
-};
+pub struct WorkSession {
+    pub start_time: u64,    // Unix timestamp
+    pub duration: u32,      // Seconds elapsed
+    pub active: bool,       // Currently working?
+}
 
-// WiFi credentials (stored in flash)
-struct WiFiConfig {
-    char ssid[32];
-    char password[64];
-    bool configured;
-};
+// WiFi configuration (stored in NVS)
+pub struct WifiConfig {
+    pub ssid: heapless::String<32>,
+    pub password: heapless::String<64>,
+    pub configured: bool,
+}
 
-// API configuration (stored in flash)
-struct ApiConfig {
-    char endpoint[128];
-    char token[256];
-    bool configured;
-};
+// API configuration (stored in NVS)
+pub struct ApiConfig {
+    pub endpoint: heapless::String<128>,
+    pub token: heapless::String<256>,
+    pub configured: bool,
+}
 ```
 
 ## Libraries & Dependencies
 
-The firmware uses these libraries (managed by PlatformIO):
+The firmware uses these crates (managed by Cargo):
 
-| Library | Version | Purpose | Size |
-|---------|---------|---------|------|
-| **FastLED** | 3.6.0 | Control WS2812B LEDs | 50KB |
-| **WiFiManager** | 2.0.16 | WiFi configuration portal | 30KB |
-| **ArduinoJson** | 6.21.3 | Parse API responses | 20KB |
-| **HTTPClient** | Built-in | Make HTTP/HTTPS requests | - |
-| **Preferences** | Built-in | Store settings in flash | - |
-| **WiFi** | Built-in | ESP32 WiFi driver | - |
+| Crate | Purpose |
+|-------|---------|
+| **esp-idf-svc** | WiFi, HTTP client, NVS (non-volatile storage), system services |
+| **esp-idf-hal** | Hardware abstraction (GPIO, timers, RMT, etc.) |
+| **embedded-hal** | Common traits for embedded drivers |
+| **smart-leds** | High-level WS2812/NeoPixel color types and patterns |
+| **serde/serde_json** | Data serialization and JSON handling |
+| **heapless** | Fixed-size data structures (no_std-friendly) |
+| **anyhow/thiserror** | Ergonomic error handling |
 
-**Total compiled size**: ~800KB (fits easily in 4MB flash)
+Built with Rust for ESP-IDF. Fits comfortably within 4MB flash on ESP32-C3.
 
 ## Memory Usage
 
@@ -383,12 +383,12 @@ The device follows this startup sequence:
 │
 ├─ 100ms   ESP32 bootloader starts
 │
-├─ 500ms   Arduino framework initializes
+├─ 500ms   esp-idf initializes
 │          - Setup serial communication
 │          - Initialize GPIO pins
-│          - Load preferences from flash
+│          - Load config from NVS
 │
-├─ 1000ms  Our setup() function runs
+├─ 1000ms  Rust main initializes subsystems
 │          - Initialize button handler
 │          - Initialize LED controller
 │          - Show blue pulse (STARTUP state)
@@ -406,7 +406,7 @@ The device follows this startup sequence:
 ├─ 2500ms  Ready for operation
 │          - Show status LED (red or green)
 │          - Update energy meter
-│          - Enter main loop()
+│          - Enter main event loop
 │
 ▼          Main loop runs every 100ms
 ```
@@ -419,26 +419,19 @@ The device follows this startup sequence:
 
 The firmware aggressively uses deep sleep to maximize battery life:
 
-```cpp
+```rust
 // Check for inactivity
-if ((currentState == IDLE_CLOCKED_OUT) && 
-    (millis() - lastActivity > SLEEP_TIMEOUT_MS)) {
-    
-    // Store state to flash
-    preferences.putBool("clocked_in", false);
-    preferences.end();
-    
-    // Configure wake-up source (button GPIO)
-    esp_sleep_enable_ext0_wakeup(BUTTON_PIN, 0); // Wake on LOW
-    
-    // Also wake periodically to check WiFi
-    esp_sleep_enable_timer_wakeup(DEEP_SLEEP_TIME_US);
-    
-    // Turn off LEDs
-    ledController.clear();
-    
-    // Enter deep sleep (5µA current)
-    esp_deep_sleep_start();
+if idle_clocked_out && now.since(last_activity) > SLEEP_TIMEOUT {
+    // Persist state (NVS via esp-idf-svc)
+    nvs.set_bool("clocked_in", false)?;
+
+    // Configure wake-up sources
+    wake_on_gpio(button_pin, Level::Low)?;     // Button press
+    wake_on_timer(DEEP_SLEEP_TIME)?;           // Periodic wake
+
+    // Turn off LEDs and sleep
+    leds.clear();
+    deep_sleep_start()?;                       // ~5µA current draw
 }
 ```
 
@@ -538,43 +531,27 @@ if (voltage < 3.2) {
     // Show low battery warning
 }
 
-// Check LED strip connection
-if (!FastLED.count()) {
-    // LEDs not responding
-    Serial.println("LED strip error");
-}
+// Check LED strip connection (visual validation)
+// Optionally send a test frame and verify expected colors
 ```
 
 ## Testing
 
 ### Unit Tests
 
-The firmware includes unit tests for critical components:
+The firmware's pure logic can be tested on the host using Rust's testing framework:
 
-**Button Handler Tests** (`test_button.cpp`):
-```cpp
-void test_button_debounce()
-void test_button_press_release()
-void test_long_press_detection()
+```rust
+// Example (host-side)
+#[test]
+fn button_long_press_detection() {
+    // arrange inputs, simulate timing, assert events
+}
 ```
 
-**LED Controller Tests** (`test_led.cpp`):
-```cpp
-void test_status_colors()
-void test_energy_meter_gradient()
-void test_animations()
-```
-
-**Running Tests**:
+Running tests locally:
 ```bash
-# Run all tests
-pio test
-
-# Run specific test
-pio test -f test_button
-
-# Run tests on hardware (connected ESP32)
-pio test -e esp32c3
+cargo test
 ```
 
 ### Manual Testing Checklist
@@ -620,31 +597,15 @@ Before deploying firmware:
 
 ### OTA (Over-The-Air) Updates
 
-The firmware supports OTA updates via WiFi:
-
-```cpp
-// Enable OTA updates in main.cpp
-ArduinoOTA.setHostname("wallclockin-001");
-ArduinoOTA.setPassword("update_password");
-ArduinoOTA.begin();
-```
-
-**Update process**:
-```bash
-# Build new firmware
-pio run
-
-# Upload via WiFi (device must be on same network)
-pio run -t upload --upload-port wallclockin-001.local
-```
+> OTA updates can be implemented using esp-idf's OTA APIs from Rust. This project focuses on USB flashing via espflash; OTA is an optional enhancement.
 
 ### USB Updates
 
 Connect USB-C cable and flash directly:
 
 ```bash
-# Upload via USB
-pio run -t upload
+# Flash via USB using espflash
+espflash flash target/riscv32imc-esp-espidf/release/firmware
 ```
 
 **No bootloader button needed** - ESP32-C3 has native USB!

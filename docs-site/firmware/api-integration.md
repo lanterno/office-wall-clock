@@ -116,7 +116,7 @@ If your API uses different endpoint paths or request formats, you can modify the
 
 ### Changing Endpoint Paths
 
-Edit `firmware/src/api_client.cpp`:
+Edit `firmware/src/api.rs`:
 
 ```cpp
 ApiResponse ApiClient::clockIn(const char* project_id) {
@@ -359,20 +359,26 @@ ApiResponse ApiClient::clockIn(const char* project_id) {
 
 ### Example 3: Custom JSON Structure
 
-```cpp
+```rust
 // If your API expects:
 // {"action": "start", "user_id": "abc", "timestamp": 12345}
 
-ApiResponse ApiClient::clockIn(const char* project_id) {
-  StaticJsonDocument<256> doc;
-  doc["action"] = "start";
-  doc["user_id"] = project_id;  // Reuse project_id field
-  doc["timestamp"] = millis() / 1000;
-  
-  String payload;
-  serializeJson(doc, payload);
-  
-  return sendRequest("POST", "/api/timelog", payload.c_str());
+pub fn clock_in(user_id: &str) -> anyhow::Result<ApiResponse> {
+  #[derive(serde::Serialize)]
+  struct Payload<'a> {
+    action: &'static str,
+    user_id: &'a str,
+    timestamp: u64,
+  }
+
+  let payload = Payload {
+    action: "start",
+    user_id,
+    timestamp: epoch_seconds(),
+  };
+
+  let body = serde_json::to_vec(&payload)?;
+  http_post("/api/timelog", &body)
 }
 ```
 
@@ -383,7 +389,7 @@ ApiResponse ApiClient::clockIn(const char* project_id) {
 Connect device via USB to see API calls:
 
 ```bash
-pio device monitor --baud 115200
+espflash monitor --speed 115200
 ```
 
 Output:

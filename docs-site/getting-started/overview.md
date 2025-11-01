@@ -63,7 +63,7 @@ This project is perfect for you if:
 - Basic electronics knowledge helpful but not required
 - Never soldered before? Our guides teach you!
 - Comfortable with command line is useful
-- No programming required (firmware is ready)
+- No programming required (Rust firmware is ready to flash)
 
 ### Time Investment
 
@@ -143,9 +143,9 @@ See [Bill of Materials](../hardware/bill-of-materials.md) for complete shopping 
 
 ### Software Required (Free!)
 
-- **Code Editor**: VS Code or Arduino IDE
-- **PlatformIO** or **Arduino IDE**: Firmware development
-- **ESPTool**: Firmware flashing (included with above)
+- **Code Editor**: VS Code (recommended)
+- **Rust toolchain**: For firmware development
+- **espflash**: For flashing and serial monitor
 
 All software is free and open source!
 
@@ -183,7 +183,7 @@ POST /api/timer/stop
 - Basic electronics (what is voltage, current, ground)
 - Soldering (or watch a YouTube tutorial first)
 - Command line basics (cd, ls, running commands)
-- Arduino/ESP32 basics (helpful for troubleshooting)
+- ESP-IDF + Rust basics (helpful for troubleshooting)
 
 **Don't Worry If You Don't Know**:
 
@@ -201,7 +201,7 @@ The complete project includes:
 ```
 wallClockInMachine/
 ├── hardware/           # Component specs and BOM
-├── firmware/           # Complete C++ source code
+├── firmware/           # Complete Rust source code
 ├── docs-site/          # This documentation website
 ├── tools/              # Helper scripts and utilities
 └── README.md           # Quick overview

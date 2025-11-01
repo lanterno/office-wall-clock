@@ -1,4 +1,4 @@
-.PHONY: help build deploy actions-status clean serve docs-url
+.PHONY: help build deploy actions-status clean serve docs-url rust-build rust-flash rust-monitor rust-check
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -91,3 +91,81 @@ clean: ## Clean build artifacts
 	rm -rf docs/
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 	find . -type f -name "*.pyc" -delete 2>/dev/null || true
+
+# -----------------
+# Rust firmware (Modern esp-hal + Embassy)
+# -----------------
+
+RUST_DIR=firmware
+
+rust-check: ## Check Rust toolchain and target are installed
+	@echo "🦀 Checking Rust environment..."
+	@command -v cargo >/dev/null 2>&1 || { echo "❌ cargo not found. Install Rust from https://rustup.rs"; exit 1; }
+	@rustup target list | grep -q "riscv32imc-unknown-none-elf (installed)" || {\
+	  echo "📦 Installing target riscv32imc-unknown-none-elf..."; \
+	  rustup target add riscv32imc-unknown-none-elf; \
+	}
+	@command -v espflash >/dev/null 2>&1 || { echo "📦 Installing espflash..."; cargo install espflash --locked; }
+	@echo "✅ Rust environment OK (stable + esp-hal)"
+
+rust-build: rust-check ## Build Rust firmware with esp-hal (release)
+	@echo "🔨 Building firmware (release, esp-hal + Embassy)..."
+	cd $(RUST_DIR) && cargo build --release
+
+rust-build-dev: rust-check ## Build Rust firmware (debug, faster compilation)
+	@echo "🔨 Building firmware (debug mode)..."
+	cd $(RUST_DIR) && cargo build
+
+rust-build-size: rust-check ## Build with maximum size optimization
+	@echo "🔨 Building firmware (size-optimized)..."
+	cd $(RUST_DIR) && cargo build --profile release-size
+
+rust-flash: rust-check ## Flash firmware to device and open serial monitor
+	@echo "⚡ Flashing firmware to ESP32-C3..."
+	cd $(RUST_DIR) && cargo run --release
+
+rust-flash-dev: rust-check ## Flash debug build (faster iteration)
+	@echo "⚡ Flashing firmware (debug build)..."
+	cd $(RUST_DIR) && cargo run
+
+rust-monitor: ## Open serial monitor to device
+	@echo "📡 Opening serial monitor..."
+	espflash monitor
+
+rust-size: rust-check ## Show binary size breakdown
+	@echo "📊 Binary size analysis..."
+	cd $(RUST_DIR) && cargo size --release -- -A
+
+rust-bloat: ## Analyze what's taking up space (requires cargo-bloat)
+	@command -v cargo-bloat >/dev/null 2>&1 || { echo "Installing cargo-bloat..."; cargo install cargo-bloat; }
+	@echo "🔍 Analyzing binary bloat..."
+	cd $(RUST_DIR) && cargo bloat --release
+
+rust-clean: ## Clean Rust firmware target
+	@echo "🧹 Cleaning build artifacts..."
+	cd $(RUST_DIR) && cargo clean
+
+rust-clippy: rust-check ## Run Clippy linter
+	@echo "🔍 Running Clippy..."
+	cd $(RUST_DIR) && cargo clippy -- -D warnings
+
+rust-fmt: ## Format Rust code
+	@echo "✨ Formatting code..."
+	cd $(RUST_DIR) && cargo fmt
+
+rust-test: rust-check ## Run tests
+	@echo "🧪 Running tests..."
+	cd $(RUST_DIR) && cargo test
+
+rust-doc: rust-check ## Generate and open documentation
+	@echo "📚 Generating documentation..."
+	cd $(RUST_DIR) && cargo doc --open
+
+rust-update: ## Update Rust dependencies
+	@echo "📦 Updating dependencies..."
+	cd $(RUST_DIR) && cargo update
+
+rust-audit: ## Audit dependencies for security issues
+	@command -v cargo-audit >/dev/null 2>&1 || { echo "Installing cargo-audit..."; cargo install cargo-audit; }
+	@echo "🔒 Auditing dependencies..."
+	cd $(RUST_DIR) && cargo audit

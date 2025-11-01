@@ -248,9 +248,9 @@
 
 | Software | Purpose | Links |
 |----------|---------|-------|
-| **Arduino IDE** | Program ESP32 | [arduino.cc](https://www.arduino.cc/en/software) |
-| **VS Code + PlatformIO** | Advanced development | [platformio.org](https://platformio.org/) |
-| **ESPTool** | Firmware flashing | [github.com/espressif/esptool](https://github.com/espressif/esptool) |
+| **Rust toolchain (rustup)** | Build firmware | [rustup.rs](https://rustup.rs) |
+| **espflash** | Flash firmware & monitor serial | [esp-rs/espflash](https://github.com/esp-rs/espflash) |
+| **VS Code** | Code editing | [code.visualstudio.com](https://code.visualstudio.com/) |
 | **Fusion 360** | 3D design (optional) | [autodesk.com](https://www.autodesk.com/products/fusion-360/personal) |
 
 ---

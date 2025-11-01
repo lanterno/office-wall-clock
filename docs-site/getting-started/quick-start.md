@@ -75,18 +75,21 @@ While waiting for parts:
    cd wallClockInMachine/firmware
    ```
 
-2. **Install PlatformIO**:
-   ```bash
-   # Install via VS Code extension
-   # Or via CLI:
-   pip install platformio
+2. **Install Rust toolchain and espflash**:
+   ```fish
+   curl -fsSL https://sh.rustup.rs | sh
+   rustup target add riscv32imc-unknown-none-elf
+   cargo install espflash --locked
+   ```
+   rustup target add riscv32imc-esp-espidf
+   cargo install espflash --locked
    ```
 
 3. **Configure API endpoint**:
-   Edit `firmware/src/config.h`:
-   ```cpp
-   #define API_ENDPOINT "https://your-api.com"
-   #define API_TOKEN "your_token_here"
+   Edit `firmware/src/config.rs`:
+   ```rust
+   pub const API_ENDPOINT: &str = "https://your-api.com";
+   pub const API_TOKEN: &str = "your_token_here";
    ```
 
 4. **Read assembly guide** (you are here!)
@@ -128,14 +131,11 @@ While waiting for parts:
 # Navigate to firmware directory
 cd firmware/
 
-# Build firmware
-pio run
+# Build and flash (opens monitor automatically via espflash)
+cargo run --release
 
-# Upload to ESP32
-pio run -t upload
-
-# Monitor serial output
-pio device monitor
+# Only monitor serial output (if already flashed)
+espflash monitor
 ```
 
 **Expected output**:
@@ -162,12 +162,12 @@ Device ready.
 
 #### Method B: Hard-code in firmware
 
-Edit `firmware/src/config.h`:
-```cpp
-#define WIFI_SSID "YourNetworkName"
-#define WIFI_PASSWORD "YourPassword"
-#define API_ENDPOINT "https://your-api.com"
-#define API_TOKEN "your_bearer_token"
+Edit `firmware/src/config.rs`:
+```rust
+pub const WIFI_SSID: &str = "YourNetworkName";
+pub const WIFI_PASSWORD: &str = "YourPassword";
+pub const API_ENDPOINT: &str = "https://your-api.com";
+pub const API_TOKEN: &str = "your_bearer_token";
 ```
 
 Re-upload firmware.
@@ -418,7 +418,7 @@ With experience, you can build in **2 hours**:
 **General Learning**:
 - [SparkFun Soldering Tutorial](https://learn.sparkfun.com/tutorials/how-to-solder-through-hole-soldering)
 - [Adafruit NeoPixel Guide](https://learn.adafruit.com/adafruit-neopixel-uberguide)
-- [ESP32 Arduino Docs](https://docs.espressif.com/projects/arduino-esp32/)
+ - [Rust on ESP-IDF (esp-idf)](https://esp-rs.github.io/book/)
 
 ## Next Steps
 

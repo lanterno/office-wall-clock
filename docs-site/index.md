@@ -191,7 +191,7 @@ A physical device on your desk with **one button**:
 :   ESP32-C3 microcontroller, WS2812B LEDs, LiPo battery, TP4056 charger
 
 **Firmware**
-:   C++ (Arduino framework), FastLED, WiFiManager, ArduinoJson
+:   Rust (esp-idf framework), smart-leds, esp-idf-svc, serde
 
 **Connectivity**
 :   WiFi 802.11 b/g/n, HTTPS, OTA updates
