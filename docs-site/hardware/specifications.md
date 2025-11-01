@@ -2,6 +2,27 @@
 
 Detailed technical specifications for all components in the Wall Clock In Machine.
 
+## Overview
+
+This document details the technical specifications and component selection rationale for the Wall Clock In Machine.
+
+## Design Requirements
+
+### Functional Requirements
+- Single button for clock in/out
+- Visual feedback via LEDs
+- WiFi connectivity for API communication
+- 8+ hours battery life
+- Automatic charging via USB-C
+- Compact desktop form factor
+
+### Technical Requirements
+- WiFi 802.11 b/g/n (2.4GHz)
+- HTTPS support for secure API calls
+- Button debouncing
+- Low power sleep modes
+- Battery level monitoring
+
 ## System Overview
 
 ```
@@ -567,15 +588,120 @@ USB-C 5V ──→ TP4056 ──┬──→ Battery (3.7V)
 | **Size** | 100×60×35mm | ⭐⭐⭐⭐ Compact |
 | **Weight** | 85g | ⭐⭐⭐⭐ Lightweight |
 
+## Development Tools Required
+
+### Hardware Tools
+- Soldering iron (30W+)
+- Solder (lead-free recommended)
+- Wire strippers
+- Small screwdriver set
+- Multimeter
+- USB-C cable
+- Helping hands / PCB holder
+- Heat shrink tubing
+
+### Software Tools
+- **Rust toolchain (rustup)**: Firmware development
+- **espflash**: Flashing firmware and serial monitor
+- **Web Browser**: Initial device configuration
+
+### Optional Tools
+- 3D printer (or use online service)
+- Hot glue gun
+- Dremel for enclosure modifications
+- Logic analyzer for debugging
+
+## Safety Considerations
+
+### Electrical Safety
+⚠️ **LiPo Battery**: Can be dangerous if punctured, overcharged, or shorted
+- Always use the TP4056 protection circuit
+- Don't short the battery terminals
+- Charge in a fireproof container first time
+- Stop using if battery swells
+
+### Construction Safety
+- Work in ventilated area (solder fumes)
+- Wear safety glasses
+- Don't touch soldering iron tip (seriously)
+- Check polarity before connecting power
+
+## Testing Checklist
+
+Before assembling into enclosure:
+
+- [ ] Battery charges correctly (LED indicators work)
+- [ ] ESP32-C3 boots and connects to WiFi
+- [ ] Button press detected reliably
+- [ ] All 8 LEDs light up correctly
+- [ ] API calls succeed
+- [ ] Deep sleep mode works
+- [ ] Battery lasts expected time
+- [ ] USB-C charging works through panel connector
+
+## Cost Breakdown
+
+| Component | Price (CHF) | Source |
+|-----------|-------------|--------|
+| ESP32-C3 DevKitM-1 | CHF 12-18 | Digitec/Conrad |
+| WS2812B LED Strip (8 LEDs) | CHF 8-15 | Digitec/Conrad |
+| Toggle Switch | CHF 5-8 | Conrad/Distrelec |
+| 2000mAh LiPo Battery | CHF 15-25 | Digitec/Conrad |
+| TP4056 Charger Module | CHF 3-8 | Conrad/Distrelec |
+| USB-C Panel Connector | CHF 5-8 | Conrad/Digitec |
+| LDO 3.3V Regulator | CHF 3-5 | Conrad/Distrelec |
+| Passive Components Kit | CHF 8-12 | Conrad/Distrelec |
+| Enclosure (3D print) | CHF 15-25 | Material cost |
+| Misc (wire, solder, etc.) | CHF 5-10 | - |
+| **TOTAL** | **~CHF 79-124** | |
+
+*Prices approximate and vary by supplier. See [Bill of Materials](bill-of-materials.md) for detailed Swiss supplier information.*
+
+## Power Budget Analysis
+
+### Detailed Current Draw
+
+| State | Duration | Current | Energy |
+|-------|----------|---------|--------|
+| **API Call** | 2 sec | 120 mA | 0.067 mAh |
+| **LED Update** | 5 sec | 100 mA | 0.139 mAh |
+| **Deep Sleep** | 8 hours | 0.005 mA | 0.040 mAh |
+| **Daily Total** | - | - | ~0.5 mAh |
+
+### Battery Life Projection
+
+**Scenario 1: Typical Use**
+- 2 button presses/day (clock in/out)
+- LEDs on for 8 hours (energy meter)
+- Deep sleep when not displaying
+- **Battery Life**: 12-14 days
+
+**Scenario 2: Heavy Use**
+- Multiple check-ins throughout day
+- LEDs always bright
+- Frequent API sync
+- **Battery Life**: 7-10 days
+
+**Scenario 3: Idle**
+- No button presses
+- Deep sleep most of the time
+- **Battery Life**: 30+ days
+
 ## Next Steps
 
 Now that you understand the technical specifications:
 
-- [**Enclosure Design**](enclosure-design.md) - Physical design and 3D models
-- [**Assembly Guide**](../assembly/soldering.md) - Build your device
-- [**Firmware Installation**](../firmware/installation.md) - Flash the code
+1. 📋 Review the [Bill of Materials](bill-of-materials.md)
+2. 🛒 Order all components
+3. 📦 While waiting, review [Assembly Guide](../assembly/soldering.md)
+4. 🎨 Design your enclosure (or use reference design) - see [Enclosure Design](enclosure-design.md)
+5. 💻 Set up development environment
 
 Or explore:
 
-- [**Bill of Materials**](bill-of-materials.md) - Updated shopping list
+- [**Enclosure Design**](enclosure-design.md) - Physical design and 3D models
 - [**Wiring Diagram**](wiring.md) - Connection guide
+
+---
+
+**Questions?** Check the [Troubleshooting Guide](../troubleshooting/common-issues.md) or open an issue!

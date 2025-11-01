@@ -1,565 +1,480 @@
-# Bill of Materials
+# Bill of Materials (BOM) - Switzerland Edition 🇨🇭
 
-Complete shopping list for building the Wall Clock In Machine.
+**Total Cost: ~CHF 90-100** (Swiss suppliers) | **Build Time: 2-3 hours** | **Skill Level: Beginner-Intermediate**
 
-!!! tip "Shopping Strategy"
-    - **Order from AliExpress** for lowest cost (2-4 week shipping)
-    - **Order from Amazon** for fast delivery (2-day shipping)
-    - **Order from Adafruit/SparkFun** for guaranteed quality
-    - **Buy multiples** - save on shipping and have spares!
+Complete shopping list for building the Wall Clock In Machine, optimized for Switzerland with Swiss suppliers, CHF pricing, and all components needed for testing and development.
 
-## Quick Summary
+## Quick Shopping Strategy
 
-| Category | Items | Total Cost |
-|----------|-------|------------|
-| Electronics | 6 components | $18 |
-| Power | 3 components | $11 |
-| Enclosure | Case + hardware | $6 |
-| Total | | **$35** |
+### Option 1: Fast Build (1-3 days, CHF 90-100)
+- **Digitec Galaxus** + **Conrad.ch** (online)
+- Professional components, fast delivery
+- Free shipping over CHF 50
 
-**Time to Assemble**: 2-3 hours for first build
+### Option 2: Budget Build (3-4 weeks, CHF 45-50)
+- Order from China (AliExpress/eBay) - single order to minimize customs
+- Split orders to stay under CHF 62 limit
+- Best for patient builders
 
-## Core Electronics
+### Option 3: Premium Build (1-2 days, CHF 150)
+- **FabLab EPFL** + **Digitec** (in-person)
+- Workshop access + professional components
+- Community support included
+
+---
+
+## Core Components
 
 ### 1. Microcontroller
 
-**ESP32-C3-DevKitM-1** (or compatible)
-
-- Quantity: 1
-- Price: $4-6
-- Features: WiFi, Bluetooth, USB-C, 22 GPIO
-- Specifications:
-    - CPU: RISC-V @ 160MHz
-    - RAM: 400KB SRAM
-    - Flash: 4MB
-    - Connector: USB-C
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **ESP32-C3-DevKitM-1** | RISC-V, WiFi, USB-C | 1 | CHF 12-18 | Digitec \| Conrad \| Distrelec |
 
 **Where to Buy**:
+- **Digitec Galaxus**: CHF 15-18, free shipping over CHF 50, 1-2 day delivery - [digitec.ch](https://www.digitec.ch/)
+- **Conrad.ch**: CHF 14-16, free shipping over CHF 50, 2-3 day delivery - [conrad.ch](https://www.conrad.ch/)
+- **Distrelec**: CHF 16-20, professional components, 1-2 day delivery - [distrelec.ch](https://www.distrelec.ch/)
+- **Play Zone** (Lausanne, Centre Flon): In-store pickup - [playzone.ch](https://www.playzone.ch/)
 
-| Vendor | Link | Price | Shipping |
-|--------|------|-------|----------|
-| **AliExpress** | [Search ESP32-C3](https://www.aliexpress.com/w/wholesale-esp32-c3-devkit.html) | $3.50 | Free (3-4 weeks) |
-| **Amazon** | [Amazon Search](https://www.amazon.com/s?k=esp32-c3) | $6.99 | Prime 2-day |
-| **Espressif** | [Official Store](https://www.espressif.com/en/products/devkits) | $5.95 | Varies |
-| **Adafruit** | [Product #5337](https://www.adafruit.com/product/5337) | $9.95 | $5 flat |
+**What to Look For**:
+- ✅ USB-C connector (NOT micro-USB)
+- ✅ On-board antenna
+- ✅ CH340 or CP2102 USB chip (or native USB)
+- ✅ Pin headers included or pre-soldered
 
-!!! note "Compatible Boards"
-    Any ESP32-C3 board works! Look for:
-    - ESP32-C3-DevKitC-02
-    - ESP32-C3-WROOM-02
-    - ESP32-C3 Super Mini
-    
-    Just verify it has: USB-C port, 4MB flash, accessible GPIO pins
+---
 
 ### 2. LED Strip
 
-**WS2812B Addressable RGB LED Strip** (8 LEDs minimum)
-
-- Quantity: 8 LEDs (or buy 1 meter strip with 60 LEDs)
-- Price: $2-5
-- Specifications:
-    - Voltage: 5V DC
-    - Type: WS2812B / SK6812 / NeoPixel
-    - Individual addressable RGB
-    - Current: ~60mA per LED at full brightness
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **WS2812B LED Strip** | Addressable RGB, 60 LEDs/m | 8 LEDs (buy 1m strip) | CHF 8-15 | Digitec \| Conrad |
 
 **Where to Buy**:
+- **Digitec Galaxus**: CHF 12-15 for 1m strip - [digitec.ch](https://www.digitec.ch/)
+- **Conrad.ch**: CHF 10-12 for 1m strip - [conrad.ch](https://www.conrad.ch/)
 
-| Vendor | Link | Price | Notes |
-|--------|------|-------|-------|
-| **AliExpress** | [WS2812B Strip](https://www.aliexpress.com/w/wholesale-ws2812b.html) | $2/meter | Buy 1 meter, cut to size |
-| **Amazon** | [Amazon WS2812B](https://www.amazon.com/s?k=ws2812b+led+strip) | $8/meter | Pre-cut options available |
-| **Adafruit** | [NeoPixel Strip](https://www.adafruit.com/product/1138) | $10/meter | High quality, weatherproof |
-| **BTF-Lighting** | [Amazon Store](https://www.amazon.com/stores/BTF-LIGHTING/page/80C2E92D-D672-4FD0-AD3D-2B8D85F0AA08) | $9/meter | Popular brand |
+**What to Buy**:
+- Buy a 1-meter strip (60 LEDs) and cut to 8 LEDs
+- Waterproof (IP65) or non-waterproof (IP20) - both work
+- Black PCB preferred (looks better)
+- 5V version (NOT 12V)
 
-!!! tip "LED Options"
-    - **60 LEDs/meter**: Easy to cut, standard density
-    - **144 LEDs/meter**: More compact, harder to cut
-    - **Pre-wired**: Look for "WS2812B 8 LED" modules
-    - **Compatible**: SK6812, NeoPixel, any WS2812 variant works
+**Cutting Guide**: LEDs have cut marks every 3 LEDs. Cut after 8th LED, save rest for future projects!
 
-### 3. Toggle Switch
+---
 
-**SPDT Toggle Switch** (ON-OFF-ON or ON-ON)
+### 3. Button/Switch
 
-- Quantity: 1
-- Price: $1-3
-- Specifications:
-    - Type: Single Pole Double Throw (SPDT)
-    - Rating: 3A @ 125VAC
-    - Mounting: Panel mount (6mm thread)
-    - Actuation: Toggle/Lever
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **Toggle Switch SPDT** | 12mm panel mount, metal | 1 | CHF 5-8 | Conrad \| Distrelec |
 
 **Where to Buy**:
+- **Conrad.ch**: CHF 6-8, quality switches - [conrad.ch](https://www.conrad.ch/)
+- **Distrelec**: CHF 5-7, professional grade - [distrelec.ch](https://www.distrelec.ch/)
 
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [SPDT Toggle](https://www.aliexpress.com/w/wholesale-spdt-toggle-switch.html) | $0.50 |
-| **Amazon** | [E-Switch 100DP1T1B1M2QEH](https://www.amazon.com/s?k=spdt+toggle+switch+panel) | $3.00 |
-| **Adafruit** | [Toggle Switch](https://www.adafruit.com/product/3220) | $0.95 |
-| **Mouser** | [C&K 7101](https://www.mouser.com/c/electromechanical/switches/toggle-switches/) | $2.50 |
+**What to Look For**:
+- ✅ SPDT (Single Pole Double Throw) - 3 terminals
+- ✅ 12mm mounting hole diameter
+- ✅ Metal construction (feels premium)
+- ✅ ON-ON type (maintained position)
 
-!!! warning "Switch Type"
-    - ✅ **SPDT** (Single Pole Double Throw) - Has 3 terminals
-    - ✅ **ON-ON** - Two stable positions
-    - ❌ **SPST** - Only 2 terminals (won't work)
-    - ❌ **Momentary** - Returns to center (not suitable)
+**Alternative**: Illuminated toggle switch - costs CHF 8-12
 
-### 4. Resistor (for LEDs)
+---
 
-**330Ω Resistor** (1/4W)
+### 4. Battery
 
-- Quantity: 1
-- Price: $0.10 (or buy pack of 100)
-- Specifications:
-    - Value: 330Ω (orange-orange-brown)
-    - Wattage: 1/4W or higher
-    - Tolerance: 5% or better
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **LiPo Battery** | 3.7V, 2000mAh, JST connector | 1 | CHF 15-25 | Digitec \| Conrad |
 
 **Where to Buy**:
+- **Digitec Galaxus**: CHF 18-22, quality batteries with protection - [digitec.ch](https://www.digitec.ch/)
+- **Conrad.ch**: CHF 20-25, professional components - [conrad.ch](https://www.conrad.ch/)
 
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [Resistor Kit](https://www.aliexpress.com/w/wholesale-resistor-kit.html) | $2 for 1000pcs |
-| **Amazon** | [Elegoo Resistor Kit](https://www.amazon.com/ELEGOO-Resistor-Assortment-Projects-Breadboard/dp/B07C7DFDN8) | $8 for 1200pcs |
-| **Adafruit** | [Single Resistor](https://www.adafruit.com/product/2781) | $0.75 |
+**What to Look For**:
+- ✅ 2000-2500 mAh capacity
+- ✅ JST-PH 2.0mm connector (red/black wires)
+- ✅ Protection circuit (PCB on battery)
+- ✅ Dimensions fit your enclosure (~50×30×10mm)
+- ⚠️ **Buy from reputable seller** - safety matters!
 
-!!! tip "Alternative"
-    Many WS2812B strips don't need external resistors. Try without first!
+**Safety Note**: LiPo batteries can be dangerous if damaged. Handle with care, don't puncture!
 
-### 5. Capacitor (for LEDs)
+---
 
-**1000µF Electrolytic Capacitor** (6.3V or higher)
+### 5. Battery Charger
 
-- Quantity: 1
-- Price: $0.20
-- Specifications:
-    - Capacitance: 470µF - 1000µF
-    - Voltage: 6.3V minimum (16V recommended)
-    - Type: Electrolytic
-
-**Where to Buy**:
-
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [Capacitor Kit](https://www.aliexpress.com/w/wholesale-electrolytic-capacitor-kit.html) | $3 for 120pcs |
-| **Amazon** | [Assorted Kit](https://www.amazon.com/s?k=electrolytic+capacitor+assortment) | $10 for 500pcs |
-| **Adafruit** | [1000µF 25V](https://www.adafruit.com/product/2193) | $0.95 |
-
-!!! note "Optional Component"
-    The capacitor smooths power to the LEDs and prevents flickering. Not strictly required for 8 LEDs.
-
-### 6. Wires & Connectors
-
-**Hookup Wire** (22-26 AWG)
-
-- Quantity: 1 meter of each color (red, black, yellow/white)
-- Price: $3-5 for assorted spool
-- Specifications:
-    - Gauge: 22-26 AWG solid or stranded
-    - Colors: Red (power), Black (ground), Other (data)
-
-**JST-PH 2.0 Connectors** (Optional but recommended)
-
-- Quantity: 2-3 sets (male + female)
-- Price: $2-4 for 10 pairs
-- Use: Battery connection, easy disconnection
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **TP4056 Charger Module** | USB-C, 1A charge, protection | 1 | CHF 3-8 | Conrad \| Distrelec |
 
 **Where to Buy**:
+- **Conrad.ch**: CHF 6-8, quality modules - [conrad.ch](https://www.conrad.ch/)
+- **Distrelec**: CHF 5-7 - [distrelec.ch](https://www.distrelec.ch/)
 
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [Wire Kit + JST](https://www.aliexpress.com/w/wholesale-hookup-wire-kit.html) | $5 |
-| **Amazon** | [Striveday Wire Kit](https://www.amazon.com/Electrical-Striveday-Stranded-Different-Breadboard/dp/B07T4SYVYH) | $14 |
-| **Adafruit** | [Silicone Wire Spool](https://www.adafruit.com/product/2051) | $3/spool |
+**What to Look For**:
+- ✅ USB-C input (NOT micro-USB)
+- ✅ Protection features (DW01A chip visible)
+- ✅ Red/Blue indicator LEDs
+- ✅ Small form factor (~26×17mm)
 
-## Power Components
+---
 
-### 7. LiPo Battery
+### 6. Voltage Regulator
 
-**3.7V 2000mAh Lithium Polymer Battery** (503450 size)
-
-- Quantity: 1
-- Price: $7-10
-- Specifications:
-    - Voltage: 3.7V nominal (4.2V max, 3.0V min)
-    - Capacity: 2000mAh (higher OK, longer runtime)
-    - Size: 50×34×5mm (503450) - flexible
-    - Connector: JST-PH 2.0 (2-pin)
-    - Protection: Built-in PCM (Protection Circuit Module)
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **AMS1117-3.3 Module** | LDO regulator, 3.3V output | 1 | CHF 3-5 | Conrad \| Distrelec |
 
 **Where to Buy**:
+- **Conrad.ch**: CHF 3-4 - [conrad.ch](https://www.conrad.ch/)
+- **Distrelec**: CHF 4-5 - [distrelec.ch](https://www.distrelec.ch/)
 
-| Vendor | Link | Price | Notes |
-|--------|------|-------|-------|
-| **AliExpress** | [LiPo 2000mAh](https://www.aliexpress.com/w/wholesale-lipo-battery-2000mah-3.7v.html) | $6-8 | Check size fits |
-| **Amazon** | [Adafruit LiPo](https://www.amazon.com/stores/Adafruit/page/6F1C5E2B-9B57-4F5A-9C4D-1C3F5F3E5A5D) | $10-12 | High quality |
-| **Adafruit** | [2000mAh Battery](https://www.adafruit.com/product/2011) | $9.95 | With JST connector |
+**What to Look For**:
+- ✅ 3.3V output
+- ✅ 500mA+ current rating
+- ✅ Pre-built module (easier than bare IC)
+- ✅ Screw terminals or pin headers
 
-!!! danger "Battery Safety"
-    - ⚠️ **Do not puncture or short circuit**
-    - ⚠️ **Do not charge unattended**
-    - ⚠️ **Store in cool, dry place**
-    - ⚠️ **Dispose properly** (battery recycling)
-    - ✅ **Use batteries with built-in protection circuit**
+---
 
-!!! tip "Size Flexibility"
-    Any 3.7V LiPo from 1000mAh to 3000mAh works:
-    - **1000mAh**: Smaller, lighter, 5-7 day runtime
-    - **2000mAh**: Recommended, 10-14 day runtime
-    - **3000mAh**: Larger, heavier, 15-20 day runtime
+### 7. USB-C Connector
 
-### 8. Battery Charger
-
-**TP4056 Lithium Battery Charger Module** (with protection)
-
-- Quantity: 1
-- Price: $1-3
-- Specifications:
-    - Input: Micro-USB or USB-C (5V)
-    - Output: 4.2V (LiPo charging)
-    - Current: 1A max (adjustable with resistor)
-    - Protection: Overcharge, overdischarge, overcurrent
-    - Indicators: Red LED (charging), Blue LED (full)
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **USB-C Panel Mount** | Female, with cable/PCB | 1 | CHF 5-8 | Conrad \| Digitec |
 
 **Where to Buy**:
+- **Conrad.ch**: CHF 6-8 - [conrad.ch](https://www.conrad.ch/)
+- **Digitec**: CHF 5-7 - [digitec.ch](https://www.digitec.ch/)
 
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [TP4056 USB-C](https://www.aliexpress.com/w/wholesale-tp4056-usb-c.html) | $1.50 |
-| **Amazon** | [HiLetgo TP4056](https://www.amazon.com/s?k=tp4056+charger+module) | $8 for 5-pack |
-| **Adafruit** | [USB LiPo Charger](https://www.adafruit.com/product/1304) | $7.50 |
+**What to Look For**:
+- ✅ Female connector (male USB-C cable plugs into it)
+- ✅ Mounting holes or nut for panel
+- ✅ ~20cm cable attached (easier to wire)
+- ✅ Power-only (don't need data pins)
 
-!!! note "USB Type"
-    - **USB-C version**: Recommended (same as ESP32-C3)
-    - **Micro-USB version**: Works but need 2 different cables
+---
 
-### 9. Voltage Regulator
+## Electronic Components
 
-**AMS1117-3.3V Linear Regulator Module**
+### Passive Components Kit
 
-- Quantity: 1
-- Price: $1-2
-- Specifications:
-    - Input: 4.5V - 7V (or 3.3-6V for LDO version)
-    - Output: 3.3V @ 800mA
-    - Type: Linear LDO (Low Dropout)
-    - Package: SOT-223 or module with caps
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **Capacitor Kit** | 0.1µF, 10µF, 100µF variety | 1 kit | CHF 8-12 | Conrad \| Distrelec |
+| **Resistor Kit** | 1/4W, assorted values | 1 kit | CHF 8-12 | Conrad \| Distrelec |
 
 **Where to Buy**:
+- **Conrad.ch**: CHF 8-10 per kit, comprehensive assortment - [conrad.ch](https://www.conrad.ch/)
+- **Distrelec**: CHF 10-12 per kit, professional grade - [distrelec.ch](https://www.distrelec.ch/)
 
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [AMS1117 Module](https://www.aliexpress.com/w/wholesale-ams1117-3.3v-module.html) | $1 |
-| **Amazon** | [HiLetgo AMS1117](https://www.amazon.com/s?k=ams1117+3.3v+module) | $7 for 10-pack |
-| **Adafruit** | [Breadboard Regulator](https://www.adafruit.com/product/2165) | $1.95 |
+**Individual Components Needed**:
 
-!!! tip "Alternative"
-    Many ESP32-C3 boards have built-in 3.3V regulation from 5V USB. If yours does, you can power LEDs from 5V USB and skip this component for USB-only operation.
+| Component | Value | Qty | Purpose |
+|-----------|-------|-----|---------|
+| Electrolytic Capacitor | 100µF, 16V | 2 | Power smoothing |
+| Ceramic Capacitor | 10µF, 16V | 2 | Bypass caps |
+| Ceramic Capacitor | 0.1µF | 4 | Decoupling |
+| Resistor | 10kΩ | 2 | Pull-up |
+| Resistor | 330Ω | 1 | LED limiter |
+| Diode | 1N4148 | 1 | Reverse protection |
 
-## Enclosure & Hardware
+💡 **Tip**: Buy a variety kit if this is your first electronics project. You'll use them in future projects!
 
-### 10. Enclosure
+**Lausanne Tip**: **Conrad.ch** has a physical store in Geneva (30 min from Lausanne) - you can pick up components same day!
 
-**3D Printed Case** or **Laser-Cut Acrylic Box**
+---
 
-- Quantity: 1
-- Price: $5-10 (materials) or $15-25 (printed/cut)
-- Specifications:
-    - Dimensions: 100×60×35mm (internal)
-    - Material: PLA, PETG, or 3mm acrylic
-    - Features: LED window, switch hole, USB access
+## Wiring & Connectors
 
-**Options**:
-
-| Option | Cost | Time | Notes |
-|--------|------|------|-------|
-| **3D Print Yourself** | $3 | 6 hours | Need 3D printer |
-| **Print Service** | $15-25 | 3-5 days | Use Shapeways, Craftcloud |
-| **Laser Cut Service** | $20-30 | 3-5 days | Use Ponoko, SendCutSend |
-| **DIY Wood/Plastic** | $5 | 2 hours | Hand tools + plastic box |
-
-**Print Services**:
-
-- [Craftcloud](https://craftcloud3d.com/) - Compare prices from 100+ services
-- [Shapeways](https://www.shapeways.com/) - Professional finish
-- [3D Hubs](https://www.hubs.com/) - Local 3D printing
-
-**Laser Cut Services**:
-
-- [Ponoko](https://www.ponoko.com/) - Upload SVG/DXF files
-- [SendCutSend](https://sendcutsend.com/) - Metal and plastic
-
-**DIY Enclosure Ideas**:
-
-1. **Plastic Project Box** ($5 from Amazon/eBay)
-2. **Hammond 1591 Enclosure** ($8 from Mouser)
-3. **Mint Tin** (free! - Altoids tin)
-4. **Wooden Box** (craft store - $3-5)
-
-**3D Model Files**: Available in `/hardware/enclosure/` folder (STL files)
-
-### 11. Mounting Hardware
-
-**Screws, Standoffs, Nuts**
-
-- Quantity: Various
-- Price: $3-5
-- Specifications:
-    - M3 screws (8-10mm length) × 4
-    - M3 hex standoffs (10mm) × 4
-    - M2 screws (6mm) for ESP32 × 2
+| Item | Specs | Qty | Price (CHF) | Suppliers |
+|------|-------|-----|-------------|-----------|
+| **Silicone Wire** | 24 AWG, red+black | 2m each | CHF 8-12 | Conrad \| Distrelec |
+| **JST Connectors** | 2-pin, 2.0mm pitch | 5 pairs | CHF 5-8 | Conrad \| Distrelec |
+| **Heat Shrink Tubing** | Assorted sizes | 1 kit | CHF 6-10 | Conrad \| Jumbo |
+| **Jumper Wires** | Male-to-female, 20cm | 20 | CHF 5-8 | Conrad \| Digitec |
 
 **Where to Buy**:
+- **Conrad.ch**: Best selection, CHF 8-12 per item - [conrad.ch](https://www.conrad.ch/)
+- **Distrelec**: Professional grade, CHF 10-15 per item - [distrelec.ch](https://www.distrelec.ch/)
+- **Local Hardware Stores** (Jumbo, Brico+Loisirs): Basic wire, CHF 5-8
 
-| Vendor | Link | Price |
-|--------|------|-------|
-| **AliExpress** | [M3 Standoff Kit](https://www.aliexpress.com/w/wholesale-m3-standoff-kit.html) | $3 |
-| **Amazon** | [Sutemribor 1080pcs Kit](https://www.amazon.com/Sutemribor-1080PCS-Standoff-Assortment-Male-Female/dp/B07D7828LC) | $16 |
-| **Home Depot** | Loose screws | $2 |
+---
 
-## Optional Components
+## Testing & Prototyping Components
 
-### For Enhanced Features
+!!! warning "Important for Development"
+    These components are essential for testing and prototyping before final assembly. Don't skip these!
 
-| Component | Purpose | Price | Link |
-|-----------|---------|-------|------|
-| **Buzzer** | Audio feedback | $1 | [AliExpress](https://www.aliexpress.com/w/wholesale-passive-buzzer-5v.html) |
-| **OLED Display** | Show time/status | $5 | [Amazon I2C OLED](https://www.amazon.com/s?k=0.96+oled+i2c) |
-| **DHT22 Sensor** | Temperature/humidity | $3 | [Adafruit DHT22](https://www.adafruit.com/product/385) |
-| **Button** | Extra input | $0.20 | [Tactile Button](https://www.adafruit.com/product/367) |
-| **NFC Reader** | RFID for multi-user | $8 | [PN532 Module](https://www.amazon.com/s?k=pn532+nfc) |
+### Breadboard & Prototyping
+
+| Item | Specs | Qty | Price (CHF) | Purpose |
+|------|-------|-----|-------------|---------|
+| **Breadboard** | 400/830 tie points | 1 | CHF 8-12 | Prototyping before soldering |
+| **Jumper Wires** | Male-to-male, 10cm | 40 | CHF 5-8 | Breadboard connections |
+| **Jumper Wires** | Male-to-female, 20cm | 20 | CHF 5-8 | ESP32 to breadboard |
+| **Breadboard Power Supply** | 5V/3.3V module (optional) | 1 | CHF 8-12 | Clean power for testing |
+
+**Where to Buy**:
+- **Conrad.ch**: CHF 8-12 breadboard, CHF 5-8 jumper wire sets - [conrad.ch](https://www.conrad.ch/)
+- **Digitec**: CHF 10-15 breadboard kits - [digitec.ch](https://www.digitec.ch/)
+
+**Why Needed**: 
+- Test all connections before soldering
+- Verify firmware works correctly
+- Debug issues without desoldering
+- See [Breadboard Prototype Guide](../assembly/breadboard.md)
+
+### Extra Components for Testing
+
+| Item | Specs | Qty | Price (CHF) | Purpose |
+|------|-------|-----|-------------|---------|
+| **Extra Resistors** | 330Ω, 10kΩ | 5 each | CHF 2-3 | Testing LED/data lines |
+| **Extra Capacitors** | 100µF, 0.1µF | 5 each | CHF 3-5 | Power supply testing |
+| **Extra JST Connectors** | 2-pin, 2.0mm | 3 pairs | CHF 3-5 | Test battery connections |
+| **Test Points/Headers** | Male pin headers | 1 strip | CHF 2-3 | Add test points to PCB |
+
+**Why Needed**:
+- Components can get damaged during testing
+- Need spares for breadboard vs final build
+- Allows experimentation without cannibalizing final build
+
+---
+
+## Enclosure
+
+### Option 1: 3D Printed (Recommended)
+
+| Item | Material | Cost (CHF) | Options |
+|------|----------|------------|---------|
+| **3D Print Service** | PLA filament | CHF 15-25 | [Shapeways](https://www.shapeways.com/) \| [Craftcloud](https://craftcloud3d.com/) |
+| **Or Print Yourself** | PLA roll, 1kg | CHF 25-35 | Digitec \| Conrad |
+
+**Files Provided**: STL files in `hardware/enclosure/` directory
+
+**Print Settings**:
+- Layer Height: 0.2mm
+- Infill: 20%
+- Supports: Yes (for overhang areas)
+- Material: PLA or PETG
+
+**Lausanne Option**: **FabLab EPFL** - Use their 3D printers for free (with EPFL access) or small membership fee!
+- Location: EPFL Campus, Bâtiment MX
+- Website: [fablab.epfl.ch](https://fablab.epfl.ch/)
+- Cost: Free for students/staff, CHF 50/year for community members
+
+### Option 2: Pre-Made Enclosure
+
+| Item | Specs | Cost (CHF) | Suppliers |
+|------|-------|------------|-----------|
+| **Project Box** | 100×60×35mm ABS | CHF 8-12 | Conrad \| Distrelec |
+
+**Modifications Needed**:
+- Drill holes for toggle switch (12mm)
+- Cut slot for USB-C connector
+- Cut window for LED strip
+
+**Local Hardware Stores** (Lausanne area):
+- **Jumbo** (multiple locations): Basic project boxes, CHF 5-8
+- **Brico+Loisirs** (multiple locations): ABS boxes, CHF 8-12
+
+---
+
+## Hardware & Fasteners
+
+| Item | Specs | Qty | Cost (CHF) | Suppliers |
+|------|-------|-----|------------|-----------|
+| **M3 Screws** | 8mm length | 8 | CHF 2-3 | Conrad/Distrelec |
+| **M3 Hex Nuts** | Standard | 8 | CHF 2-3 | Conrad/Distrelec |
+| **M3 Standoffs** | 10mm height | 4 | CHF 4-6 | Conrad/Distrelec |
+| **Rubber Feet** | Self-adhesive, 10mm | 4 | CHF 3-5 | Conrad/Jumbo |
+
+**Conrad Kit**: CHF 8-12 for complete M3 assortment kit
+
+**Local Option**: **Jumbo** or **Brico+Loisirs** have basic screws/nuts, CHF 2-5
+
+---
 
 ## Tools Required
 
-!!! info "You'll Need These Tools"
-    Not included in cost above - these are workshop tools you may already have:
+### Essential Tools (Must Have)
 
-### Essential Tools
+| Tool | Approximate Cost (CHF) | Suppliers |
+|------|----------------------|-----------|
+| **Soldering Iron** | CHF 25-80 | Conrad \| Digitec |
+| **Solder** | CHF 8-12 | Conrad \| Jumbo |
+| **Wire Strippers** | CHF 12-20 | Conrad \| Jumbo |
+| **Screwdriver Set** | CHF 10-15 | Conrad \| Jumbo |
+| **Multimeter** | CHF 20-40 | Digitec \| Conrad |
+| **USB-C Cable** | CHF 5-10 | Digitec \| Conrad |
 
-| Tool | Purpose | Price | Where |
-|------|---------|-------|-------|
-| **Soldering Iron** | Solder components | $15-50 | [Amazon](https://www.amazon.com/s?k=soldering+iron+kit) |
-| **Solder** | Join connections | $5 | [60/40 Rosin Core](https://www.amazon.com/s?k=rosin+core+solder) |
-| **Wire Strippers** | Strip wire insulation | $8 | Hardware store |
-| **Flush Cutters** | Cut wires/leads | $7 | [Amazon](https://www.amazon.com/s?k=flush+cutters) |
-| **Multimeter** | Test voltage/continuity | $12 | [Amazon](https://www.amazon.com/s?k=digital+multimeter) |
-| **USB-C Cable** | Program ESP32 | $5 | Any USB-C cable |
+**Total Tool Cost**: ~CHF 80-150 (one-time investment, use for many projects!)
 
-**Total Tool Cost**: ~$50-100 (one-time investment, reusable for all projects)
+**Lausanne Tip**: **FabLab EPFL** has all tools available for free (with EPFL access) or small membership fee!
 
-### Nice to Have
+### Nice to Have (for Testing & Development)
 
-- **Third Hand/Helping Hands** - Hold components while soldering ($10)
-- **Heat Shrink Tubing** - Insulate connections ($5)
-- **Hot Glue Gun** - Secure components ($8)
-- **Drill + Bits** - Make holes in enclosure ($30)
-- **Label Maker** - Mark connections ($15)
+| Tool | Purpose | Cost (CHF) | Suppliers |
+|------|---------|------------|-----------|
+| **Helping Hands** | Hold PCBs while soldering | CHF 12-18 | Conrad |
+| **Hot Glue Gun** | Strain relief, mounting | CHF 10-15 | Jumbo/Brico+Loisirs |
+| **Flush Cutters** | Clean wire cuts | CHF 8-12 | Conrad |
+| **Tweezers** | Handle small parts | CHF 5-8 | Conrad |
+| **Desoldering Pump** | Fix mistakes | CHF 8-12 | Conrad |
+| **Solder Wick** | Remove solder | CHF 3-5 | Conrad |
+| **Magnifying Glass** | See tiny components | CHF 15-25 | Conrad |
+| **Heat Gun** | Heat shrink tubing | CHF 15-30 | Conrad/Jumbo |
 
-## Shopping Lists
+---
 
-### Budget Option (~$35 total)
+## Software (Free!)
 
-Perfect for first build:
+| Software | Purpose | Links |
+|----------|---------|-------|
+| **Rust toolchain (rustup)** | Build firmware | [rustup.rs](https://rustup.rs) |
+| **espflash** | Flash firmware & monitor serial | [esp-rs/espflash](https://github.com/esp-rs/espflash) |
+| **VS Code** | Code editing | [code.visualstudio.com](https://code.visualstudio.com/) |
+| **Fusion 360** | 3D design (optional) | [autodesk.com](https://www.autodesk.com/products/fusion-360/personal) |
 
-1. ESP32-C3 from AliExpress: $3.50
-2. WS2812B LED Strip (1 meter): $2.00
-3. SPDT Toggle Switch: $0.50
-4. 2000mAh LiPo Battery: $7.00
-5. TP4056 Charger (USB-C): $1.50
-6. AMS1117 Regulator Module: $1.00
-7. Wire Kit + Connectors: $5.00
-8. Resistor/Capacitor Kit: $3.00
-9. Plastic Project Box: $5.00
-10. M3 Hardware Kit: $3.00
-11. USB-C Cable: $3.00
+---
 
-**Subtotal**: $34.50  
-**Shipping**: Free (3-4 weeks from China)
+## Complete Shopping List
 
-### Premium Option (~$80 total)
+### Quick Copy-Paste List for Swiss Suppliers
 
-Higher quality, faster shipping:
+**Core Components**:
+```
+- ESP32-C3 DevKitM-1 development board
+- WS2812B LED strip (1 meter, 60 LEDs)
+- 12mm SPDT toggle switch (metal, panel mount)
+- 3.7V 2000mAh LiPo battery with JST-PH 2.0mm connector
+- TP4056 USB-C charger module (with protection)
+- AMS1117-3.3V voltage regulator module
+- USB-C panel mount connector (female, with cable)
+```
 
-1. ESP32-C3 from Adafruit: $9.95
-2. NeoPixel Strip from Adafruit: $10.00
-3. Quality Toggle Switch: $3.00
-4. Adafruit 2000mAh LiPo: $9.95
-5. Adafruit USB LiPo Charger: $7.50
-6. Regulator Module from Amazon: $2.00
-7. Premium Wire Kit: $14.00
-8. Component Kits: $10.00
-9. 3D Printed Enclosure: $20.00
-10. Hardware Assortment: $10.00
-11. USB-C Cable: $5.00
+**Components & Wiring**:
+```
+- Capacitor assortment kit (includes 0.1µF, 10µF, 100µF)
+- Resistor assortment kit (includes 330Ω, 10kΩ, etc.)
+- 24 AWG silicone wire (red and black, 2m each)
+- JST-PH 2.0mm connector kit (male + female pairs)
+- Heat shrink tubing assortment
+- Male pin headers (for breadboard/ESP32)
+```
 
-**Subtotal**: $101.40  
-**Shipping**: ~$10 (2-3 days domestic)
+**Testing & Prototyping**:
+```
+- Breadboard (400 or 830 tie points)
+- Jumper wire kit (male-to-male, male-to-female)
+- Extra resistors (330Ω, 10kΩ) - 5 each
+- Extra capacitors (100µF, 0.1µF) - 5 each
+- Extra JST connectors (3 pairs)
+```
 
-### Bulk Order (Build 5 units)
+**Hardware & Enclosure**:
+```
+- M3 screw/nut/standoff kit
+- Rubber feet (4 pack, self-adhesive)
+- Project box (100×60×35mm) OR 3D print enclosure
+```
 
-Save on per-unit cost:
+**Tools** (if you don't have):
+```
+- Soldering iron kit (30W+, temperature controlled)
+- Lead-free solder (0.8mm diameter)
+- Wire strippers
+- Flush cutters
+- Multimeter (digital, basic)
+- USB-C cable (for programming)
+- Screwdriver set (PH0/PH1)
+```
 
-- ESP32-C3 × 5: $17.50 ($3.50 each)
-- LED Strips × 5m: $10 ($2 each)
-- Switches × 10: $5 ($0.50 each)
-- Batteries × 5: $35 ($7 each)
-- Chargers × 5: $7.50 ($1.50 each)
-- Regulators × 10: $10 ($1 each)
-- Shared wire/component kits: $15
-- Project boxes × 5: $25 ($5 each)
-- Shared hardware: $10
+---
 
-**Total**: $135 for 5 units = **$27 per unit**  
-**Savings**: 25% vs buying individually
+## Swiss Suppliers Directory
 
-## Where to Get Everything
+### Primary Suppliers (Recommended)
 
-### 🇨🇭 Local Shopping in Lausanne, Switzerland
+#### Digitec Galaxus
+- **Website**: [digitec.ch](https://www.digitec.ch/)
+- **Delivery**: 1-2 days (free over CHF 50)
+- **Strengths**: ESP32 boards, LED strips, batteries, tools
+- **Best For**: Fast delivery, good prices, Swiss customer service
 
-**Physical Stores in Lausanne Area**:
+#### Conrad.ch
+- **Website**: [conrad.ch](https://www.conrad.ch/)
+- **Delivery**: 2-3 days (free over CHF 50)
+- **Strengths**: Complete electronics catalog, passive components, tools
+- **Physical Store**: Geneva (30 min from Lausanne) - [Store Finder](https://www.conrad.ch/fr/ch/pages/store-finder)
+- **Best For**: One-stop shopping, professional components
 
-| Store | Location | Speciality | Website |
-|-------|----------|------------|---------|
-| **Digitec Galaxus** | Online + Zürich | Electronics, fast delivery | [digitec.ch](https://www.digitec.ch/) |
-| **Play Zone** | Centre Flon, Lausanne | Electronics, Arduino kits | [playzone.ch](https://www.playzone.ch/) |
-| **Distrelec** | Online + pickup points | Professional components | [distrelec.ch](https://www.distrelec.ch/) |
-| **Brack** | Online, 1-2 day delivery | Consumer electronics | [brack.ch](https://www.brack.ch/) |
+#### Distrelec
+- **Website**: [distrelec.ch](https://www.distrelec.ch/)
+- **Delivery**: 1-2 days (free over CHF 50)
+- **Strengths**: Professional components, industrial grade
+- **Best For**: Quality components, technical support
 
-**Maker Spaces in Lausanne** (borrow tools, get help):
+### Local Stores (Lausanne Area)
 
-- **FabLab EPFL** - EPFL Campus (check EPFL website for current information)
-  - Location: EPFL Campus, Bâtiment MX
-  - Tools: 3D printers, soldering stations, laser cutters
-  - Open hours: Check website for schedule
-  - Perfect for: Students with EPFL access
+#### Play Zone (Lausanne)
+- **Location**: Centre Flon, Lausanne
+- **Website**: [playzone.ch](https://www.playzone.ch/)
+- **Specialty**: Arduino kits, ESP32 boards, maker components
+- **Best For**: In-person shopping, immediate pickup
 
-- **Makerspace Renens** - Near Lausanne
-  - Location: Renens (15 min from Lausanne)
-  - Tools: Full workshop access
-  - Community: Meetups and workshops
+#### Jumbo (Multiple Locations)
+- **Locations**: Multiple in Lausanne area
+- **Website**: [jumbo.ch](https://www.jumbo.ch/)
+- **Specialty**: Basic tools, wire, basic components
+- **Best For**: Basic tools, wire, screws
 
-### European Suppliers (Fast Shipping to Switzerland)
+#### Brico+Loisirs (Multiple Locations)
+- **Locations**: Multiple in Lausanne area
+- **Website**: [bricorama.ch](https://www.bricorama.ch/)
+- **Specialty**: Tools, hardware, basic electronics
+- **Best For**: Tools, project boxes, hardware
 
-**Germany** (2-3 day delivery):
+### Maker Spaces (Lausanne Area)
 
-| Vendor | Speciality | Shipping | Website |
-|--------|------------|----------|---------|
-| **Reichelt** | Complete electronics | CHF 9, free >CHF 80 | [reichelt.com](https://www.reichelt.com/) |
-| **Conrad Electronic** | Professional components | CHF 8, free >CHF 50 | [conrad.ch](https://www.conrad.ch/) |
-| **Berrybase** | Raspberry Pi & ESP32 | CHF 10 | [berrybase.de](https://www.berrybase.de/) |
-| **Eckstein** | Arduino & makers | CHF 7 | [eckstein-shop.de](https://www.eckstein-shop.de/) |
+#### FabLab EPFL
+- **Location**: EPFL Campus, Bâtiment MX
+- **Website**: [fablab.epfl.ch](https://fablab.epfl.ch/)
+- **Tools**: 3D printers, soldering stations, laser cutters, milling machines
+- **Access**: Free for EPFL students/staff, CHF 50/year for community members
+- **Best For**: 3D printing enclosure, using tools, getting help
 
-**France** (2-4 day delivery):
+#### Makerspace Renens
+- **Location**: Renens (15 min from Lausanne)
+- **Tools**: Full workshop access
+- **Community**: Meetups and workshops
+- **Best For**: Community support, workshops
 
-| Vendor | Speciality | Shipping | Website |
-|--------|------------|----------|---------|
-| **Kubii** | Maker components | CHF 12 | [kubii.fr](https://www.kubii.fr/) |
-| **GoTronic** | Electronics kits | CHF 10 | [gotronic.fr](https://www.gotronic.fr/) |
+### European Suppliers (Optional)
 
-**UK** (3-5 days, customs possible):
+#### Reichelt (Germany)
+- **Website**: [reichelt.com](https://www.reichelt.com/)
+- **Shipping**: CHF 9, free over CHF 80
+- **Delivery**: 2-3 days (no customs within EU)
+- **Best For**: Complete electronics, good prices
 
-| Vendor | Speciality | Shipping | Website |
-|--------|------------|----------|---------|
-| **Pimoroni** | Quality maker products | £10-15 + customs | [pimoroni.com](https://shop.pimoroni.com/) |
-| **The Pi Hut** | Raspberry Pi ecosystem | £8-12 + customs | [thepihut.com](https://thepihut.com/) |
+---
 
-!!! warning "Brexit & Customs"
-    Orders from UK may incur:
-    - Import VAT (7.7% in Switzerland)
-    - Customs clearance fee (CHF 11-18)
-    - Consider ordering from EU instead
+## Swiss Customs & Tax Information
 
-### Budget Options
-
-**AliExpress** (cheapest, 3-4 weeks):
-
-- Search: "ESP32-C3 kit"
-- Order from seller with good ratings (>95%)
-- Price: CHF 25-35 with free shipping
-- **Swiss customs**: Orders >CHF 62 incur VAT + CHF 18 processing
-- Best for: Budget builds, patient buyers
-
-**Bangood** (alternative to AliExpress):
-
-- Similar prices and shipping times
-- Sometimes better shipping to Switzerland
-- Price: CHF 30-40 including shipping
-
-### Recommended Shopping Plan for Lausanne
-
-**Option 1: Fast Build (2-3 days, CHF 90)**
-
-1. **Digitec Galaxus** (order online, delivered to Lausanne):
-   - ESP32-C3 DevKit: CHF 15
-   - WS2812B LED Strip (1m): CHF 12
-   - LiPo Battery 2000mAh: CHF 18
-   - USB-C cables and connectors: CHF 10
-   - Shipping: Free over CHF 50
-
-2. **Conrad.ch** (online or store in Geneva):
-   - TP4056 Charger Module: CHF 8
-   - AMS1117 Regulator: CHF 3
-   - Toggle Switch: CHF 5
-   - Wire kit: CHF 12
-   - Resistor/Capacitor kit: CHF 8
-   - Shipping: Free over CHF 50
-
-3. **FabLab EPFL** or local hardware store:
-   - Enclosure materials: CHF 8-15
-   - Screws/standoffs: CHF 5
-
-**Total: ~CHF 90-100** (Available in 2-3 days)
-
-**Option 2: Budget Build (3-4 weeks, CHF 40)**
-
-1. **AliExpress** (single order to avoid multiple customs):
-   - ESP32-C3 kit with LEDs: CHF 15
-   - 2000mAh LiPo + TP4056 charger: CHF 10
-   - Complete component kit: CHF 8
-   - Project box: CHF 5
-   - Shipping: Free
-
-2. **Local hardware store** (Landi, Jumbo):
-   - Screws/standoffs: CHF 3-5
-
-**Total: ~CHF 40-45** (Wait 3-4 weeks)
-
-**Option 3: Premium Build (1-2 days, CHF 150)**
-
-Visit **FabLab EPFL** + **Digitec**:
-- All components from Swiss suppliers
-- Professional quality parts
-- Workshop access for assembly
-- Community support
-
-**Total: ~CHF 150** (Same/next day)
-
-### Price Comparison (in CHF)
-
-| Component | AliExpress | Digitec/Conrad | Adafruit (import) |
-|-----------|-----------|----------------|-------------------|
-| ESP32-C3 | CHF 4 | CHF 15 | CHF 18 |
-| LED Strip | CHF 2 | CHF 12 | CHF 20 |
-| LiPo Battery | CHF 7 | CHF 18 | CHF 25 |
-| Charger | CHF 2 | CHF 8 | CHF 15 |
-| Other parts | CHF 10 | CHF 25 | CHF 30 |
-| **Subtotal** | **CHF 25** | **CHF 78** | **CHF 108** |
-| Shipping | Free (slow) | CHF 0-12 | CHF 20-30 |
-| Customs/VAT | CHF 0-5 | CHF 0 | CHF 18-25 |
-| **TOTAL** | **CHF 25-30** | **CHF 78-90** | **CHF 146-163** |
-| **Delivery** | **3-4 weeks** | **1-3 days** | **1-2 weeks** |
-
-### Swiss Tax & Customs Information
-
-!!! info "Import Rules"
+!!! info "Import Rules for Switzerland"
     - **Tax-free limit**: CHF 62 (including shipping)
     - **VAT rate**: 7.7% on (value + shipping)
     - **Processing fee**: CHF 11.50-18.00 (Swiss Post)
     - **Customs declaration**: Required for all imports
-    - **Pro tip**: Split orders to stay under CHF 62
+    - **Pro tip**: Order from Swiss/EU suppliers to avoid customs entirely
 
-**Example calculation for CHF 80 order**:
+**Example calculation for CHF 80 order from outside EU**:
 ```
 Order value:        CHF 80.00
 Shipping:          CHF 10.00
@@ -570,36 +485,114 @@ Processing fee:    CHF 18.00
 TOTAL:             CHF 114.93
 ```
 
-### Regional Options (Other Countries)
+**Strategy**: 
+- Use Swiss/EU suppliers (Digitec, Conrad, Distrelec, Reichelt) - no customs
+- Keep individual orders under CHF 62 if ordering from outside EU
+- Split orders to minimize customs fees
 
-**Other Europe**:
-- [Pimoroni](https://shop.pimoroni.com/) (UK) - Quality products, Brexit customs
-- [Mouser](https://www.mouser.ch/) (Switzerland) - Professional components
-- [Farnell](https://ch.farnell.com/) (Switzerland) - Industrial supplier
+---
 
-**Asia**:
-- [Taobao](https://www.taobao.com/) (China - cheapest!)
-- [Tokopedia](https://www.tokopedia.com/) (Indonesia)
-- [Lazada](https://www.lazada.com/) (Southeast Asia)
+## Cost Breakdown - Switzerland
 
-**Australia**:
-- [Core Electronics](https://core-electronics.com.au/)
-- [Little Bird Electronics](https://littlebirdelectronics.com.au/)
+### Option 1: Fast Build (Swiss Suppliers)
 
-**Americas**:
-- [Adafruit](https://www.adafruit.com/) (USA) - High shipping + customs
-- [SparkFun](https://www.sparkfun.com/) (USA) - High shipping + customs
-- [Amazon.de](https://www.amazon.de/) (Germany) - Ships to Switzerland
+| Component | Quantity | Price (CHF) | Supplier |
+|-----------|----------|-------------|----------|
+| ESP32-C3 DevKitM-1 | 1 | CHF 15 | Digitec |
+| WS2812B LED Strip (1m) | 1 | CHF 12 | Digitec |
+| SPDT Toggle Switch | 1 | CHF 7 | Conrad |
+| LiPo Battery 2000mAh | 1 | CHF 20 | Digitec |
+| TP4056 Charger Module | 1 | CHF 7 | Conrad |
+| AMS1117 Regulator Module | 1 | CHF 4 | Conrad |
+| USB-C Panel Connector | 1 | CHF 7 | Conrad |
+| Capacitor Kit | 1 | CHF 9 | Conrad |
+| Resistor Kit | 1 | CHF 9 | Conrad |
+| Wire Kit | 1 | CHF 10 | Conrad |
+| JST Connectors | 5 pairs | CHF 6 | Conrad |
+| Heat Shrink Tubing | 1 kit | CHF 7 | Conrad |
+| Breadboard | 1 | CHF 10 | Conrad |
+| Jumper Wires | 1 kit | CHF 6 | Conrad |
+| Extra Components | 1 set | CHF 5 | Conrad |
+| M3 Hardware Kit | 1 | CHF 9 | Conrad |
+| Rubber Feet | 4 | CHF 4 | Conrad |
+| Project Box | 1 | CHF 10 | Conrad |
+| **Subtotal** | | **CHF 156** | |
+| Shipping | | CHF 0 | (Free over CHF 50) |
+| **TOTAL** | | **CHF 156** | |
+| **Delivery** | | **1-3 days** | |
+
+### Option 2: Budget Build (Outside EU)
+
+| Component | Quantity | Price (CHF) | Supplier |
+|-----------|----------|-------------|----------|
+| ESP32-C3 DevKitM-1 | 1 | CHF 5 | China |
+| WS2812B LED Strip (1m) | 1 | CHF 2 | China |
+| SPDT Toggle Switch | 1 | CHF 1 | China |
+| LiPo Battery 2000mAh | 1 | CHF 8 | China |
+| TP4056 Charger Module | 1 | CHF 2 | China |
+| AMS1117 Regulator Module | 1 | CHF 1 | China |
+| USB-C Panel Connector | 1 | CHF 2 | China |
+| Component Kit | 1 | CHF 4 | China |
+| Wire & Connectors Kit | 1 | CHF 5 | China |
+| Breadboard | 1 | CHF 3 | China |
+| Jumper Wires | 1 kit | CHF 2 | China |
+| Extra Components | 1 set | CHF 2 | China |
+| M3 Hardware Kit | 1 | CHF 3 | China |
+| Project Box | 1 | CHF 5 | China |
+| **Subtotal** | | **CHF 45** | |
+| Shipping | | CHF 0 | (Free shipping) |
+| Customs/VAT (if >CHF 62) | | CHF 0-8 | (Stay under CHF 62) |
+| **TOTAL** | | **CHF 45-53** | |
+| **Delivery** | | **3-4 weeks** | |
+
+---
+
+## Estimated Delivery Times
+
+| Source | Delivery Time | Shipping Cost | Customs | Total Time |
+|--------|--------------|---------------|---------|------------|
+| **Digitec/Conrad** | 1-3 days | Free over CHF 50 | None | 1-3 days |
+| **Distrelec** | 1-2 days | Free over CHF 50 | None | 1-2 days |
+| **Reichelt (Germany)** | 2-3 days | CHF 9 (free >CHF 80) | None | 2-3 days |
+| **Outside EU** | 15-30 days | Free | CHF 0-18 | 3-4 weeks |
+| **Local Store** | Same day | - | None | Same day |
+
+💡 **Pro Tip**: Order critical components (ESP32, battery) from Swiss suppliers for fast delivery, order passive components from cheaper sources to save money!
+
+---
 
 ## Next Steps
 
-**Got your parts?** Great! Continue to:
+1. ✅ Copy the shopping list above
+2. 🛒 Order components:
+   - **Fast**: Digitec + Conrad (CHF 90-100, 1-3 days)
+   - **Budget**: Outside EU suppliers (CHF 45-50, 3-4 weeks)
+3. ⏰ While waiting, read the [Assembly Guide](../assembly/soldering.md)
+4. 💻 Set up development environment (see [Firmware Installation](../../docs/FIRMWARE_INSTALLATION.md))
+5. 🎨 Design or print the enclosure (or use FabLab EPFL!)
+6. ☕ Relax - you're about to build something awesome!
 
-- [**Hardware Specifications**](specifications.md) - Detailed technical specs
-- [**Enclosure Design**](enclosure-design.md) - Build the box
-- [**Assembly Guide**](../assembly/soldering.md) - Start building!
+---
 
-**Questions about components?**
+## Testing Checklist
 
-- Check component specifications in [Hardware Specifications](specifications.md)
-- Ask in [GitHub Discussions](https://github.com/lanterno/office-wall-clock/discussions)
+Before final assembly, verify all components work:
+
+- [ ] ESP32-C3 boots and connects to WiFi
+- [ ] Battery charges correctly (LED indicators work)
+- [ ] Button press detected reliably
+- [ ] All 8 LEDs light up correctly
+- [ ] API calls succeed
+- [ ] Deep sleep mode works
+- [ ] Battery lasts expected time
+- [ ] USB-C charging works through panel connector
+
+See [Component Testing Guide](../assembly/testing.md) for detailed testing procedures.
+
+---
+
+**Questions about components?** Check the [FAQ](../../docs/FAQ.md) or open an issue!
+
+**Found better prices?** Submit a PR to update this list!
+
+**Need help in Lausanne?** Visit FabLab EPFL or join Makerspace Renens!
