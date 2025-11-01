@@ -89,4 +89,4 @@ if (syncing) pulse(StatusPixel, Blue);
 
 ---
 
-See also: [Daily Operation](daily-operation.md), [Battery Management](battery.md), [Common Issues](../troubleshooting/common-issues.md)
+See also: [Daily Operation](daily-operation.md), [Battery Management](battery.md)

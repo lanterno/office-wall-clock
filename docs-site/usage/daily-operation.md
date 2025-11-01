@@ -10,7 +10,7 @@ This guide covers the everyday use of your Wall Clock In Machine for tracking of
 
 1. **Check Device Status**
    - Top LED should be breathing green (clocked out, idle)
-   - If red: Check [Power Problems](../troubleshooting/power.md)
+   - If red: Check battery level and power connections
    - If blinking blue: Device is connecting to WiFi
 
 2. **Clock In**
@@ -21,7 +21,7 @@ This guide covers the everyday use of your Wall Clock In Machine for tracking of
 3. **Confirmation**
    - Listen for quiet "beep" from LED feedback (visual pulse)
    - Check backend API to verify session started
-   - If no response: See [Network Issues](../troubleshooting/network.md)
+   - If no response: Check WiFi connection and API configuration
 
 **Normal behavior**: Button stays in DOWN position throughout your work session.
 
@@ -51,7 +51,7 @@ The 7 lower LEDs show your accumulated work time:
 - **Solid Blue**: Working normally, clocked in
 - **Pulsing Blue**: Sending API update (every 5 minutes)
 - **Blinking Yellow**: Battery below 20%
-- **Blinking Red**: Error (check [Troubleshooting](../troubleshooting/common-issues.md))
+- **Blinking Red**: Error (check battery level and connections)
 
 ### Taking Breaks
 
@@ -255,13 +255,13 @@ curl -X GET "https://your-api.com/api/beats?date=2024-01-15" \
 1. Check battery level (yellow/red LED?)
 2. Try long press (2 seconds)
 3. Check button physical connection
-4. See [Hardware Debugging](../troubleshooting/hardware.md)
+4. Check hardware connections and battery level
 
 ### Session Not Recorded
 1. Check WiFi connection (blue blinking = connecting)
 2. Verify API endpoint in configuration
 3. Check backend API logs
-4. See [Network Issues](../troubleshooting/network.md)
+4. Check WiFi connection and API configuration
 
 ### Wrong Duration Recorded
 1. Verify clock-out button press registered
@@ -273,7 +273,7 @@ curl -X GET "https://your-api.com/api/beats?date=2024-01-15" \
 1. Check battery charge
 2. Verify LED power connection
 3. Test with USB-C power
-4. See [Hardware Debugging](../troubleshooting/hardware.md)
+4. Check hardware connections and battery level
 
 ## Advanced Usage
 
@@ -378,8 +378,7 @@ See full maintenance guide: [Maintenance](maintenance.md)
 - Learn about [LED Indicators](led-indicators.md) in detail
 - Understand [Battery Management](battery.md)
 - Review [Maintenance](maintenance.md) procedures
-- Check [Common Issues](../troubleshooting/common-issues.md)
 
 ---
 
-**Questions?** See the [FAQ](../reference/faq.md) or open an issue on GitHub!
+**Questions?** Check the documentation or open an issue on GitHub!

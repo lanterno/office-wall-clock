@@ -12,7 +12,7 @@ Get your Wall Clock In Machine up and running in under 2 hours! This guide assum
 
 2. **Get tools**: Free at FabLab EPFL or CHF 80 one-time
    - **FabLab EPFL**: Bâtiment MX, EPFL Campus
-   - Open hours: Check [fablab.epfl.ch](https://fablab.epfl.ch/)
+   - Open hours: Check EPFL FabLab website or contact EPFL directly
 
 3. **Build time**: 2-3 hours at FabLab (help available!)
 
@@ -71,8 +71,8 @@ While waiting for parts:
 
 1. **Download firmware**:
    ```bash
-   git clone https://github.com/yourusername/wallClockInMachine.git
-   cd wallClockInMachine/firmware
+   git clone https://github.com/lanterno/office-wall-clock.git
+   cd office-wall-clock/firmware
    ```
 
 2. **Install Rust toolchain and espflash**:
@@ -185,7 +185,7 @@ Re-upload firmware.
 5. ☑️ **Energy meter** - LEDs 2-8 show work duration
 6. ☑️ **Battery** - Disconnect USB, still works
 
-**If any step fails**: [Troubleshooting Guide](../troubleshooting/overview.md)
+**If any step fails**: Check the component specifications and wiring connections in the [Hardware Guide](../hardware/overview.md).
 
 ### Step 7: Enclosure (30-60 minutes)
 
@@ -227,8 +227,7 @@ Daily use:
 
 **Next steps**:
 - [Usage Guide](../usage/daily-operation.md) - Daily workflow
-- [Customization](../firmware/customization.md) - Change colors, timings
-- [Troubleshooting](../troubleshooting/overview.md) - Fix issues
+- [Configuration Guide](../firmware/configuration.md) - Customize settings
 
 ## Estimated Costs
 
@@ -340,7 +339,7 @@ Hour 3+:    Using it! (daily operation)
 **Solution**:
 - Long press to enter config portal
 - Reconfigure credentials
-- See [WiFi Troubleshooting](../troubleshooting/connectivity.md)
+- Check [Configuration Guide](../firmware/configuration.md)
 
 ### ❌ API Calls Fail
 
@@ -354,7 +353,7 @@ Hour 3+:    Using it! (daily operation)
 **Solution**:
 - Monitor serial output for errors
 - Test API endpoint manually
-- See [API Troubleshooting](../troubleshooting/api.md)
+- Check [API Integration Guide](../firmware/api-integration.md)
 
 ## Time Investment
 
@@ -391,7 +390,7 @@ With experience, you can build in **2 hours**:
 - Address: Bâtiment MX, EPFL Campus
 - Tools: Free (EPFL) or small fee
 - Help: Experienced makers available
-- Website: [fablab.epfl.ch](https://fablab.epfl.ch/)
+- Website: EPFL FabLab (check EPFL website for current information)
 
 **Electrolab Renens**:
 - Address: Near Lausanne
@@ -409,16 +408,15 @@ With experience, you can build in **2 hours**:
 - [Hardware Guide](../hardware/overview.md)
 - [Assembly Guide](../assembly/soldering.md)
 - [Firmware Guide](../firmware/overview.md)
-- [Troubleshooting](../troubleshooting/overview.md)
 
 **Community**:
-- [GitHub Discussions](https://github.com/yourusername/wallClockInMachine/discussions)
-- [Issues](https://github.com/yourusername/wallClockInMachine/issues)
+- [GitHub Discussions](https://github.com/lanterno/office-wall-clock/discussions)
+- [Issues](https://github.com/lanterno/office-wall-clock/issues)
 
 **General Learning**:
 - [SparkFun Soldering Tutorial](https://learn.sparkfun.com/tutorials/how-to-solder-through-hole-soldering)
 - [Adafruit NeoPixel Guide](https://learn.adafruit.com/adafruit-neopixel-uberguide)
- - [Rust on ESP-IDF (esp-idf)](https://esp-rs.github.io/book/)
+ - [Rust on ESP-IDF (esp-idf)](https://docs.espressif.com/projects/rust/book/)
 
 ## Next Steps
 
@@ -444,10 +442,8 @@ With experience, you can build in **2 hours**:
 
 ---
 
-**Questions?** Ask in [GitHub Discussions](https://github.com/yourusername/wallClockInMachine/discussions)
+**Questions?** Ask in [GitHub Discussions](https://github.com/lanterno/office-wall-clock/discussions)
 
-**Stuck?** Visit [Troubleshooting Guide](../troubleshooting/overview.md)
-
-**Want to contribute?** See [Development Guide](../development/contributing.md)
+**Stuck?** Check the [Configuration Guide](../firmware/configuration.md) or open an issue on GitHub.
 
 Let's build this! 🚀

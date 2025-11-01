@@ -428,7 +428,7 @@ Save on per-unit cost:
 
 **Maker Spaces in Lausanne** (borrow tools, get help):
 
-- **FabLab EPFL** - [fablab.epfl.ch](https://fablab.epfl.ch/)
+- **FabLab EPFL** - EPFL Campus (check EPFL website for current information)
   - Location: EPFL Campus, Bâtiment MX
   - Tools: 3D printers, soldering stations, laser cutters
   - Open hours: Check website for schedule
@@ -596,10 +596,10 @@ TOTAL:             CHF 114.93
 **Got your parts?** Great! Continue to:
 
 - [**Hardware Specifications**](specifications.md) - Detailed technical specs
-- [**Enclosure Design**](enclosure.md) - Build the box
+- [**Enclosure Design**](enclosure-design.md) - Build the box
 - [**Assembly Guide**](../assembly/soldering.md) - Start building!
 
 **Questions about components?**
 
-- Check [Troubleshooting - Hardware Issues](../troubleshooting/hardware.md)
-- Ask in [GitHub Discussions](https://github.com/yourusername/wallClockInMachine/discussions)
+- Check component specifications in [Hardware Specifications](specifications.md)
+- Ask in [GitHub Discussions](https://github.com/lanterno/office-wall-clock/discussions)

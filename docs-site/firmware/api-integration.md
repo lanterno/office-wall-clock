@@ -250,7 +250,7 @@ http.addHeader("Authorization", "Basic " + auth);
 
 ### OAuth2
 
-For OAuth2, you'll need to implement token refresh logic. This is advanced - see [Custom Features](../development/customization.md).
+For OAuth2, you'll need to implement token refresh logic. This is advanced - see the firmware source code in the repository.
 
 ## Network Requirements
 
@@ -478,8 +478,7 @@ Tokens are stored in ESP32 non-volatile storage:
 - **Configure Device**: [Configuration Guide](configuration.md)
 - **Test Setup**: [Testing Guide](../assembly/final-testing.md)
 - **Daily Use**: [Usage Guide](../usage/daily-operation.md)
-- **Troubleshoot**: [API Issues](../troubleshooting/network.md)
 
 ---
 
-**Need Help?** Check [Troubleshooting](../troubleshooting/network.md) or open an issue on GitHub.
+**Need Help?** Check the [Configuration Guide](configuration.md) or open an issue on GitHub.

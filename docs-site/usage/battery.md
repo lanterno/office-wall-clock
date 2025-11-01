@@ -68,4 +68,4 @@ If not using for 1+ month:
 
 ---
 
-Related: [LED Indicators](led-indicators.md), [Power Problems](../troubleshooting/power.md), [Maintenance](maintenance.md)
+Related: [LED Indicators](led-indicators.md), [Maintenance](maintenance.md)

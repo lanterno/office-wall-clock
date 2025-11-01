@@ -734,15 +734,15 @@ Soldering complete! ✓
 
 **Continue to**:
 
-- [**Wiring Diagram**](wiring.md) - Visual reference
+- [**Wiring Diagram**](../hardware/wiring.md) - Visual reference
 - [**Enclosure Assembly**](enclosure.md) - Build the box
 - [**Firmware Installation**](../firmware/installation.md) - Upload code
 
 **Or if issues**:
 
-- [**Troubleshooting - Hardware**](../troubleshooting/hardware.md) - Fix problems
-- [**Rework Guide**](rework.md) - Fix mistakes
+- Check [Hardware Specifications](../hardware/specifications.md) for component details
+- Review the [Assembly Guide](preparation.md) if you missed steps
 
 ---
 
-**Questions?** Ask in [GitHub Discussions](https://github.com/yourusername/wallClockInMachine/discussions) or visit **FabLab EPFL** for in-person help!
+**Questions?** Ask in [GitHub Discussions](https://github.com/lanterno/office-wall-clock/discussions) or visit **FabLab EPFL** for in-person help!

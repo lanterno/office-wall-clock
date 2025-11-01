@@ -339,7 +339,7 @@ Ready to build? Continue to:
 
 - [**Bill of Materials**](bill-of-materials.md) - Shopping list with links
 - [**Specifications**](specifications.md) - Detailed technical specs
-- [**Enclosure Design**](enclosure.md) - 3D model and dimensions
+- [**Enclosure Design**](enclosure-design.md) - 3D model and dimensions
 
 Or jump ahead to:
 

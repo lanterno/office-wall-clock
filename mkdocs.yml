@@ -154,7 +154,6 @@ nav:
     - Maintenance: usage/maintenance.md
 
   - Deployment:
-    - GitHub Pages: deployment/github-pages.md
     - Quick Start: deployment/quick-start.md
 
 copyright: Copyright &copy; 2025 Wall Clock In Machine Project

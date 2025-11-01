@@ -8,7 +8,7 @@ Fast reference guide for getting your documentation online.
 
 ```bash
 # 1. Enable GitHub Pages
-# Go to: https://github.com/YOUR-USERNAME/wallClockInMachine/settings/pages
+# Go to: https://github.com/lanterno/office-wall-clock/settings/pages
 # Source: Deploy from a branch → gh-pages → / (root) → Save
 
 # 2. Push to GitHub
@@ -17,10 +17,10 @@ git commit -m "Add documentation and auto-deployment"
 git push origin main
 
 # 3. Monitor deployment
-# https://github.com/YOUR-USERNAME/wallClockInMachine/actions
+# https://github.com/lanterno/office-wall-clock/actions
 
 # 4. Visit your site (2-3 minutes)
-# https://YOUR-USERNAME.github.io/wallClockInMachine/
+# https://lanterno.github.io/office-wall-clock/
 ```
 
 ### What Was Already Configured
@@ -65,7 +65,7 @@ mkdocs serve
 
 **Add Badge to README**:
 ```markdown
-![Documentation](https://github.com/YOUR-USERNAME/wallClockInMachine/actions/workflows/deploy-docs.yml/badge.svg)
+![Documentation](https://github.com/lanterno/office-wall-clock/actions/workflows/deploy-docs.yml/badge.svg)
 ```
 
 ## Troubleshooting
@@ -96,9 +96,7 @@ gh run view --log-failed
 
 ## Next Steps
 
-📚 **Full guide**: [GitHub Pages Deployment](github-pages.md)  
-🚀 **Site URL**: `https://YOUR-USERNAME.github.io/wallClockInMachine/`  
-🔧 **Custom domain**: See [full deployment guide](github-pages.md#custom-domain-setup)
+🚀 **Site URL**: `https://lanterno.github.io/office-wall-clock/`
 
 ---
 

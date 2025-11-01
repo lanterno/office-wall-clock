@@ -221,7 +221,7 @@ If you need a working demo quickly:
 Once you've completed your build:
 
 1. Read [Daily Operation](../usage/daily-operation.md) for usage tips
-2. Review [Troubleshooting](../troubleshooting/common-issues.md) for common issues
+2. Review the documentation for common issues
 3. Consider contributing improvements to the project
 4. Share your build with the community!
 
@@ -234,4 +234,4 @@ Once you've completed your build:
 
 ---
 
-**Questions?** Check the [FAQ](../reference/faq.md) or open an issue on GitHub!
+**Questions?** Check the documentation or open an issue on GitHub!

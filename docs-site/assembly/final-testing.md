@@ -25,4 +25,4 @@ Checklist to validate a finished device.
 
 ---
 
-If any item fails, see [Troubleshooting](../troubleshooting/common-issues.md).
+If any item fails, check the component specifications and wiring connections.

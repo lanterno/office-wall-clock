@@ -672,6 +672,5 @@ Ready to install the firmware?
 
 Or dive deeper:
 
-- [**Source Code**](https://github.com/yourusername/wallClockInMachine/tree/main/firmware) - Browse on GitHub
-- [**Development Guide**](../development/setup.md) - Build from source
-- [**Troubleshooting**](../troubleshooting/firmware.md) - Fix firmware issues
+- [**Source Code**](https://github.com/lanterno/office-wall-clock/tree/main/firmware) - Browse on GitHub
+- [**Architecture Guide**](architecture.md) - Understand the codebase

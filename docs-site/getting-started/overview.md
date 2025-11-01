@@ -199,7 +199,7 @@ Our documentation explains everything step-by-step with:
 The complete project includes:
 
 ```
-wallClockInMachine/
+office-wall-clock/
 ├── hardware/           # Component specs and BOM
 ├── firmware/           # Complete Rust source code
 ├── docs-site/          # This documentation website
@@ -271,15 +271,14 @@ Ready to get started?
 <div class="center-content" markdown>
 
 [Quick Start Guide](quick-start.md){ .md-button .md-button--primary }
-[View Project on GitHub](https://github.com/yourusername/wallClockInMachine){ .md-button }
+[View Project on GitHub](https://github.com/lanterno/office-wall-clock){ .md-button }
 
 </div>
 
 ## Questions?
 
-- Check the [FAQ](../reference/faq.md)
-- Read [Troubleshooting](../troubleshooting/common-issues.md)
-- Open an issue on [GitHub](https://github.com/yourusername/wallClockInMachine/issues)
+- Check the documentation for common issues
+- Open an issue on [GitHub](https://github.com/lanterno/office-wall-clock/issues)
 
 ---
 

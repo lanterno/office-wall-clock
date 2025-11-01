@@ -240,18 +240,12 @@ This documentation is organized into clear sections:
 
 **[Usage](usage/daily-operation.md)** - Daily operation and maintenance
 
-**[Troubleshooting](troubleshooting/common-issues.md)** - Problem solving guides
-
-**[Development](development/contributing.md)** - Contributing and customization
-
-**[Reference](reference/pins.md)** - Technical specifications and API docs
-
 ---
 
 ## Community
 
 !!! tip "Get Involved"
-    - **Star the repo** ⭐ on [GitHub](https://github.com/yourusername/wallClockInMachine)
+    - **Star the repo** ⭐ on [GitHub](https://github.com/lanterno/office-wall-clock)
     - **Share your build** - Post photos with #WallClockInMachine
     - **Report issues** - Help improve the project
     - **Contribute** - Submit PRs with improvements
@@ -263,8 +257,6 @@ This documentation is organized into clear sections:
 
 This project is open source and available under the MIT License.
 
-See [License](about/license.md) for details.
-
 ---
 
 <div class="center-content" markdown>
@@ -272,6 +264,6 @@ See [License](about/license.md) for details.
 ## Ready to Build?
 
 [Get Started Now](getting-started/overview.md){ .md-button .md-button--primary }
-[View on GitHub](https://github.com/yourusername/wallClockInMachine){ .md-button }
+[View on GitHub](https://github.com/lanterno/office-wall-clock){ .md-button }
 
 </div>

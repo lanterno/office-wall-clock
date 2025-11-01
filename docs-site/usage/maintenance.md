@@ -53,4 +53,4 @@ Date       | Action           | Notes
 
 ---
 
-See also: [Battery Management](battery.md), [Troubleshooting](../troubleshooting/common-issues.md)
+See also: [Battery Management](battery.md)

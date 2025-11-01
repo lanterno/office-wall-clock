@@ -571,11 +571,11 @@ USB-C 5V ──→ TP4056 ──┬──→ Battery (3.7V)
 
 Now that you understand the technical specifications:
 
-- [**Enclosure Design**](enclosure.md) - Physical design and 3D models
+- [**Enclosure Design**](enclosure-design.md) - Physical design and 3D models
 - [**Assembly Guide**](../assembly/soldering.md) - Build your device
 - [**Firmware Installation**](../firmware/installation.md) - Flash the code
 
 Or explore:
 
 - [**Bill of Materials**](bill-of-materials.md) - Updated shopping list
-- [**Troubleshooting**](../troubleshooting/hardware.md) - Hardware issues
+- [**Wiring Diagram**](wiring.md) - Connection guide

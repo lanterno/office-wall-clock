@@ -107,7 +107,7 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 ## Repository Structure
 
 ```
-wallClockInMachine/
+office-wall-clock/
 ├── README.md              # This file
 ├── DEPLOYMENT.md          # Documentation deployment guide
 ├── Makefile              # Build commands (rust-build, rust-flash, serve, etc.)
