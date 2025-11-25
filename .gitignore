@@ -1,0 +1,30 @@
+# Build artifacts
+/target/
+**/target/
+
+# Rust / Cargo
+Cargo.lock
+*.rlib
+*.rmeta
+
+# Python / docs
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+site/
+
+# IDE / tooling
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+.cursor/
+
+# Logs
+*.log
+
+
