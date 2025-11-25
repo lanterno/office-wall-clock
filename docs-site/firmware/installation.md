@@ -32,9 +32,12 @@ Set up your development environment and flash the firmware.
 	```
 
 ## First Boot
-- Device will enter WiFi setup mode (coming soon in Rust)
-- Connect to AP: `WALL-CLOCK-SETUP` (planned)
-- Configure WiFi and API URL (see Configuration)
+- The device will try to connect to the WiFi network defined in `firmware/src/config.rs` (`NETWORK_CONFIG.wifi_ssid` / `wifi_password`).
+- On success, the top LED turns **green** after boot and the device is ready to send API requests on button press.
+- On failure, the top LED stays **blue/yellow** – double‑check your WiFi credentials in `config.rs` and re‑flash.
+
+!!! note
+    There is **no web-based configuration portal yet** in the Rust firmware. All WiFi and API settings are compile-time values in `firmware/src/config.rs`. See [Configuration](configuration.md) for details.
 
 ## Rust Workflow (Recommended)
 - Open project folder in VS Code

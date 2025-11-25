@@ -10,15 +10,18 @@ This page explains all LED patterns and what they mean on the Wall Clock In Mach
 
 ## Top Status LED (Pixel 0)
 
-| Pattern | Meaning | Action |
-|--------|---------|--------|
-| Breathing Green | Clocked out, idle | None |
-| Solid Blue | Clocked in, working | None |
-| Pulsing Blue (5s) | Sync in progress | Wait |
-| Fast Rainbow | WiFi setup mode (AP) | Connect via captive portal |
-| Blinking Yellow (2 Hz) | Battery low (<20%) | Charge soon |
-| Blinking Red (2 Hz) | Error state | See Troubleshooting |
-| Off | Deep sleep | Press button or power cycle |
+The current Rust firmware uses **simple solid colors**:
+
+| Pattern      | Meaning                      | Action                |
+|-------------|------------------------------|-----------------------|
+| Solid Blue  | Connecting to WiFi           | Wait a few seconds    |
+| Solid Green | Connected / last API OK      | Normal operation      |
+| Solid Yellow| WiFi / API error (last call) | Check WiFi + backend  |
+| Purple      | API call in progress         | Wait; turns green/end |
+| Off         | Powered off / not running    | Check power/USB       |
+
+Fast rainbow animation is currently used as a **demo/config placeholder** on
+long‑press and does not start a WiFi setup portal yet.
 
 ## Energy Meter LEDs (Pixels 1-7)
 
@@ -36,14 +39,11 @@ This page explains all LED patterns and what they mean on the Wall Clock In Mach
 - Green: Fully charged
 - Off: Not connected or no battery
 
-## Setup Mode Animation
+## Setup / Demo Animation
 
-When device boots with button pressed (or no saved WiFi):
-
-1. Top LED shows fast rainbow cycle
-2. Energy meter LEDs scroll left-right
-3. Device exposes WiFi AP: `WALL-CLOCK-SETUP`
-4. Connect to AP, then configure WiFi and API endpoint
+When you long‑press the button, the firmware triggers a rainbow animation on all
+LEDs. This is currently just a **visual demo** and a placeholder for future
+configuration modes.
 
 ## Error Patterns
 
@@ -66,20 +66,9 @@ When device boots with button pressed (or no saved WiFi):
 
 You can customize colors and patterns in firmware:
 
-- File: `firmware/src/led_controller.cpp`
-- Constants to change:
-  - `STATUS_COLOR_WORKING`
-  - `STATUS_COLOR_IDLE`
-  - `COLOR_GRADIENT[]`
-  - `BRIGHTNESS`
-
-Example (pseudocode):
-
-```cpp
-setStatusColor(working ? Blue : Green);
-fillEnergyMeter(hoursWorked, gradient);
-if (syncing) pulse(StatusPixel, Blue);
-```
+- File: `firmware/src/tasks/led.rs`
+- Enum: `StatusColor` (Red, Green, Blue, Yellow, Purple, Off)
+- Match on `LedCommand` in `led_task` to change how LEDs respond to events.
 
 ## Tips
 

@@ -1,34 +1,62 @@
 # Configuration
 
-Configure WiFi, API endpoint, and device options in Rust firmware.
+Configure WiFi, API endpoint, and basic device options in the Rust firmware.
 
-## WiFi Setup
-On first boot or after reset (coming soon in Rust):
-1. Device exposes AP: `WALL-CLOCK-SETUP` (planned)
-2. Connect with phone or laptop
-3. Open `http://192.168.4.1/` (planned)
-4. Enter WiFi SSID and password
+## Where to configure things (today)
 
-## API Settings
-- API Base URL: e.g., `https://api.example.com`
-- Start endpoint: `/api/beats/start`
-- End endpoint: `/api/beats/end`
-- Optional auth token header
+In the current Rust firmware there is **no configuration portal** yet. All settings live
+in Rust code:
+
+- File: `firmware/src/config.rs`
+- Type: `NetworkConfig`
+- Constant: `NETWORK_CONFIG`
+
+```rust
+pub struct NetworkConfig {
+    pub wifi_ssid: &'static str,
+    pub wifi_password: &'static str,
+    pub api_host: &'static str,
+    pub api_port: u16,
+    pub api_path: &'static str,
+}
+
+pub const NETWORK_CONFIG: NetworkConfig = NetworkConfig {
+    wifi_ssid: "YOUR_WIFI_SSID",
+    wifi_password: "YOUR_WIFI_PASSWORD",
+    api_host: "192.168.1.100",
+    api_port: 8000,
+    api_path: "/api/timer/toggle",
+};
+```
+
+### Steps to configure WiFi + API
+
+1. Open `firmware/src/config.rs` in your editor.
+2. Find the `NETWORK_CONFIG` constant.
+3. Set:
+   - `wifi_ssid` to your 2.4GHz WiFi network name
+   - `wifi_password` to your WiFi password
+   - `api_host` to your backend host (IP or DNS)
+   - `api_port` to the backend port (e.g. `8000` for local dev)
+   - `api_path` to the path of your toggle endpoint (default: `/api/timer/toggle`)
+4. Rebuild and flash the firmware.
+5. Press the button – the device will issue a minimal HTTP `POST` to that endpoint.
+
+!!! note
+    The default firmware sends a **simple POST request with no JSON body** and treats
+    any successful TCP exchange as a “toggle”. See [API Integration](api-integration.md)
+    for how to adapt this to your own API.
 
 ## Device Options
-- LED Brightness: 10-255 (default 64)
-- Update Interval: 5 min
-- Low Battery Threshold: 20%
-- Timezone/NTP server
-- All options are managed in Rust via `firmware/src/config.rs` and `DeviceConfig` struct.
 
-## Resetting Config
-- Hold button for 10 seconds at boot → clears WiFi and settings (implemented in Rust)
-- Or expose settings page via admin long-press menu (planned)
+Other basic options are also in `firmware/src/config.rs`:
 
-## Environment Variables (for API docs site)
-- BACKEND_API_BASE_URL
-- BACKEND_API_TOKEN (optional)
+- `LED_BRIGHTNESS` – overall LED brightness (0–255)
+- `WORK_SESSION_HOURS` – hours represented by a full energy meter
+- `BUTTON_DEBOUNCE_MS` / `BUTTON_LONG_PRESS_MS` – button behavior
+
+More advanced options like deep sleep, NTP, and on-device configuration are
+**planned** but not implemented yet in the Rust firmware.
 
 ---
 

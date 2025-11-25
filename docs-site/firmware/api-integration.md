@@ -13,99 +13,34 @@ Your timer API must provide HTTP/HTTPS endpoints for:
 !!! info "External Dependency"
     The Wall Clock In Machine does not include a backend API. You must have your own timer tracking service running. The device acts as a physical interface to your existing API.
 
-## Default API Format
+## Default API Format (current Rust firmware)
 
-The firmware is pre-configured to work with the following API structure:
-
-### Clock In Endpoint
+The minimal Rust firmware is configured for a **single toggle endpoint**:
 
 ```http
-POST /api/timer/start
-Content-Type: application/json
-Authorization: Bearer {your_token}
-
-{
-  "project_id": "office-time"
-}
+POST /api/timer/toggle
+Host: 192.168.1.100:8000
+Content-Length: 0
+Connection: close
 ```
 
-**Expected Response** (200 OK):
-```json
-{
-  "beat_id": "12345",
-  "started_at": "2025-10-29T08:00:00Z"
-}
-```
+- No JSON body is sent by default.
+- Any `2xx` response is treated as a success.
+- The endpoint is controlled by `NETWORK_CONFIG.api_host`, `api_port`, and
+  `api_path` in `firmware/src/config.rs`.
 
-### Clock Out Endpoint
+You can still build a more traditional API with separate start/stop endpoints – see
+“Adapting to Your API” below.
 
-```http
-POST /api/timer/stop
-Content-Type: application/json
-Authorization: Bearer {your_token}
+## Configuration (Rust firmware)
 
-{
-  "beat_id": "12345"
-}
-```
+All network and API configuration currently lives in code:
 
-**Expected Response** (200 OK):
-```json
-{
-  "beat_id": "12345",
-  "stopped_at": "2025-10-29T17:00:00Z",
-  "duration": 28800
-}
-```
+- File: `firmware/src/config.rs`
+- Constant: `NETWORK_CONFIG`
 
-### Get Status Endpoint (Optional)
-
-```http
-GET /api/timer/current
-Authorization: Bearer {your_token}
-```
-
-**Expected Response** (200 OK):
-```json
-{
-  "is_running": true,
-  "beat_id": "12345",
-  "started_at": "2025-10-29T08:00:00Z",
-  "elapsed": 3600
-}
-```
-
-## Configuration
-
-### Environment Variables
-
-Set these environment variables for configuration:
-
-```bash
-# API endpoint (base URL without paths)
-export TIMER_API_ENDPOINT="https://your-api-domain.com"
-
-# API authentication token (optional)
-export TIMER_API_TOKEN="your_bearer_token_here"
-
-# Project ID for time entries (optional, default: "office-time")
-export TIMER_PROJECT_ID="office-time"
-```
-
-### Device Configuration
-
-When you first power on the device, it will create a WiFi hotspot for configuration:
-
-1. Connect to WiFi network: **WallClockIn-Setup**
-2. Browser opens automatically (or go to http://192.168.4.1)
-3. Enter configuration:
-   - **WiFi SSID**: Your office/home WiFi
-   - **WiFi Password**: Your WiFi password
-   - **API Endpoint**: `https://your-api-domain.com`
-   - **API Token**: Your authentication token (optional)
-4. Click **Save**
-
-The device will reboot and connect to your WiFi.
+See the [Configuration](configuration.md) page for the exact Rust snippet and
+step-by-step instructions.
 
 !!! warning "HTTPS Recommended"
     For security, use HTTPS for your API endpoint. The device supports both HTTP and HTTPS, but HTTP sends your token in plain text over WiFi.
@@ -114,69 +49,46 @@ The device will reboot and connect to your WiFi.
 
 If your API uses different endpoint paths or request formats, you can modify the firmware.
 
-### Changing Endpoint Paths
+### Changing Endpoint Path
 
-Edit `firmware/src/api.rs`:
+Edit `NETWORK_CONFIG` in `firmware/src/config.rs`:
 
-```cpp
-ApiResponse ApiClient::clockIn(const char* project_id) {
-  // Change the path here:
-  return sendRequest("POST", "/your/custom/start/path", payload.c_str());
-}
-
-ApiResponse ApiClient::clockOut(const char* beat_id) {
-  // Change the path here:
-  return sendRequest("POST", "/your/custom/stop/path", payload.c_str());
-}
+```rust
+pub const NETWORK_CONFIG: NetworkConfig = NetworkConfig {
+    wifi_ssid: "YOUR_WIFI_SSID",
+    wifi_password: "YOUR_WIFI_PASSWORD",
+    api_host: "your-api-domain.com",
+    api_port: 443,
+    api_path: "/your/custom/path",
+};
 ```
 
-### Changing Request Format
+### Sending a JSON body (advanced)
 
-Edit `firmware/src/api_client.cpp`:
+The minimal firmware sends an empty body, but you can change `handle_clock_toggle`
+in `firmware/src/tasks/wifi.rs` to send JSON instead:
 
-```cpp
-ApiResponse ApiClient::clockIn(const char* project_id) {
-  StaticJsonDocument<256> doc;
-  
-  // Modify the JSON structure:
-  doc["your_field_name"] = project_id;
-  doc["another_field"] = "value";
-  
-  String payload;
-  serializeJson(doc, payload);
-  
-  return sendRequest("POST", "/api/timer/start", payload.c_str());
+```rust
+#[derive(serde::Serialize)]
+struct TogglePayload<'a> {
+    action: &'a str,
 }
+
+let payload = TogglePayload { action: "toggle" };
+let body = serde_json_core::to_string::<_, heapless::String<128>>(&payload)
+    .map_err(|_| "json")?;
+
+write!(
+    &mut request,
+    "POST {} HTTP/1.1\r\nHost: {}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+    cfg.api_path,
+    cfg.api_host,
+    body.len(),
+    body,
+)?;
 ```
 
-### Changing Response Parsing
-
-Edit `firmware/src/api_client.cpp` in the `sendRequest` method:
-
-```cpp
-if (doc.containsKey("your_beat_id_field")) {
-  response.beat_id = doc["your_beat_id_field"].as<String>();
-}
-```
-
-### Adding Custom Headers
-
-Edit `firmware/src/api_client.cpp`:
-
-```cpp
-ApiResponse ApiClient::sendRequest(const char* method, const char* path, const char* payload) {
-  // ... existing code ...
-  
-  http.addHeader("Content-Type", "application/json");
-  http.addHeader("Authorization", "Bearer " + api_token);
-  
-  // Add your custom headers:
-  http.addHeader("X-Custom-Header", "value");
-  http.addHeader("X-Device-ID", "wall-clock-in-machine");
-  
-  // ... rest of code ...
-}
-```
+You can extend the payload to match your API (e.g., project IDs, auth tokens).
 
 ## Testing Your API
 
@@ -323,64 +235,48 @@ If API is unreachable:
 
 ## API Integration Examples
 
-### Example 1: Toggl API
+### Minimal Example Backend (FastAPI)
 
-```cpp
-// firmware/src/api_client.cpp
+The easiest way to try the device end‑to‑end is to run a tiny local backend that
+implements the `/api/timer/toggle` endpoint the firmware expects:
 
-ApiResponse ApiClient::clockIn(const char* project_id) {
-  StaticJsonDocument<256> doc;
-  doc["time_entry"]["description"] = "Office time";
-  doc["time_entry"]["created_with"] = "Wall Clock In Machine";
-  
-  String payload;
-  serializeJson(doc, payload);
-  
-  return sendRequest("POST", "/api/v9/time_entries", payload.c_str());
-}
+```python
+# backend.py
+from fastapi import FastAPI
+from pydantic import BaseModel
+from datetime import datetime
+
+app = FastAPI()
+
+class State(BaseModel):
+    is_running: bool = False
+    last_toggle: datetime | None = None
+
+state = State()
+
+@app.post("/api/timer/toggle")
+def toggle():
+    state.is_running = not state.is_running
+    state.last_toggle = datetime.utcnow()
+    return state
 ```
 
-### Example 2: Harvest API
+Run it locally:
 
-```cpp
-// firmware/src/api_client.cpp
-
-ApiResponse ApiClient::clockIn(const char* project_id) {
-  StaticJsonDocument<256> doc;
-  doc["project_id"] = 12345;  // Your Harvest project ID
-  doc["task_id"] = 67890;     // Your task ID
-  
-  String payload;
-  serializeJson(doc, payload);
-  
-  return sendRequest("POST", "/api/v2/time_entries", payload.c_str());
-}
+```bash
+pip install fastapi uvicorn
+uvicorn backend:app --host 0.0.0.0 --port 8000
 ```
 
-### Example 3: Custom JSON Structure
+Then set in `NETWORK_CONFIG`:
 
 ```rust
-// If your API expects:
-// {"action": "start", "user_id": "abc", "timestamp": 12345}
-
-pub fn clock_in(user_id: &str) -> anyhow::Result<ApiResponse> {
-  #[derive(serde::Serialize)]
-  struct Payload<'a> {
-    action: &'static str,
-    user_id: &'a str,
-    timestamp: u64,
-  }
-
-  let payload = Payload {
-    action: "start",
-    user_id,
-    timestamp: epoch_seconds(),
-  };
-
-  let body = serde_json::to_vec(&payload)?;
-  http_post("/api/timelog", &body)
-}
+api_host: "192.168.1.100", // your dev machine IP on WiFi
+api_port: 8000,
+api_path: "/api/timer/toggle",
 ```
+
+Pressing the button will now flip `is_running` on your backend.
 
 ## Monitoring API Calls
 

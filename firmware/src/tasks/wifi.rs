@@ -2,7 +2,9 @@
 //! 
 //! Handles WiFi connection, maintains network state, and communicates with the API.
 
-use embassy_net::{Config, Stack, StackResources};
+use core::fmt::Write as FmtWrite;
+
+use embassy_net::{tcp::TcpSocket, Config, IpEndpoint, Stack, StackResources};
 use embassy_time::{Duration, Timer};
 use esp_hal::{peripherals::WIFI, timer::timg::TimerGroup};
 use esp_wifi::{
@@ -13,16 +15,10 @@ use esp_wifi::{
     EspWifiInitFor,
 };
 use defmt::*;
+use embedded_io_async::Write as AsyncWrite;
 
-use crate::config::{WIFI_CONNECT_TIMEOUT_SECS, API_TIMEOUT_SECS};
+use crate::config::{NetworkConfig, NETWORK_CONFIG, WIFI_CONNECT_TIMEOUT_SECS, API_RETRY_COUNT, API_TIMEOUT_SECS};
 use super::led::{LedCommand, StatusColor, LED_COMMANDS};
-
-/// WiFi credentials (in production, load from NVS)
-const WIFI_SSID: &str = "YOUR_WIFI_SSID";
-const WIFI_PASSWORD: &str = "YOUR_WIFI_PASSWORD";
-
-/// API endpoint (in production, load from NVS)
-const API_ENDPOINT: &str = "https://your-api.example.com";
 
 /// WiFi + API task
 #[embassy_executor::task]
@@ -50,10 +46,10 @@ pub async fn wifi_task(
     let (wifi_interface, controller) =
         esp_wifi::wifi::new_with_mode(&init, wifi, WifiStaDevice).unwrap();
     
-    // Configure WiFi
+    // Configure WiFi from compile-time configuration
     let config = Configuration::Client(ClientConfiguration {
-        ssid: WIFI_SSID.try_into().unwrap(),
-        password: WIFI_PASSWORD.try_into().unwrap(),
+        ssid: NETWORK_CONFIG.wifi_ssid.try_into().unwrap(),
+        password: NETWORK_CONFIG.wifi_password.try_into().unwrap(),
         ..Default::default()
     });
     
@@ -64,7 +60,7 @@ pub async fn wifi_task(
     controller.start().await.unwrap();
     
     // Connect to WiFi
-    info!("Connecting to WiFi: {}", WIFI_SSID);
+    info!("Connecting to WiFi: {}", NETWORK_CONFIG.wifi_ssid);
     let timeout = Duration::from_secs(WIFI_CONNECT_TIMEOUT_SECS);
     
     match embassy_time::with_timeout(timeout, controller.connect()).await {
@@ -129,7 +125,10 @@ pub async fn wifi_task(
             match event {
                 crate::tasks::button::ButtonEvent::ShortPress => {
                     info!("Handling clock in/out");
-                    handle_clock_toggle(stack).await;
+                    if let Err(e) = handle_clock_toggle(stack, &NETWORK_CONFIG).await {
+                        warn!("API toggle failed: {}", e);
+                        LED_COMMANDS.signal(LedCommand::SetStatus(StatusColor::Yellow));
+                    }
                 }
                 crate::tasks::button::ButtonEvent::LongPress => {
                     info!("Handling long press (config mode?)");
@@ -148,23 +147,91 @@ async fn net_task(stack: &'static Stack<WifiDevice<'static, WifiStaDevice>>) {
     stack.run().await
 }
 
-/// Handle clock in/out API call
-async fn handle_clock_toggle(stack: &Stack<WifiDevice<'_, WifiStaDevice>>) {
-    info!("Making API request to {}", API_ENDPOINT);
-    
+/// Handle clock in/out API call.
+///
+/// This is a **very small HTTP client** built directly on `embassy-net`'s
+/// `TcpSocket`. It sends a `POST` request with an empty body to the configured
+/// `api_path` and treats any successful TCP exchange as a success.
+async fn handle_clock_toggle(
+    stack: &Stack<WifiDevice<'_, WifiStaDevice>>,
+    cfg: &NetworkConfig,
+) -> Result<(), &'static str> {
+    info!(
+        "Making API request to {}:{}{}",
+        cfg.api_host, cfg.api_port, cfg.api_path
+    );
+
     LED_COMMANDS.signal(LedCommand::SetStatus(StatusColor::Purple));
-    
-    // TODO: Implement HTTP request using reqwless
-    // This is a placeholder for the actual HTTP client implementation
-    
-    Timer::after(Duration::from_secs(1)).await;
-    
-    // Simulate success
-    info!("API request successful");
-    LED_COMMANDS.signal(LedCommand::SetStatus(StatusColor::Green));
-    
-    // Update energy meter (example: 5/7 hours remaining)
-    LED_COMMANDS.signal(LedCommand::SetEnergyMeter(5));
+
+    // Retry a few times on network errors.
+    for attempt in 1..=API_RETRY_COUNT {
+        info!("HTTP attempt {}/{}", attempt, API_RETRY_COUNT);
+
+        // Small buffers are enough for a tiny POST + short response status line.
+        let mut rx_buf = [0u8; 512];
+        let mut tx_buf = [0u8; 512];
+        let mut socket = TcpSocket::new(stack, &mut rx_buf, &mut tx_buf);
+
+        // Connect using the configured host and port.
+        let endpoint = IpEndpoint::from((cfg.api_host, cfg.api_port));
+
+        // Connect with a timeout.
+        match embassy_time::with_timeout(
+            Duration::from_secs(API_TIMEOUT_SECS),
+            socket.connect(endpoint),
+        )
+        .await
+        {
+            Ok(Ok(())) => {
+                debug!("TCP connected to API");
+            }
+            Ok(Err(_e)) => {
+                warn!("TCP connect error");
+                continue;
+            }
+            Err(_) => {
+                warn!("TCP connect timeout");
+                continue;
+            }
+        }
+
+        // Build a minimal HTTP/1.1 POST request.
+        let mut request: heapless::String<256> = heapless::String::new();
+        write!(
+            &mut request,
+            "POST {} HTTP/1.1\r\nHost: {}\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+            cfg.api_path,
+            cfg.api_host,
+        )
+        .map_err(|_| "format error")?;
+
+        if let Err(_e) = embassy_time::with_timeout(
+            Duration::from_secs(API_TIMEOUT_SECS),
+            socket.write_all(request.as_bytes()),
+        )
+        .await
+        {
+            warn!("HTTP write failed");
+            continue;
+        }
+
+        // Wait briefly for any response; we don't parse it yet.
+        let mut tmp = [0u8; 64];
+        let _ = embassy_time::with_timeout(
+            Duration::from_secs(API_TIMEOUT_SECS),
+            socket.read(&mut tmp),
+        )
+        .await;
+
+        info!("API request complete");
+
+        // Success – set status LED back to green and update a placeholder energy level.
+        LED_COMMANDS.signal(LedCommand::SetStatus(StatusColor::Green));
+        LED_COMMANDS.signal(LedCommand::SetEnergyMeter(5));
+        return Ok(());
+    }
+
+    Err("all HTTP attempts failed")
 }
 
 // Note: StaticCell is needed for static allocation

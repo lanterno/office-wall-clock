@@ -102,22 +102,33 @@ Tasks communicate via Embassy's `Signal` - type-safe, lock-free messaging.
 
 ## Configuration
 
-Hardware configuration in `src/config.rs`:
+Hardware configuration and network settings live in `src/config.rs`:
 
 ```rust
-pub const BUTTON_PIN: u8 = 9;       // GPIO9 - Button input
-pub const LED_PIN: u8 = 8;          // GPIO8 - WS2812B data
-pub const NUM_LEDS: usize = 8;      // 1 status + 7 energy meter
+pub const BUTTON_PIN: u8 = 9;  // GPIO9 - Button input
+pub const LED_PIN: u8 = 8;     // GPIO8 - WS2812B data
+pub const NUM_LEDS: usize = 8; // 1 status + 7 energy meter
 pub const LED_BRIGHTNESS: u8 = 128; // 0-255
+
+pub struct NetworkConfig {
+    pub wifi_ssid: &'static str,
+    pub wifi_password: &'static str,
+    pub api_host: &'static str,
+    pub api_port: u16,
+    pub api_path: &'static str,
+}
+
+pub const NETWORK_CONFIG: NetworkConfig = NetworkConfig {
+    wifi_ssid: "YOUR_WIFI_SSID",
+    wifi_password: "YOUR_WIFI_PASSWORD",
+    api_host: "192.168.1.100",
+    api_port: 8000,
+    api_path: "/api/timer/toggle",
+};
 ```
 
-WiFi credentials (edit `src/tasks/wifi.rs` for development):
-```rust
-const WIFI_SSID: &str = "YOUR_SSID";
-const WIFI_PASSWORD: &str = "YOUR_PASSWORD";
-```
-
-**Note**: In production, these should be stored in NVS (non-volatile storage).
+Edit `NETWORK_CONFIG` to point the firmware at your WiFi + backend, then rebuild
+and flash.
 
 ## Features
 
@@ -127,10 +138,11 @@ const WIFI_PASSWORD: &str = "YOUR_PASSWORD";
 - ✅ WiFi connection (async, pure Rust)
 - ✅ Embassy async runtime
 - ✅ defmt logging
+ - ✅ Minimal HTTP POST client using `embassy-net` `TcpSocket`
 
 **Planned:**
-- ⏳ API integration (HTTP client with TLS)
-- ⏳ NVS configuration storage
+- ⏳ Rich API integration (JSON payloads, TLS, retries with status codes)
+- ⏳ NVS configuration storage + web portal
 - ⏳ Deep sleep + power management
 - ⏳ OTA firmware updates
 

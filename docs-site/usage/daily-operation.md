@@ -105,19 +105,13 @@ The 7 lower LEDs show your accumulated work time:
 
 ### Quick Status Check
 
-| Indicator | Pattern | Meaning | Action |
-|-----------|---------|---------|--------|
-| Top LED | Breathing Green | Clocked out, idle | Normal standby |
-| Top LED | Solid Blue | Clocked in, working | Normal operation |
-| Top LED | Pulsing Blue | Sending API update | Wait (5-10 seconds) |
-| Top LED | Blinking Yellow | Low battery | Charge soon |
-| Top LED | Blinking Red | Error state | Check troubleshooting |
-| Top LED | Fast Rainbow | WiFi setup mode | Connect via captive portal |
-| Energy Meter | Green gradient | 0-2 hours worked | Fresh session |
-| Energy Meter | Yellow gradient | 2-4 hours worked | Mid-session |
-| Energy Meter | Orange-Red | 4+ hours worked | Long session |
-| Charging LED | Red | Charging | Leave connected |
-| Charging LED | Green | Fully charged | Can unplug |
+| Indicator | Pattern      | Meaning                      | Action               |
+|-----------|--------------|------------------------------|----------------------|
+| Top LED   | Solid Blue   | Connecting to WiFi           | Wait a few seconds   |
+| Top LED   | Solid Green  | Connected / last API OK      | Normal operation     |
+| Top LED   | Solid Yellow | WiFi / API error (last call) | Check WiFi + backend |
+| Top LED   | Purple       | API call in progress         | Wait; turns green    |
+| Energy Meter | Green→Yellow gradient | Relative “work energy” / progress | Visual only |
 
 For detailed LED meanings, see [LED Indicators](led-indicators.md).
 

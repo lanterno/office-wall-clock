@@ -89,6 +89,20 @@ A physical device on your desk with **one button**:
 
 ---
 
+## TL;DR (for the impatient)
+
+- **What it is**: A small ESP32-C3 desk device with a button and LED strip that calls your time-tracking API when you toggle it.
+- **Build path**:
+  1. Skim [Getting Started](getting-started/overview.md)
+  2. Check the [Bill of Materials](hardware/bill-of-materials.md) and order parts
+  3. Follow the [Assembly Guide](assembly/preparation.md)
+  4. Flash the Rust firmware from `firmware/` (see [Installation](firmware/installation.md))
+  5. Edit `firmware/src/config.rs` (`NETWORK_CONFIG`) to set your WiFi + API endpoint
+  6. Re-flash and start using the device
+- **Current limitations**: Rust firmware uses compile-time WiFi/API settings and a minimal HTTP POST client – no web config portal, deep sleep, or OTA updates yet.
+
+---
+
 ## Features
 
 ### Hardware
@@ -102,13 +116,12 @@ A physical device on your desk with **one button**:
 
 ### Firmware
 
-- [x] WiFi connectivity with auto-reconnect
-- [x] Web-based configuration portal
-- [x] HTTPS API integration
-- [x] Deep sleep mode (5µA idle)
-- [x] OTA firmware updates
-- [x] Battery level monitoring
-- [x] Error handling & retry logic
+- [x] WiFi connectivity using pure Rust (`esp-hal` + `esp-wifi`)
+- [x] Async tasks for button, LEDs, and WiFi (Embassy executor)
+- [x] Basic HTTP API integration (single POST endpoint)
+- [ ] Web-based configuration portal _(planned)_
+- [ ] Deep sleep mode + aggressive power saving _(planned)_
+- [ ] OTA firmware updates _(planned)_
 
 ### Design
 
@@ -191,7 +204,7 @@ A physical device on your desk with **one button**:
 :   ESP32-C3 microcontroller, WS2812B LEDs, LiPo battery, TP4056 charger
 
 **Firmware**
-:   Rust (esp-idf framework), smart-leds, esp-idf-svc, serde
+:   Rust (`esp-hal`, Embassy, `esp-wifi`, `smart-leds`, `heapless`, `serde-json-core`)
 
 **Connectivity**
 :   WiFi 802.11 b/g/n, HTTPS, OTA updates
@@ -230,15 +243,17 @@ Beyond time savings:
 
 This documentation is organized into clear sections:
 
-**[Getting Started](getting-started/overview.md)** - Project overview and quick start guide
+**Builder path**
+- [Getting Started](getting-started/overview.md) – Project overview and expectations
+- [Hardware](hardware/overview.md) – Components, specs, and BOM
+- [Assembly](assembly/preparation.md) – Step-by-step build and testing
+- [Usage](usage/daily-operation.md) – Daily operation and maintenance
 
-**[Hardware](hardware/overview.md)** - Component selection, specifications, and BOM
-
-**[Firmware](firmware/overview.md)** - Architecture, installation, and configuration
-
-**[Assembly](assembly/preparation.md)** - Step-by-step build instructions
-
-**[Usage](usage/daily-operation.md)** - Daily operation and maintenance
+**Developer path**
+- [Firmware Overview](firmware/overview.md) – Architecture and async tasks
+- [Firmware Installation](firmware/installation.md) – Tooling and flashing
+- [Firmware Configuration](firmware/configuration.md) – How to change WiFi + API in `config.rs`
+- [`firmware/README.md`](https://github.com/lanterno/office-wall-clock/tree/main/firmware) – Source layout and dev workflow
 
 ---
 

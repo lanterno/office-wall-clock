@@ -38,9 +38,9 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 - [Quick Start Guide](https://lanterno.github.io/office-wall-clock/getting-started/quick-start/) - Build in 2-3 hours
 
 ### 🔧 Hardware
-- [Bill of Materials](hardware/BILL_OF_MATERIALS.md) - What to buy (~$35)
-- [Hardware Specifications](hardware/HARDWARE_SPECS.md) - Technical details
-- [Enclosure Design](hardware/ENCLOSURE_DESIGN.md) - Physical dimensions
+- [Bill of Materials](https://lanterno.github.io/office-wall-clock/hardware/bill-of-materials/) - What to buy (~$35)
+- [Hardware Specifications](https://lanterno.github.io/office-wall-clock/hardware/specifications/) - Technical details
+- [Enclosure Design](https://lanterno.github.io/office-wall-clock/hardware/enclosure-design/) - Physical dimensions
 
 ### 💾 Firmware
 - [Firmware Overview](https://lanterno.github.io/office-wall-clock/firmware/overview/) - Architecture and features
@@ -75,10 +75,9 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 - **Tactile Feedback**: Physical button with satisfying click
 
 ### Software
-- **Reliable**: Handles network failures gracefully
-- **Efficient**: Low power consumption for all-day battery life
-- **Tested**: Comprehensive test coverage
-- **Configurable**: Easy WiFi and API setup via web interface (coming soon in Rust)
+- **Reliable**: Async Rust firmware with clear separation of button, LED, and WiFi tasks
+- **Efficient**: Designed for low-power operation on ESP32-C3 (deep sleep planned)
+- **Configurable**: WiFi + API set via `firmware/src/config.rs` (`NETWORK_CONFIG`)
 
 ## Time Savings Calculation
 
@@ -92,8 +91,8 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 
 - **Microcontroller**: ESP32-C3 (RISC-V, WiFi, USB-C, native Rust support)
 - **Programming Language**: Rust with esp-hal 0.20 + Embassy 0.6 (pure Rust, no C!)
-- **Firmware Framework**: Embassy async runtime (modern async/await)
-- **LED Display**: WS2812B addressable RGB LEDs
+- **Networking**: `esp-wifi` + `embassy-net` (async TCP/IP)
+- **LED Display**: WS2812B addressable RGB LEDs (`smart-leds`, `esp-hal-smartled`)
 - **Button**: Mechanical SPDT toggle switch
 - **Battery**: 3.7V 2000mAh LiPo with TP4056 USB-C charging
 - **Total Cost**: ~$35 including enclosure
@@ -107,23 +106,22 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 ## Repository Structure
 
 ```
-office-wall-clock/
-├── README.md              # This file
-├── DEPLOYMENT.md          # Documentation deployment guide
-├── Makefile              # Build commands (rust-build, rust-flash, serve, etc.)
-├── mkdocs.yml            # Documentation site configuration
-├── hardware/             # Hardware specifications and BOM
-├── firmware/             # Rust firmware source code
+wall-clock/
+├── README.md           # Project overview (this file)
+├── Makefile            # Build commands (rust-build, rust-flash, docs, etc.)
+├── mkdocs.yml          # Documentation site configuration
+├── docs-site/          # Documentation website source (MkDocs Material)
+│   ├── getting-started/
+│   ├── hardware/
+│   ├── firmware/
+│   ├── assembly/
+│   └── usage/
+├── firmware/           # Rust firmware source code
 │   └── src/
-│       ├── main.rs       # Embassy executor
-│       ├── config.rs     # Hardware constants
-│       └── tasks/        # Async tasks (button, LED, WiFi)
-└── docs-site/            # Documentation website source
-    ├── getting-started/
-    ├── hardware/
-    ├── firmware/
-    ├── assembly/
-    └── usage/
+│       ├── main.rs     # Embassy executor & task spawning
+│       ├── config.rs   # Hardware + NETWORK_CONFIG (WiFi + API)
+│       └── tasks/      # Async tasks (button, LED, WiFi + HTTP)
+└── target/             # Build artifacts (ignored by git)
 ```
 
 ## Development
@@ -154,8 +152,6 @@ mkdocs serve
 # Deploy to GitHub Pages
 git push origin main  # Auto-deploys via GitHub Actions
 ```
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for deployment details.
 
 ## Contributing
 

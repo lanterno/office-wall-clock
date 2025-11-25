@@ -103,12 +103,10 @@ This project is perfect for you if:
 
 ### Firmware
 
-- **WiFi Connectivity** - Automatic reconnection
-- **Web Configuration** - Easy setup portal
-- **API Integration** - Works with any HTTP/HTTPS endpoint
-- **Deep Sleep** - Ultra-low power consumption
-- **OTA Updates** - Wireless firmware updates
-- **Error Handling** - Robust retry logic
+- **WiFi Connectivity** – Connects to a single configured network
+- **Async Tasks** – Separate tasks for button, LEDs, and WiFi using Embassy
+- **Basic API Integration** – Simple HTTP POST to your timer API
+- _Planned_: Web configuration portal, deep sleep, OTA updates, and richer error handling
 
 ### Design
 

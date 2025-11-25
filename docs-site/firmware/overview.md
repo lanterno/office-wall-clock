@@ -223,18 +223,21 @@ All configurable parameters are in `config.rs`:
 ### WiFi Settings
 
 ```rust
-pub const WIFI_TIMEOUT_MS: u64 = 30_000; // 30 seconds to connect
+pub const WIFI_CONNECT_TIMEOUT_SECS: u64 = 30;
 ```
 
-WiFi credentials are provided via the configuration portal and stored in NVS.
+WiFi credentials are currently **compile-time values** in `firmware/src/config.rs`
+(`NETWORK_CONFIG`). A future version may move these into NVS + a config portal.
 
 ### API Settings
 
 ```rust
-pub const API_ENDPOINT: &str = "https://api.example.com";
-pub const API_TIMEOUT_MS: u64 = 10_000;      // 10 seconds per request
-pub const API_RETRY_COUNT: u8 = 3;           // Retry 3 times
+pub const API_TIMEOUT_SECS: u64 = 10; // 10 seconds per request
+pub const API_RETRY_COUNT: u8 = 3;    // Retry 3 times
 ```
+
+The actual host, port, and path for the API live in `NETWORK_CONFIG` in
+`firmware/src/config.rs`.
 
 ### Hardware Pins
 
@@ -324,15 +327,16 @@ The firmware uses these crates (managed by Cargo):
 
 | Crate | Purpose |
 |-------|---------|
-| **esp-idf-svc** | WiFi, HTTP client, NVS (non-volatile storage), system services |
-| **esp-idf-hal** | Hardware abstraction (GPIO, timers, RMT, etc.) |
-| **embedded-hal** | Common traits for embedded drivers |
-| **smart-leds** | High-level WS2812/NeoPixel color types and patterns |
-| **serde/serde_json** | Data serialization and JSON handling |
-| **heapless** | Fixed-size data structures (no_std-friendly) |
-| **anyhow/thiserror** | Ergonomic error handling |
+| **esp-hal** | Pure Rust hardware abstraction (GPIO, timers, RMT, etc.) |
+| **esp-wifi** | WiFi + network stack integration for ESP32-C3 |
+| **embassy-executor / embassy-time / embassy-net** | Async runtime, timers, and TCP/IP |
+| **smart-leds / esp-hal-smartled** | WS2812/NeoPixel color types and RMT-based driver |
+| **serde / serde-json-core** | Data serialization for no_std environments |
+| **heapless** | Fixed-size data structures (no allocator required) |
+| **defmt** | Efficient logging over serial |
 
-Built with Rust for ESP-IDF. Fits comfortably within 4MB flash on ESP32-C3.
+Built with pure Rust for ESP32-C3 (`no_std` + `esp-hal`). Fits comfortably within
+flash and RAM limits for this MCU.
 
 ## Memory Usage
 
@@ -383,7 +387,7 @@ The device follows this startup sequence:
 │
 ├─ 100ms   ESP32 bootloader starts
 │
-├─ 500ms   esp-idf initializes
+├─ 500ms   HAL initializes (clocks, timers, GPIO)
 │          - Setup serial communication
 │          - Initialize GPIO pins
 │          - Load config from NVS
@@ -422,7 +426,7 @@ The firmware aggressively uses deep sleep to maximize battery life:
 ```rust
 // Check for inactivity
 if idle_clocked_out && now.since(last_activity) > SLEEP_TIMEOUT {
-    // Persist state (NVS via esp-idf-svc)
+    // Persist state (planned: NVS / flash-backed config)
     nvs.set_bool("clocked_in", false)?;
 
     // Configure wake-up sources
@@ -597,7 +601,7 @@ Before deploying firmware:
 
 ### OTA (Over-The-Air) Updates
 
-> OTA updates can be implemented using esp-idf's OTA APIs from Rust. This project focuses on USB flashing via espflash; OTA is an optional enhancement.
+> OTA updates can be implemented using the ESP32 OTA support exposed in Rust crates. This project currently focuses on USB flashing via `espflash`; OTA is an optional enhancement.
 
 ### USB Updates
 
