@@ -374,41 +374,32 @@ Add your personal touch:
 
 ### DIY 3D Print at Home
 
-**Cost**: $2 material + $0 labor = **$2 total**
-**Time**: 6-8 hours print time
-**Quality**: Good with proper tuning
-**Best For**: Personal use, iterating on design
+- Cost: roughly $2 of filament
+- Time: 6-8 hours print time
 
 ### Online 3D Print Service
 
-**Services**: Shapeways, Craftcloud, i.materialise, Xometry
-**Cost**: $10-20 per enclosure
-**Time**: 5-10 days shipping
-**Quality**: Professional finish, many material options
-**Best For**: No printer access, want perfect finish
+- Examples: Shapeways, Craftcloud, i.materialise, Xometry
+- Cost: roughly $10-20 per enclosure
+-,Time: 5-10 days including shipping
 
 ### Local Makerspace
 
-**Cost**: $5-10 (material + membership)
-**Time**: Print yourself in 1 day
-**Quality**: Good, learn from community
-**Best For**: Learning, networking with makers
+- Cost: typical material + membership fees
+- Time: print in one session
 
 ### CNC / Laser Cutting Service
 
-**Materials**: Wood, acrylic, aluminum
-**Cost**: $30-60 for custom enclosure
-**Time**: 1-2 weeks
-**Quality**: Excellent, industrial look
-**Best For**: Production run, premium feel
+- Materials: wood, acrylic, aluminum
+- Cost: higher, suitable for more robust enclosures
 
 ## Next Steps
 
-1. 📐 Review CAD files in `hardware/enclosure/`
-2. 🎨 Choose your material and color
-3. 🖨️ 3D print or order enclosure
-4. 🔧 While waiting, prep the electronics (see [Assembly Guide](../assembly/soldering.md))
-5. 🎉 Assemble everything when enclosure arrives!
+1. Review CAD files in `hardware/enclosure/`
+2. Choose material and color
+3. 3D print or order the enclosure
+4. While waiting, prep the electronics (see [Assembly Guide](../assembly/soldering.md))
+5. Assemble everything when the enclosure arrives
 
 ---
 

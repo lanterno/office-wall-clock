@@ -62,9 +62,6 @@ Week 2: Build
 
 **Delivery**: 1-3 days to Lausanne
 
-!!! tip "Student Discount"
-    EPFL students: Check if you have access to components through your lab or FabLab!
-
 ### Step 2: Prepare (15 minutes)
 
 While waiting for parts:
@@ -215,19 +212,17 @@ Re-upload firmware.
 
 **Detailed instructions**: [Enclosure Assembly](../assembly/enclosure.md)
 
-### Step 8: Done! 🎉
-
-**Your device is ready!**
+### Step 8: Final Checks
 
 Daily use:
 - **Toggle DOWN** = Clock in (start work)
 - **Toggle UP** = Clock out (stop work)
 - **LEDs** = Energy meter shows hours worked
-- **Battery** = Lasts 10-14 days per charge
+- **Battery** = Should last roughly 10-14 days per charge
 
-**Next steps**:
-- [Usage Guide](../usage/daily-operation.md) - Daily workflow
-- [Configuration Guide](../firmware/configuration.md) - Customize settings
+Next steps:
+- [Usage Guide](../usage/daily-operation.md)
+- [Configuration Guide](../firmware/configuration.md)
 
 ## Estimated Costs
 
@@ -435,15 +430,6 @@ With experience, you can build in **2 hours**:
    - Visit FabLab EPFL
    - Or buy basic soldering kit
 
-4. **Build!**:
-   - Follow guides step-by-step
-   - Ask for help if stuck
-   - Share your success!
-
----
-
-**Questions?** Ask in [GitHub Discussions](https://github.com/lanterno/office-wall-clock/discussions)
-
-**Stuck?** Check the [Configuration Guide](../firmware/configuration.md) or open an issue on GitHub.
-
-Let's build this! 🚀
+4. **Build**:
+   - Follow the guides step-by-step.
+   - If you get stuck, check the [Configuration Guide](../firmware/configuration.md) or open an issue on GitHub.

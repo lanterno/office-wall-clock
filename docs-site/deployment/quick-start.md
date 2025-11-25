@@ -96,8 +96,4 @@ gh run view --log-failed
 
 ## Next Steps
 
-🚀 **Site URL**: `https://lanterno.github.io/office-wall-clock/`
-
----
-
-**Your documentation is now live!** Share the link! 🎉
+- Site URL (default): `https://lanterno.github.io/office-wall-clock/`

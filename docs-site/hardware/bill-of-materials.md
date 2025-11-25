@@ -14,7 +14,6 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 ### Option 2: Budget Build (3-4 weeks, CHF 45-50)
 - Order from China (AliExpress/eBay) - single order to minimize customs
 - Split orders to stay under CHF 62 limit
-- Best for patient builders
 
 ### Option 3: Premium Build (1-2 days, CHF 150)
 - **FabLab EPFL** + **Digitec** (in-person)
@@ -405,20 +404,17 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 - **Website**: [digitec.ch](https://www.digitec.ch/)
 - **Delivery**: 1-2 days (free over CHF 50)
 - **Strengths**: ESP32 boards, LED strips, batteries, tools
-- **Best For**: Fast delivery, good prices, Swiss customer service
 
 #### Conrad.ch
 - **Website**: [conrad.ch](https://www.conrad.ch/)
 - **Delivery**: 2-3 days (free over CHF 50)
 - **Strengths**: Complete electronics catalog, passive components, tools
 - **Physical Store**: Geneva (30 min from Lausanne) - [Store Finder](https://www.conrad.ch/fr/ch/pages/store-finder)
-- **Best For**: One-stop shopping, professional components
 
 #### Distrelec
 - **Website**: [distrelec.ch](https://www.distrelec.ch/)
 - **Delivery**: 1-2 days (free over CHF 50)
 - **Strengths**: Professional components, industrial grade
-- **Best For**: Quality components, technical support
 
 ### Local Stores (Lausanne Area)
 
@@ -426,19 +422,16 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 - **Location**: Centre Flon, Lausanne
 - **Website**: [playzone.ch](https://www.playzone.ch/)
 - **Specialty**: Arduino kits, ESP32 boards, maker components
-- **Best For**: In-person shopping, immediate pickup
 
 #### Jumbo (Multiple Locations)
 - **Locations**: Multiple in Lausanne area
 - **Website**: [jumbo.ch](https://www.jumbo.ch/)
 - **Specialty**: Basic tools, wire, basic components
-- **Best For**: Basic tools, wire, screws
 
 #### Brico+Loisirs (Multiple Locations)
 - **Locations**: Multiple in Lausanne area
 - **Website**: [bricorama.ch](https://www.bricorama.ch/)
 - **Specialty**: Tools, hardware, basic electronics
-- **Best For**: Tools, project boxes, hardware
 
 ### Maker Spaces (Lausanne Area)
 
@@ -447,13 +440,11 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 - **Website**: [fablab.epfl.ch](https://fablab.epfl.ch/)
 - **Tools**: 3D printers, soldering stations, laser cutters, milling machines
 - **Access**: Free for EPFL students/staff, CHF 50/year for community members
-- **Best For**: 3D printing enclosure, using tools, getting help
 
 #### Makerspace Renens
 - **Location**: Renens (15 min from Lausanne)
 - **Tools**: Full workshop access
 - **Community**: Meetups and workshops
-- **Best For**: Community support, workshops
 
 ### European Suppliers (Optional)
 
@@ -461,18 +452,17 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 - **Website**: [reichelt.com](https://www.reichelt.com/)
 - **Shipping**: CHF 9, free over CHF 80
 - **Delivery**: 2-3 days (no customs within EU)
-- **Best For**: Complete electronics, good prices
 
 ---
 
 ## Swiss Customs & Tax Information
 
-!!! info "Import Rules for Switzerland"
-    - **Tax-free limit**: CHF 62 (including shipping)
-    - **VAT rate**: 7.7% on (value + shipping)
-    - **Processing fee**: CHF 11.50-18.00 (Swiss Post)
-    - **Customs declaration**: Required for all imports
-    - **Pro tip**: Order from Swiss/EU suppliers to avoid customs entirely
+### Import Rules for Switzerland
+
+- **Tax-free limit**: CHF 62 (including shipping)
+- **VAT rate**: 7.7% on (value + shipping)
+- **Processing fee**: CHF 11.50-18.00 (Swiss Post)
+- **Customs declaration**: Required for all imports
 
 **Example calculation for CHF 80 order from outside EU**:
 ```
@@ -557,7 +547,7 @@ TOTAL:             CHF 114.93
 | **Outside EU** | 15-30 days | Free | CHF 0-18 | 3-4 weeks |
 | **Local Store** | Same day | - | None | Same day |
 
-💡 **Pro Tip**: Order critical components (ESP32, battery) from Swiss suppliers for fast delivery, order passive components from cheaper sources to save money!
+- For critical components (ESP32, battery), you may prefer local suppliers; passive components can often be sourced more cheaply elsewhere.
 
 ---
 
@@ -570,7 +560,7 @@ TOTAL:             CHF 114.93
 3. ⏰ While waiting, read the [Assembly Guide](../assembly/soldering.md)
 4. 💻 Set up development environment (see [Firmware Installation](../../docs/FIRMWARE_INSTALLATION.md))
 5. 🎨 Design or print the enclosure (or use FabLab EPFL!)
-6. ☕ Relax - you're about to build something awesome!
+6. Relax while waiting for parts to arrive.
 
 ---
 

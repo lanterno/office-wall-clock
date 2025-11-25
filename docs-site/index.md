@@ -84,9 +84,6 @@ A physical device on your desk with **one button**:
 - **LED feedback** shows status and remaining hours
 - **Battery powered** - lasts weeks between charges
 
-!!! success "Annual Time Savings"
-    **2.6 hours** saved + no more context switching + never forget to log time!
-
 ---
 
 ## TL;DR (for the impatient)
@@ -125,11 +122,8 @@ A physical device on your desk with **one button**:
 
 ### Design
 
-- [x] Professional appearance
 - [x] 3D printable enclosure
-- [x] Documented assembly process
-- [x] Beginner-friendly guides
-- [x] Comprehensive troubleshooting
+- [x] Documented assembly and wiring
 
 ---
 
@@ -174,8 +168,6 @@ A physical device on your desk with **one button**:
     ---
 
     Start using your device daily with the [Usage Guide](usage/daily-operation.md).
-    
-    Never type curl commands again! 🎉
 
 </div>
 
@@ -214,28 +206,6 @@ A physical device on your desk with **one button**:
 
 **Enclosure**
 :   3D printed PLA/PETG or project box
-
----
-
-## Why Build This?
-
-!!! quote "Time Saved"
-    **Current process**: Open terminal, type curl command (~15 seconds × 2 times/day)
-    
-    **New process**: Press button (~2 seconds × 2 times/day)
-    
-    **Daily savings**: 26 seconds
-    
-    **Annual savings**: ~2.6 hours + no context switching!
-
-Beyond time savings:
-
-- ✅ **Tactile satisfaction** - Physical buttons feel good!
-- ✅ **Never forget** - Button on your desk is impossible to miss
-- ✅ **Visual feedback** - LED energy meter is motivating
-- ✅ **Learn IoT** - Great project to learn hardware + firmware
-- ✅ **Customizable** - Open source, modify as you like
-- ✅ **Show off** - Cool desk accessory that actually works!
 
 ---
 

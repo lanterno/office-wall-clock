@@ -34,16 +34,8 @@ This process:
 
 With the Wall Clock In Machine:
 
-- ✅ Press button (2 seconds)
-- ✅ Device calls API automatically
-- ✅ LED feedback confirms action
-- ✅ Never forget - button is on your desk
-- ✅ Battery powered - weeks between charges
-
-!!! success "Time Savings"
-    **Daily**: 26 seconds saved  
-    **Yearly**: ~2.6 hours saved  
-    **Plus**: No context switching, no forgetting!
+- Press a physical toggle switch instead of typing curl commands.
+- Device calls your API automatically and shows state via LEDs.
 
 ## Who Is This For?
 
@@ -205,56 +197,11 @@ office-wall-clock/
 └── README.md           # Quick overview
 ```
 
-## What Makes This Special?
+## What Makes This Useful
 
-### 1. Complete Documentation
-
-Unlike many DIY projects, this includes:
-
-- ✅ Full hardware specifications
-- ✅ Complete firmware source code
-- ✅ Step-by-step assembly guide
-- ✅ Comprehensive troubleshooting
-- ✅ API integration examples
-
-### 2. Production Quality
-
-This isn't a proof-of-concept - it's a fully working device:
-
-- ✅ Error handling and retries
-- ✅ Battery monitoring
-- ✅ Deep sleep for power saving
-- ✅ OTA updates
-- ✅ Configuration portal
-
-### 3. Beginner Friendly
-
-Even if you've never built anything before:
-
-- ✅ Clear explanations
-- ✅ Photos and diagrams
-- ✅ Troubleshooting guides
-- ✅ Community support
-
-### 4. Customizable
-
-Open source means you can:
-
-- ✅ Modify for your specific needs
-- ✅ Add features
-- ✅ Change the design
-- ✅ Share improvements
-
-## Success Stories
-
-!!! quote "Time Saver"
-    *"I used to forget to log my time at least once a week. Now I never forget - the button is right there on my desk. Plus it looks cool!"* - Alex, Software Engineer
-
-!!! quote "Gateway Project"
-    *"This was my first IoT project. The documentation made it easy to follow, and now I'm hooked on building things!"* - Sam, Designer
-
-!!! quote "Productivity Boost"
-    *"The LED energy meter is surprisingly motivating. Watching it count down makes me more aware of my work hours."* - Jordan, Product Manager
+- Hardware, firmware, and docs are all included in this repo.
+- The design is simple enough for a first IoT build but still non-trivial.
+- All code is open source, so you can adapt it to your own API or LEDs.
 
 ## Next Steps
 
@@ -275,9 +222,5 @@ Ready to get started?
 
 ## Questions?
 
-- Check the documentation for common issues
-- Open an issue on [GitHub](https://github.com/lanterno/office-wall-clock/issues)
-
----
-
-**Ready to stop typing curl commands?** Let's build this! 🚀
+- Check the documentation for common issues.
+- Open an issue on [GitHub](https://github.com/lanterno/office-wall-clock/issues).

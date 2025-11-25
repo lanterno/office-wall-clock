@@ -561,7 +561,7 @@ USB-C 5V ──→ TP4056 ──┬──→ Battery (3.7V)
 
 ### Electromagnetic Compatibility (EMC)
 
-- **WiFi**: FCC Part 15, CE, IC certified (via ESP32-C3 module)
+- **WiFi**: FCC Part 15, CE, IC certified (via ESP32 module)
 - **Emissions**: Class B (residential)
 - **Immunity**: IEC 61000-4 compliant
 
@@ -571,20 +571,19 @@ USB-C 5V ──→ TP4056 ──┬──→ Battery (3.7V)
 - **Battery**: UN38.3 certified (LiPo shipping)
 - **RoHS**: Lead-free components
 
-!!! warning "Certification Note"
-    Personal projects don't need certifications, but components are pre-certified. If selling commercially, you'd need CE marking for Europe.
+Personal projects don't need certifications, but most components are pre-certified. If selling commercially, you would need to consider CE marking and similar requirements.
 
 ## Performance Summary
 
-| Metric | Value | Industry Comparison |
-|--------|-------|---------------------|
-| **Boot Time** | 2-3 seconds | ⭐⭐⭐⭐⭐ Excellent |
-| **Battery Life** | 10-14 days | ⭐⭐⭐⭐ Very Good |
-| **WiFi Range** | 50-100m | ⭐⭐⭐ Good |
-| **Response Time** | <500ms | ⭐⭐⭐⭐⭐ Excellent |
-| **Cost** | CHF 40-90 | ⭐⭐⭐⭐⭐ Excellent |
-| **Size** | 100×60×35mm | ⭐⭐⭐⭐ Compact |
-| **Weight** | 85g | ⭐⭐⭐⭐ Lightweight |
+| Metric | Value |
+|--------|-------|
+| **Boot Time** | 2-3 seconds |
+| **Battery Life** | 10-14 days |
+| **WiFi Range** | 50-100m |
+| **Response Time** | <500ms |
+| **Cost** | CHF 40-90 |
+| **Size** | 100×60×35mm |
+| **Weight** | 85g |
 
 ## Development Tools Required
 
@@ -629,7 +628,7 @@ USB-C 5V ──→ TP4056 ──┬──→ Battery (3.7V)
 Before assembling into enclosure:
 
 - [ ] Battery charges correctly (LED indicators work)
-- [ ] ESP32-C3 boots and connects to WiFi
+- [ ] ESP32-C6 DevKitC-1 boots and connects to WiFi
 - [ ] Button press detected reliably
 - [ ] All 8 LEDs light up correctly
 - [ ] API calls succeed
