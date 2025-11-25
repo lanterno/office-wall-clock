@@ -83,9 +83,9 @@ This project is perfect for you if:
 
 <div class="grid cards" markdown>
 
--   **ESP32-C3 Microcontroller**
+-   **ESP32-C6 DevKitC-1 Microcontroller**
     
-    WiFi enabled, low power, USB-C programming
+    WiFi 6 enabled, low power, USB-C programming
 
 -   **8 RGB LEDs**
     

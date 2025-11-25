@@ -1,4 +1,4 @@
-# Wall Clock In Machine – Rust Firmware (ESP32-C3)
+# Wall Clock In Machine – Rust Firmware (ESP32-C6 DevKitC-1)
 
 Modern Rust firmware using **state-of-the-art embedded tools**:
 - **esp-hal 0.20**: Pure Rust hardware abstraction (no C!)
@@ -31,7 +31,7 @@ Modern Rust firmware using **state-of-the-art embedded tools**:
 # Install Rust (if needed)
 curl -fsSL https://sh.rustup.rs | sh
 
-# Add ESP32-C3 target (no_std embedded Rust)
+# Add RISC-V embedded target (no_std for ESP32-C6)
 rustup target add riscv32imc-unknown-none-elf
 
 # Install espflash
@@ -44,11 +44,10 @@ cargo install espflash --locked
 firmware/
 ├── Cargo.toml              # Modern dependencies (esp-hal, Embassy)
 ├── rust-toolchain.toml     # Stable Rust
-├── memory.x                # ESP32-C3 linker script
 ├── .cargo/config.toml      # Build configuration
 └── src/
     ├── main.rs             # Embassy executor & initialization
-    ├── config.rs           # Hardware constants
+    ├── config.rs           # Hardware + NETWORK_CONFIG
     └── tasks/              # Async task modules
         ├── mod.rs          # Task exports
         ├── button.rs       # Button handling (async)
@@ -164,7 +163,7 @@ and flash.
 
 ## Learning Path
 
-1. **Start**: Read esp-hal examples for ESP32-C3
+1. **Start**: Read esp-hal examples for ESP32-C6
 2. **Learn**: Embassy async patterns
 3. **Practice**: Build this project!
 4. **Master**: Contribute back to community

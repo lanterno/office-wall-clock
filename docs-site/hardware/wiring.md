@@ -1,16 +1,16 @@
 # Wiring Diagram
 
-Connections between ESP32-C3, button, LED strip, charger, and battery.
+Connections between ESP32-C6 DevKitC-1, button, LED strip, charger, and battery.
 
 ## Summary
-- Microcontroller: ESP32-C3 DevKit
+- Microcontroller: ESP32-C6 DevKitC-1
 - LEDs: WS2812B (8 pixels)
 - Button: SPDT or latching toggle
 - Power: 3.7V LiPo via TP4056 to 3.3V regulator
 
 ## Pin Mapping
 
-| Function | ESP32-C3 Pin | Notes |
+| Function | ESP32-C6 Pin | Notes |
 |---------|--------------:|------|
 | LED Data | GPIO 2 | Connect to DIN of WS2812B via 330Ω resistor |
 | Button | GPIO 9 | Use pull-up; button to GND |

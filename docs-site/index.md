@@ -91,7 +91,7 @@ A physical device on your desk with **one button**:
 
 ## TL;DR (for the impatient)
 
-- **What it is**: A small ESP32-C3 desk device with a button and LED strip that calls your time-tracking API when you toggle it.
+- **What it is**: A small ESP32-C6 DevKitC-1 desk device with a button and LED strip that calls your time-tracking API when you toggle it.
 - **Build path**:
   1. Skim [Getting Started](getting-started/overview.md)
   2. Check the [Bill of Materials](hardware/bill-of-materials.md) and order parts
@@ -107,7 +107,7 @@ A physical device on your desk with **one button**:
 
 ### Hardware
 
-- [x] **ESP32-C3** microcontroller (WiFi, low power, USB-C)
+- [x] **ESP32-C6 DevKitC-1** microcontroller (WiFi 6, low power, USB-C)
 - [x] **8 RGB LEDs** (1 status + 7 energy meter)
 - [x] **Toggle switch** (satisfying tactile feedback)
 - [x] **2000mAh battery** (10-14 days runtime)
@@ -157,7 +157,7 @@ A physical device on your desk with **one button**:
 
     ---
 
-    Upload firmware to ESP32-C3 using the [Installation Guide](firmware/installation.md).
+    Upload firmware to ESP32-C6 DevKitC-1 using the [Installation Guide](firmware/installation.md).
     
     Takes about 30 minutes.
 
@@ -201,7 +201,7 @@ A physical device on your desk with **one button**:
 ## Tech Stack
 
 **Hardware**
-:   ESP32-C3 microcontroller, WS2812B LEDs, LiPo battery, TP4056 charger
+:   ESP32-C6 DevKitC-1 microcontroller, WS2812B LEDs, LiPo battery, TP4056 charger
 
 **Firmware**
 :   Rust (`esp-hal`, Embassy, `esp-wifi`, `smart-leds`, `heapless`, `serde-json-core`)

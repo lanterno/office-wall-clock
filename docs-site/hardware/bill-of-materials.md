@@ -29,7 +29,7 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 
 | Item | Specs | Qty | Price (CHF) | Suppliers |
 |------|-------|-----|-------------|-----------|
-| **ESP32-C3-DevKitM-1** | RISC-V, WiFi, USB-C | 1 | CHF 12-18 | Digitec \| Conrad \| Distrelec |
+| **ESP32-C6-DevKitC-1** | RISC-V, WiFi 6, USB-C | 1 | CHF 12-18 | Digitec \| Conrad \| Distrelec |
 
 **Where to Buy**:
 - **Digitec Galaxus**: CHF 15-18, free shipping over CHF 50, 1-2 day delivery - [digitec.ch](https://www.digitec.ch/)
@@ -349,7 +349,7 @@ Complete shopping list for building the Wall Clock In Machine, optimized for Swi
 
 **Core Components**:
 ```
-- ESP32-C3 DevKitM-1 development board
+- ESP32-C6 DevKitC-1 development board
 - WS2812B LED strip (1 meter, 60 LEDs)
 - 12mm SPDT toggle switch (metal, panel mount)
 - 3.7V 2000mAh LiPo battery with JST-PH 2.0mm connector
@@ -498,7 +498,7 @@ TOTAL:             CHF 114.93
 
 | Component | Quantity | Price (CHF) | Supplier |
 |-----------|----------|-------------|----------|
-| ESP32-C3 DevKitM-1 | 1 | CHF 15 | Digitec |
+| ESP32-C6 DevKitC-1 | 1 | CHF 15 | Digitec |
 | WS2812B LED Strip (1m) | 1 | CHF 12 | Digitec |
 | SPDT Toggle Switch | 1 | CHF 7 | Conrad |
 | LiPo Battery 2000mAh | 1 | CHF 20 | Digitec |
@@ -525,7 +525,7 @@ TOTAL:             CHF 114.93
 
 | Component | Quantity | Price (CHF) | Supplier |
 |-----------|----------|-------------|----------|
-| ESP32-C3 DevKitM-1 | 1 | CHF 5 | China |
+| ESP32-C6 DevKitC-1 | 1 | CHF 5 | China |
 | WS2812B LED Strip (1m) | 1 | CHF 2 | China |
 | SPDT Toggle Switch | 1 | CHF 1 | China |
 | LiPo Battery 2000mAh | 1 | CHF 8 | China |
@@ -578,7 +578,7 @@ TOTAL:             CHF 114.93
 
 Before final assembly, verify all components work:
 
-- [ ] ESP32-C3 boots and connects to WiFi
+- [ ] ESP32-C6 boots and connects to WiFi
 - [ ] Battery charges correctly (LED indicators work)
 - [ ] Button press detected reliably
 - [ ] All 8 LEDs light up correctly

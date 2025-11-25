@@ -1,6 +1,6 @@
 # Firmware Overview
 
-The Wall Clock In Machine firmware is built in **pure Rust** for ESP32-C3, using state-of-the-art embedded tools. This provides a modern, safe, and efficient solution for time tracking.
+The Wall Clock In Machine firmware is built in **pure Rust** for ESP32-C6 DevKitC-1, using state-of-the-art embedded tools. This provides a modern, safe, and efficient solution for time tracking.
 
 ## Technology Stack
 
@@ -328,14 +328,14 @@ The firmware uses these crates (managed by Cargo):
 | Crate | Purpose |
 |-------|---------|
 | **esp-hal** | Pure Rust hardware abstraction (GPIO, timers, RMT, etc.) |
-| **esp-wifi** | WiFi + network stack integration for ESP32-C3 |
+| **esp-wifi** | WiFi + network stack integration for ESP32-C6 |
 | **embassy-executor / embassy-time / embassy-net** | Async runtime, timers, and TCP/IP |
 | **smart-leds / esp-hal-smartled** | WS2812/NeoPixel color types and RMT-based driver |
 | **serde / serde-json-core** | Data serialization for no_std environments |
 | **heapless** | Fixed-size data structures (no allocator required) |
 | **defmt** | Efficient logging over serial |
 
-Built with pure Rust for ESP32-C3 (`no_std` + `esp-hal`). Fits comfortably within
+Buit with pure Rust for ESP32-C6 DevKitC-1 (`no_std` + `esp-hal`). Fits comfortably within
 flash and RAM limits for this MCU.
 
 ## Memory Usage
@@ -612,7 +612,7 @@ Connect USB-C cable and flash directly:
 espflash flash target/riscv32imc-esp-espidf/release/firmware
 ```
 
-**No bootloader button needed** - ESP32-C3 has native USB!
+**No bootloader button needed** - ESP32-C6 DevKitC-1 has native USB!
 
 ## Customization
 

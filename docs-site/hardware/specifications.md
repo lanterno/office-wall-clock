@@ -31,7 +31,7 @@ This document details the technical specifications and component selection ratio
 ├─────────────────────────────────────────────────────┤
 │                                                      │
 │  Input      ──→  Processing  ──→  Output            │
-│  Toggle         ESP32-C3        8× RGB LEDs         │
+│  Toggle         ESP32-C6        8× RGB LEDs         │
 │  Switch         RISC-V          WS2812B             │
 │                 160MHz                               │
 │                                                      │
@@ -44,7 +44,7 @@ This document details the technical specifications and component selection ratio
 └─────────────────────────────────────────────────────┘
 ```
 
-## 1. Microcontroller (ESP32-C3)
+## 1. Microcontroller (ESP32-C6 DevKitC-1)
 
 ### Core Specifications
 
@@ -127,14 +127,12 @@ This document details the technical specifications and component selection ratio
 | **Humidity** | 5% to 95% RH | Non-condensing |
 | **ESD Protection** | 2kV HBM | Human body model |
 
-### Pin Configuration (Our Usage)
+### Pin Configuration (Our Usage on ESP32-C6 DevKitC-1)
 
 | GPIO Pin | Function | Connection | Notes |
 |----------|----------|------------|-------|
-| **GPIO2** | Digital Input | Toggle Switch | Pull-up enabled |
-| **GPIO3** | Digital Output | WS2812B Data | 5V tolerant with resistor |
-| **GPIO9** | USB D- | USB Data | Reserved for USB |
-| **GPIO8** | USB D+ | USB Data | Reserved for USB |
+| **GPIO9** | Digital Input | Toggle Switch | Pull-up enabled |
+| **GPIO8** | Digital Output | WS2812B Data | Series resistor recommended |
 | **EN** | Reset | Reset Button | Active low |
 | **GND** | Ground | Ground plane | Multiple pins |
 | **3V3** | Power Output | 3.3V supply | 600mA max |
@@ -499,7 +497,7 @@ AMS1117 Module (Top View)
 
 VIN  → Battery positive (3.7-4.2V)
 GND  → Common ground
-VOUT → ESP32-C3 3.3V input
+VOUT → ESP32 3.3V input
 ```
 
 ## System Integration
@@ -509,7 +507,7 @@ VOUT → ESP32-C3 3.3V input
 ```
 USB-C 5V ──→ TP4056 ──┬──→ Battery (3.7V)
                        │
-                       └──→ AMS1117 ──→ ESP32-C3 (3.3V)
+                       └──→ AMS1117 ──→ ESP32 (3.3V)
                             
                             ESP32 5V ──→ WS2812B LEDs (5V)
 ```
@@ -643,7 +641,7 @@ Before assembling into enclosure:
 
 | Component | Price (CHF) | Source |
 |-----------|-------------|--------|
-| ESP32-C3 DevKitM-1 | CHF 12-18 | Digitec/Conrad |
+| ESP32-C6 DevKitC-1 | CHF 12-18 | Digitec/Conrad |
 | WS2812B LED Strip (8 LEDs) | CHF 8-15 | Digitec/Conrad |
 | Toggle Switch | CHF 5-8 | Conrad/Distrelec |
 | 2000mAh LiPo Battery | CHF 15-25 | Digitec/Conrad |

@@ -37,7 +37,7 @@ The enclosure consists of:
 - **Front**: LED light bar (8 LEDs) across full width
 - **Right Side**: USB-C charging port
 - **Bottom**: Four rubber feet at corners
-- **Internal**: Bottom shell houses all electronics (ESP32-C3, battery, TP4056 charger, regulator)
+- **Internal**: Bottom shell houses all electronics (ESP32-C6 DevKitC-1, battery, TP4056 charger, regulator)
 
 ## Detailed Component Layout
 

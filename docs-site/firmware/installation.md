@@ -4,7 +4,7 @@ Set up your development environment and flash the firmware.
 
 ## Prerequisites
 - Rust toolchain via rustup (stable)
-- Target: `riscv32imc-unknown-none-elf` (no_std embedded)
+- Target: `riscv32imc-unknown-none-elf` (RISC-V no_std embedded for ESP32-C6)
 - `espflash` CLI for flashing and serial monitor
 
 ## Steps
@@ -12,7 +12,7 @@ Set up your development environment and flash the firmware.
 	```fish
 	curl -fsSL https://sh.rustup.rs | sh
 	```
-2. Add ESP32-C3 target (no_std):
+2. Add RISC-V embedded target (no_std):
 	```fish
 	rustup target add riscv32imc-unknown-none-elf
 	```
@@ -20,7 +20,7 @@ Set up your development environment and flash the firmware.
 	```fish
 	cargo install espflash --locked
 	```
-4. Connect ESP32-C3 via USB-C
+4. Connect ESP32-C6 DevKitC-1 via USB-C
 5. Build and flash firmware:
 	```fish
 	cd firmware

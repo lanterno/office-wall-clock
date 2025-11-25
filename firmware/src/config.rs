@@ -2,7 +2,7 @@
 
 pub const FIRMWARE_VERSION: &str = env!("CARGO_PKG_VERSION");
 
-// Pin assignments (ESP32-C3)
+// Pin assignments (ESP32-C6 DevKitC-1)
 pub const BUTTON_PIN: u8 = 9; // GPIO9 - Toggle switch input
 pub const LED_PIN: u8 = 8; // GPIO8 - WS2812B LED strip data
 pub const BATTERY_ADC_PIN: u8 = 4; // GPIO4 - Battery voltage sensing

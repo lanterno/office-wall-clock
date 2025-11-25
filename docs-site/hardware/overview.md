@@ -9,7 +9,7 @@ The device consists of five main subsystems working together:
 ```mermaid
 graph TD
     A[User] --> B[Button/Switch]
-    B --> C[ESP32-C3 Brain]
+    B --> C[ESP32-C6 DevKitC-1 Brain]
     C --> D[LED Display]
     C --> E[WiFi Module]
     C --> F[Power System]
@@ -47,37 +47,36 @@ The input is a mechanical toggle switch that can be in one of two stable positio
 - Connected to GPIO pin with internal pull-up resistor
 - No external resistors needed
 
-### 2. Processing Unit (ESP32-C3)
+### 2. Processing Unit (ESP32-C6)
 
-**Component**: ESP32-C3-DevKit-M-1
+**Component**: ESP32-C6-DevKitC-1
 
 The "brain" of the device is a modern RISC-V microcontroller:
 
-**Key Features**:
+**Key Features** (ESP32-C6 DevKitC-1):
 
 - **32-bit RISC-V processor** @ 160MHz
-- **400KB SRAM** for program execution
-- **4MB Flash** for code and data storage
-- **WiFi 802.11 b/g/n** (2.4GHz)
-- **Bluetooth 5.0 LE** (future expansion)
-- **22 GPIO pins** (plenty for expansion)
+- **Large on-chip SRAM** for program execution
+- **On-board Flash** for code and data storage
+- **WiFi 6 (802.11 b/g/n/ax) 2.4GHz**
+- **Bluetooth LE** (future expansion)
+- **Plenty of GPIO pins** for expansion
 - **Native USB-C** (no UART adapter needed)
-- **Deep Sleep Mode** @ 5µA (battery efficiency)
 
-**Why ESP32-C3?**
+**Why ESP32-C6 DevKitC-1?**
 
-| Requirement | ESP32-C3 | Alternatives |
+| Requirement | ESP32-C6 DevKitC-1 | Alternatives |
 |------------|----------|--------------|
 | WiFi | ✅ Built-in | Arduino Uno + Shield $30 |
-| Low Power | ✅ 5µA sleep | Raspberry Pi Zero: 100mA |
+| Low Power | ✅ Deep sleep support | Raspberry Pi Zero: 100mA |
 | USB Programming | ✅ Native | ESP8266 needs adapter |
-| Cost | ✅ $4 | Arduino Nano 33 IoT: $25 |
-| Community | ✅ Massive | New boards lack support |
+| Cost | ✅ Low-cost devkit | Arduino Nano 33 IoT: $25 |
+| Community | ✅ Growing ESP32-C6 ecosystem | New boards lack support |
 
 **Pinout Overview**:
 
 ```
-                ESP32-C3
+                ESP32-C6 DevKitC-1
            ┌───────────────┐
      3V3 ──┤ 1         21 ├── GND
  BUTTON ──┤ 2         20 ├── (unused)
@@ -183,12 +182,12 @@ Settings stored in flash memory (survives reboots).
 - **Weight**: 15g
 - **Lifecycle**: 500+ charge cycles
 
-**Runtime Calculation**:
+**Runtime Calculation** (values approximate for ESP32-C6 DevKitC-1):
 
 ```
 Average Current:
-- ESP32-C3 active: 80mA
-- ESP32-C3 sleep: 0.005mA (5µA)
+- ESP32 active: 80mA
+- ESP32 sleep: 0.005mA (5µA)
 - LEDs idle: 5mA (dim status LED)
 - LEDs active: 60mA (8 LEDs at 1/4 brightness)
 
@@ -213,7 +212,7 @@ Battery Life: 2000mAh / 15mAh = 133 hours = 10-14 days
 #### Voltage Regulator (AMS1117-3.3)
 
 - **Input**: 3.0V - 5.0V (from battery or USB)
-- **Output**: 3.3V (stable for ESP32-C3)
+- **Output**: 3.3V (stable for ESP32)
 - **Current**: 800mA max
 - **Dropout**: 1.1V
 - **Protection**: Thermal shutdown, current limiting
@@ -267,7 +266,7 @@ Side View:
 
 | Component | Model | Voltage | Current | Cost |
 |-----------|-------|---------|---------|------|
-| Microcontroller | ESP32-C3-DevKit-M-1 | 3.3V | 80mA avg | $4 |
+| Microcontroller | ESP32-C6-DevKitC-1 | 3.3V | 80mA avg | $4 |
 | LED Strip | WS2812B (8 LEDs) | 5V | 60mA max | $2 |
 | Switch | SPDT Toggle | 3.3V | <1mA | $1 |
 | Battery | LiPo 503450 2000mAh | 3.7V | - | $8 |
@@ -290,7 +289,7 @@ Side View:
 ### Thermal Protection
 
 - AMS1117 shuts down at 150°C
-- ESP32-C3 throttles at 85°C
+- ESP32-C6 throttles at 85°C (approx.)
 - Battery disconnects at 80°C
 
 ### Voltage Protection

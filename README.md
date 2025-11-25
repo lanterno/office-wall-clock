@@ -58,7 +58,7 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 
 ## Technical Stack
 
-- **Microcontroller**: ESP32-C3 (RISC-V, WiFi, USB-C)
+- **Microcontroller**: ESP32-C6 DevKitC-1 (RISC-V, WiFi, USB-C)
 - **Programming Language**: Rust (pure Rust with esp-hal + Embassy)
 - **Firmware Framework**: Embassy async runtime
 - **LED Display**: WS2812B addressable RGB LEDs
@@ -76,7 +76,7 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 
 ### Software
 - **Reliable**: Async Rust firmware with clear separation of button, LED, and WiFi tasks
-- **Efficient**: Designed for low-power operation on ESP32-C3 (deep sleep planned)
+- **Efficient**: Designed for low-power operation on ESP32-C6 (deep sleep planned)
 - **Configurable**: WiFi + API set via `firmware/src/config.rs` (`NETWORK_CONFIG`)
 
 ## Time Savings Calculation
@@ -89,7 +89,7 @@ The Wall Clock In Machine is a smart IoT device that sits on your desk and makes
 
 ## Technical Stack
 
-- **Microcontroller**: ESP32-C3 (RISC-V, WiFi, USB-C, native Rust support)
+- **Microcontroller**: ESP32-C6 DevKitC-1 (RISC-V, WiFi 6, USB-C, native Rust support)
 - **Programming Language**: Rust with esp-hal 0.20 + Embassy 0.6 (pure Rust, no C!)
 - **Networking**: `esp-wifi` + `embassy-net` (async TCP/IP)
 - **LED Display**: WS2812B addressable RGB LEDs (`smart-leds`, `esp-hal-smartled`)

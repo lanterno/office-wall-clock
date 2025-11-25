@@ -7,14 +7,14 @@ resolver = "2"
 rust-version = "1.76"
 
 [dependencies]
-# Core ESP32-C3 HAL (pure Rust)
-esp-hal = { version = "0.20", features = ["esp32c3"] }
-esp-backtrace = { version = "0.14", features = ["esp32c3", "exception-handler", "panic-handler", "defmt"] }
-esp-println = { version = "0.11", features = ["esp32c3", "defmt-espflash"] }
+# Core ESP32-C6 HAL (pure Rust)
+esp-hal = { version = "0.20", features = ["esp32c6"] }
+esp-backtrace = { version = "0.14", features = ["esp32c6", "exception-handler", "panic-handler", "defmt"] }
+esp-println = { version = "0.11", features = ["esp32c6", "defmt-espflash"] }
 esp-alloc = "0.4"
 
 # WiFi support (pure Rust)
-esp-wifi = { version = "0.9", features = ["esp32c3", "wifi", "async", "embassy-net"] }
+esp-wifi = { version = "0.9", features = ["esp32c6", "wifi", "async", "embassy-net"] }
 
 # Embassy async runtime
 embassy-executor = { version = "0.6", features = ["arch-riscv32", "executor-thread", "integrated-timers"] }
@@ -25,7 +25,7 @@ embassy-net = { version = "0.4", features = ["tcp", "udp", "dns", "dhcpv4", "med
 
 # LED control for WS2812B
 smart-leds = { version = "0.4", default-features = false }
-esp-hal-smartled = { version = "0.14", features = ["esp32c3"] }
+esp-hal-smartled = { version = "0.14", features = ["esp32c6"] }
 
 # HTTP client (async, lightweight)
 reqwless = { version = "0.12", default-features = false }

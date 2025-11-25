@@ -1,4 +1,4 @@
-//! Wall Clock In Machine - Rust Firmware for ESP32-C3
+//! Wall Clock In Machine - Rust Firmware for ESP32-C6 DevKitC-1
 //!
 //! Uses state-of-the-art Rust embedded tools:
 //! - esp-hal: Pure Rust hardware abstraction
@@ -48,7 +48,7 @@ async fn main(spawner: Spawner) {
     info!("=================================");
     info!("Wall Clock In Machine (Rust)");
     info!("Version: {}", env!("CARGO_PKG_VERSION"));
-    info!("Target: ESP32-C3 (RISC-V)");
+    info!("Target: ESP32-C6 (RISC-V)");
     info!("Runtime: Embassy async");
     info!("=================================");
 
