@@ -1,5 +1,5 @@
 site_name: Wall Clock In Machine
-site_description: A physical desk button for automatic time tracking. No more curl commands!
+site_description: Documentation for the Wall Clock In Machine.
 site_author: Wall Clock In Machine Project
 site_url: https://lanterno.github.io/office-wall-clock/
 
@@ -58,9 +58,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/lanterno/office-wall-clock
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/lanterno
-  
   version:
     provider: mike
     default: latest
