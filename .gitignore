@@ -23,6 +23,7 @@ site/
 *.swp
 *.swo
 .cursor/
+*.ipynb
 
 # Logs
 *.log
